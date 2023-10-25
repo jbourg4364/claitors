@@ -1,0 +1,184 @@
+#home-banner {
+    background-color: #79227b;
+    height: 500px;
+    width: 95%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    color: white;
+}
+
+#home-banner-content {
+    display: flex;
+    flex-direction: row;
+    height: 500px;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 20px;
+    text-align: center;
+}
+
+.home-image-main {
+    height: 400px;
+    margin: 0px;
+    padding: 0px;
+}
+
+#home-banner-description {
+    width: 50%;
+    font-size: 20px;
+}
+
+#home-banner-title {
+    width: 25%;
+    font-size: 25px;
+    line-height: 50px;
+}
+
+.home-button-main {
+    padding: 10px;
+    font-size: 20px;
+    border-radius: 10%;
+    height: 60px;
+ 
+}
+
+.home-button-main:hover {
+    font-weight: 500;
+    cursor: pointer;
+}
+
+#featured-container {
+    height: 500px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding: 10px;
+}
+
+.featured-ind-container {
+    background-color: lightgray;
+    width: 30%;
+    text-align: center;
+    padding: 5px;
+    color: black;
+}
+
+.featured-image {
+    height: 250px;
+}
+
+.featured-ind-heading {
+    height: 50px;
+}
+
+.featured-button {
+    padding: 10px;
+    font-size: 17px;
+    border-radius: 10%;
+}
+
+.featured-button:hover {
+    color: white;
+    background-color: #79227b;
+    cursor: pointer;
+}
+
+.price-field {
+    font-weight: 400;
+}
+
+#newsletter {
+    margin-top: 650px;
+    text-align: center;
+}
+
+.mailingList-input {
+    width: 70vw;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 25px;
+    padding: 10px;
+    border: 2px solid #79227b;
+}
+
+.subscribe-button {
+    color: white;
+    background-color: #79227b;
+    padding: 10px;
+    margin-top: 30px;
+    font-size: 20px;
+    border-radius: 10%;
+    width: 200px;
+}
+
+.subscribe-button:hover {
+    cursor: pointer;
+}
+
+@media screen and (max-width: 800px) {
+    #featured-container {
+        height: 1400px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        margin-top: 200px;
+    }
+
+    .featured-ind-container {
+        background-color: lightgray;
+        width: 90%;
+        text-align: center;
+        padding: 5px;
+        color: black;
+    }
+
+    #home-banner-content {
+        display: flex;
+        flex-direction: column;
+        height: 500px;
+        align-items: center;
+        justify-content: space-evenly;
+        padding: 20px;
+        text-align: center;
+    }
+    
+    .home-image-main {
+        height: 225px;
+        margin: 0px;
+        padding: 0px;
+        margin-top: 125px;
+    }
+    
+    #home-banner-description {
+        width: 100%;
+        font-size: 15px;
+    }
+    
+    #home-banner-title {
+        width: 100%;
+        font-size: 15px;
+        line-height: 25px;
+    }
+    
+    .home-button-main {
+        padding: 5px;
+        font-size: 15px;
+        border-radius: 10%;
+        height: 40px;
+     
+    }
+
+    #home-banner {
+        height: 700px;
+    }
+
+    #newsletter {
+        margin-top: 1550px;
+        text-align: center;
+    }
+}
+
