@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { getAllBooks } from "../api-client/index";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "./Books.css";
 
 const LawBooks = () => {
   const [allBooks, setAllBooks] = useState([]);
+  const { id } = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {

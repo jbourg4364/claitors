@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Routes, Route } from "react-router-dom";
-import { Home, Nav, LawBooks, IndBook } from './Index';
+import { Home, Nav, LawBooks, IndBook, Footer } from './Index';
 import './Main.css';
 
 
 const Main = () => {
+  
+
   return (
     <>
     <Nav />
@@ -14,14 +16,14 @@ const Main = () => {
       element={<Home />}
       />
       <Route 
-      path='/lawbooks'
+      exact path='/lawbooks'
       element={<LawBooks />}
       />
       <Route 
       path='/books/details/:id'
-      element={<IndBook />}
-      />
+      element={<IndBook />} /> 
     </Routes>
+    <Footer />
     </>
   )
 };

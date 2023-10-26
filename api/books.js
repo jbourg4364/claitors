@@ -15,7 +15,7 @@ booksRouter.get('/details/:id', async (req, res, next) => {
     const { id } = req.params;
     try {
         const book = await getBookById(id);
-        res.status(201).json(book)
+        res.json(book);
     } catch (error) {
         console.error(error, 'Error getting book details in API');
     }

@@ -101,3 +101,25 @@
     flex-direction: column;
     align-items: center;
 }
+
+@media screen and (max-width: 800px) {
+    #ind-book-container {
+        flex-direction: column;
+        height: 400px;
+        align-items: center;
+    }
+
+    .ind-price-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .ind-book-price-actual {
+        padding: 5px;
+        margin: 0;
+    }
+
+    .ind-book-title {
+        width: auto;
+    }
+}

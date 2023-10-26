@@ -1,7 +1,7 @@
 import React from 'react';
 import './Home.css';
 import Images from "../media";
-import { Footer } from './Index';
+
 
 const Home = () => {
   return (
@@ -65,7 +65,6 @@ const Home = () => {
         <input className='mailingList-input'/>
         <button className="subscribe-button">Subscribe</button>
       </div>
-      <Footer />
     </>
   );
 };
