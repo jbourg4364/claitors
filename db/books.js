@@ -130,7 +130,6 @@ async function createBooks({
   }
 };
 
-
 async function getAllBooks() {
   try {
     const { rows } = await client.query(`
@@ -143,7 +142,21 @@ async function getAllBooks() {
   }
 };
 
+async function getBookById(id) {
+  try {
+    const { rows: [book] } = await client.query(`
+    SELECT * FROM books
+    WHERE id = $1;
+    `, [id]);
+
+    return book;
+  } catch (error) {
+    console.error(error, 'Error getting book by id in DB');
+  }
+}
+
 module.exports = {
   createBooks,
-  getAllBooks
+  getAllBooks,
+  getBookById
 };

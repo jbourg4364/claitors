@@ -1,6 +1,6 @@
 const express = require('express');
 const booksRouter = express.Router();
-const { createBooks, getAllBooks } = require('../db');
+const { createBooks, getAllBooks, getBookById } = require('../db');
 
 booksRouter.get('/', async (req, res, next) => {
     try {
@@ -11,8 +11,21 @@ booksRouter.get('/', async (req, res, next) => {
     }
 });
 
-
-
+booksRouter.get('/details/:id', async (req, res, next) => {
+    const { id } = req.params;
+    try {
+        const book = await getBookById(id);
+        res.status(201).json(book)
+    } catch (error) {
+        console.error(error, 'Error getting book details in API');
+    }
+});
 
 
 module.exports = booksRouter;
+
+// Additional Routes
+
+// /:searchTerm
+// /category/:lawBooks
+// /details/:id
