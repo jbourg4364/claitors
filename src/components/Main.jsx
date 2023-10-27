@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Routes, Route } from "react-router-dom";
-import { Home, Nav, LawBooks, IndBook, Footer } from './Index';
+import { Home, Nav, LawBooks, IndBook, Footer, GPO } from './Index';
 import './Main.css';
 
 
@@ -22,6 +22,9 @@ const Main = () => {
       <Route 
       path='/books/details/:id'
       element={<IndBook />} /> 
+      <Route 
+      path='/gpotitles'
+      element={<GPO />} /> 
     </Routes>
     <Footer />
     </>

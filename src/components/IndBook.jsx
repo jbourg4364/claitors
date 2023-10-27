@@ -81,6 +81,13 @@ const IndBook = () => {
           </tr>
         </tbody>
       </table>
+      <div id="ind-book-detail-price-container">
+        <select className="ind-book-price-actual-detail">
+          <option>${book.price} US</option>
+          <option>${book.pricenonus} INT</option>
+        </select>
+        <button className="ind-book-cart-detail">Add to Cart</button>
+      </div>
     </div>
   );
 };

@@ -26,3 +26,41 @@
     justify-content: center;
     font-size: 25px;
 }
+
+.ind-book-cart-detail {
+    width: 150px;
+    height: 60px;
+    background-color: #79227b;
+    color: white;
+    border-radius: 10px 10px 10px 10px;
+    font-size: 18px;
+    margin-top: 15px;
+}
+
+.ind-book-cart-detail:hover {
+    background-color: black;
+    color: white;
+    cursor: pointer;
+}
+
+.ind-detail-table {
+    border: 2px solid darkgray;
+}
+
+.ind-book-price-actual-detail {
+    border: 3px solid #79227b;
+    padding: 7px;
+    width: 150px;
+    text-align: center;
+    font-weight: 400;
+    background-color: rgb(227, 227, 227);
+    font-size: 17px;
+    margin-top: 15px;
+}
+
+#ind-book-detail-price-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}

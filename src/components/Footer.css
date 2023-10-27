@@ -23,4 +23,8 @@
     #footer-container {
         padding-top: 25px;
     }
+
+    .logo {
+        line-height: 30px;
+    }
 }

@@ -16,7 +16,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-evenly;
-    height: 175px;
+    height: 200px;
     background-color: lightgray;
     padding: 15px;
     margin: 15px;
@@ -100,6 +100,32 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.bottom-total-pages-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+  
+.pagination {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    gap: 10px;
+}
+
+button.page-link {
+    padding: 10px;
+    background-color: #79227b;
+    color: white;
+    border-radius: 10px 10px 10px 10px;
+}
+
+button.page-link:hover {
+    cursor: pointer;
 }
 
 @media screen and (max-width: 800px) {
