@@ -5,3 +5,6 @@ export { default as Footer } from './Footer';
 export { default as LawBooks } from './LawBooks';
 export { default as IndBook } from './IndBook';
 export { default as GPO } from './GPO';
+export { default as ClaitorsTitles } from './ClaitorsTitles';
+export { default as Contact } from './Contact';
+

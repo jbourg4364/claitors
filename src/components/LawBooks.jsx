@@ -5,6 +5,8 @@ import "./Books.css";
 
 const LawBooks = () => {
   const [allBooks, setAllBooks] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const booksPerPage = 10;
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -22,7 +24,59 @@ const LawBooks = () => {
 
   const handleDetail = async (id) => {
     navigate(`/books/details/${id}`);
-  }
+  };
+
+  const indexOfLastBook = currentPage * booksPerPage;
+  const indexOfFirstBook = indexOfLastBook - booksPerPage;
+  const filteredBooks = allBooks.filter((book) =>
+  book.availability.includes("lacode") || 
+  book.availability.includes("lacode lalaw") || 
+  book.availability.includes("lalaw")
+);
+
+  const totalPages = Math.ceil(filteredBooks.length / booksPerPage); // Calculate the total number of pages
+
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+    const element = document.getElementById('books-heading');
+    if(element) {
+      element.scrollIntoView({behavior: "smooth"});
+    }
+  };
+
+  const renderPaginationButtons = () => {
+    const previousPage = currentPage - 1;
+    const nextPage = currentPage + 1;
+
+    return (
+      <ul className="pagination">
+        {currentPage > 1 && (
+          <li className="page-item">
+            <button
+              onClick={() => paginate(previousPage)}
+              className="page-link"
+            >
+              <i className="fa-solid fa-arrow-left"></i>
+            </button>
+          </li>
+        )}
+
+        <li className="page-item">
+          <button onClick={() => paginate(currentPage)} className="page-link">
+            {currentPage}
+          </button>
+        </li>
+
+        {currentPage < totalPages && (
+          <li className="page-item">
+            <button onClick={() => paginate(nextPage)} className="page-link">
+              <i className="fa-solid fa-arrow-right"></i>
+            </button>
+          </li>
+        )}
+      </ul>
+    );
+  };
 
   return (
     <>
@@ -30,6 +84,9 @@ const LawBooks = () => {
         <h1 className="books-heading-h1">Law Books</h1>
       </div>
       <div id="all-books-container">
+        <h3 className="total-pages">
+          Page {currentPage} of {totalPages}
+        </h3>
         {allBooks.map((book) => {
           if (
             (book.field_1 === "lacode") |
@@ -55,6 +112,9 @@ const LawBooks = () => {
             );
           }
         })}
+      </div>
+      <div className="bottom-total-pages-container">
+        <ul className="pagination">{renderPaginationButtons()}</ul>
       </div>
     </>
   );

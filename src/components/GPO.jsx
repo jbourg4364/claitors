@@ -8,7 +8,7 @@ const GPO = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
-  const booksPerPage = 15;
+  const booksPerPage = 10;
 
   useEffect(() => {
     const getAllGPOBooks = async () => {

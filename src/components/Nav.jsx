@@ -25,7 +25,7 @@ const Nav = () => {
                 <h3 className='nav-link'>LAW BOOKS</h3>
             </NavLink>
             <NavLink to='/contact'>
-                <h3 className='nav-link'>CONTACT US</h3>
+                <h3 className='nav-link' id='contact-us'>CONTACT US</h3>
             </NavLink>
             <NavLink to='/cart'>
             <i id='cart' className="fa-solid fa-cart-shopping fa-xl"></i>

@@ -122,10 +122,18 @@ button.page-link {
     background-color: #79227b;
     color: white;
     border-radius: 10px 10px 10px 10px;
+    font-size: 17px;
 }
 
 button.page-link:hover {
     cursor: pointer;
+}
+
+h3.total-pages {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
 }
 
 @media screen and (max-width: 800px) {

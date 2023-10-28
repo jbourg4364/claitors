@@ -1,3 +1,7 @@
+html {
+    overflow-x: hidden;
+}
+
 * {
     font-family: 'Poppins', sans-serif;;
 }
@@ -74,13 +78,14 @@ a:hover {
     padding: 10px;
     border: 2px solid gray;
     margin-right: 0px;
+    font-size: 15px;
 }
 
 #input {
     display: inline-flex;
     align-items: center;
     transform: translate(15%);
-   margin-bottom: 30px;
+    margin-bottom: 30px;
 }
 
 #search-glass {
@@ -88,10 +93,28 @@ a:hover {
     padding-left: 15px;
 }
 
+#search-glass:hover {
+    cursor: pointer;
+    color:#79227b;
+}
+
 @media screen and (max-width: 800px) {
     .nav-link {
         font-size: 15px;
-        padding-left: 5px;
-        padding-right: 5px;
+        margin: 5px;
+    }
+
+    #contact-us {
+        display: none;
+    }
+
+    .search-bar {
+        width: 60vw;
+        font-size: 13px;
+        margin-top: 10px;
+    }
+
+    #links {
+        flex-direction: column;
     }
 }
