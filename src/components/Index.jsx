@@ -7,4 +7,5 @@ export { default as IndBook } from './IndBook';
 export { default as GPO } from './GPO';
 export { default as ClaitorsTitles } from './ClaitorsTitles';
 export { default as Contact } from './Contact';
+export { default as Search } from './Search';
 

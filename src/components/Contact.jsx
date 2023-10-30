@@ -3,8 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import './Contact.css';
 
 const Contact = () => {
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
+    const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState("");
     const [company, setCompany] = useState("");
@@ -17,6 +16,14 @@ const Contact = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        window.alert(`Your message was sent to Claitor's!`);
+        setName('');
+        setEmail('');
+        setPhone('');
+        setCompany('');
+        setState('');
+        setZip('');
+        setMessage('');
     };
 
   return (
@@ -25,24 +32,15 @@ const Contact = () => {
         <h1 className="books-heading-h1">Contact Us</h1>
       </div>
       <div id='form-content'>
-      <form onSubmit={handleSubmit} ref={inputElement} id='contact-form'>
+      <form onSubmit={handleSubmit} ref={inputElement} id='contact-form' method="POST" action="http://claitors.com/cgi-bin/clt/claitorsbnb.cgi">
         <input 
-          placeholder="First Name"
+          placeholder="Name"
           type="text"
           className="contact-input"
-          value={firstName}
-          onChange={(e) => setFirstName(e.target.value)}
+          value={name}
+          onChange={(e) => setName(e.target.value)}
           required
-         
-          />
-        <input 
-          placeholder="Last Name" 
-          type="text"
-          className="contact-input"
-          value={lastName}
-          onChange={(e) => setLastName(e.target.value)}
-          required
-          />
+        />
         <input 
           placeholder="Email" 
           type="email"

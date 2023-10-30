@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import './Home.css';
 import Images from "../media";
 
 
 const Home = () => {
+  const [email, setEmail] = useState('');
+  const inputElement = useRef();
+
   return (
     <>
       <div id="home-banner">
@@ -62,8 +65,11 @@ const Home = () => {
       </div>
       <div id="newsletter">
         <h2>Join our mailing list for new titles, specials and more!</h2>
-        <input className='mailingList-input'/>
-        <button className="subscribe-button">Subscribe</button>
+        <form method='post' action='http://claitors.com/cgi-bin/clt/subscribe.cgi' ref={inputElement}>
+          <input className='mailingList-input' value={email} onChange={(e) => setEmail(e.target.value)} required/>
+          <button className="subscribe-button">Subscribe</button>
+        </form>
+        
       </div>
     </>
   );

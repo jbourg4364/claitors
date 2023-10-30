@@ -26,11 +26,14 @@ const ClaitorsTitles = () => {
     const handleDetail = async (bookId) => {
       navigate(`/books/details/${bookId}`);
     };
+
+    console.log(allBooks)
   
     const indexOfLastBook = currentPage * booksPerPage;
     const indexOfFirstBook = indexOfLastBook - booksPerPage;
     const filteredBooks = allBooks.filter((book) =>
-      book.availability.includes("Available at Claitors")
+      book.availability.includes("Available at Claitors") &&
+      !book.availability.includes("0. out of print")
     );
     const currentBooks = filteredBooks.slice(indexOfFirstBook, indexOfLastBook);
   

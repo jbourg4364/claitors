@@ -83,14 +83,14 @@ function textFileToJSON(filePath) {
       jsonData.push(record);
     }
   
-    return jsonData; // Return the JSON data as an array
+    return jsonData;
   }
   
   async function createInitialBooks() {
     console.log('Creating initial books...');
     try {
       const filePath = 'db/CATALOG_1.txt';
-      const jsonResult = textFileToJSON(filePath); // Call the textFileToJSON function here to get the JSON data
+      const jsonResult = textFileToJSON(filePath); // Calls the textFileToJSON for JSON data
   
       const books = await Promise.all(jsonResult.map(createBooks));
   

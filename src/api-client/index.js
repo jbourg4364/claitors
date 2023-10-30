@@ -36,3 +36,19 @@ export const getBookById = async (id) => {
         console.error(error, 'Error getting book details in middleware');
     }
 };
+
+export const searchBooks = async (keyword) => {
+    try {
+        const response = await fetch(`${BASE}/books/search/${keyword}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+        
+        const result = await response.json();
+        return result;
+    } catch (error) {
+        console.error(error, 'Error searching books in middleware')
+    };
+};

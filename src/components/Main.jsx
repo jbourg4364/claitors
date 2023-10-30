@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import { Routes, Route } from "react-router-dom";
-import { Home, Nav, LawBooks, IndBook, Footer, GPO, ClaitorsTitles, Contact } from './Index';
+import { Home, Nav, LawBooks, IndBook, Footer, GPO, ClaitorsTitles, Contact, Search } from './Index';
 import './Main.css';
 
 
 const Main = () => {
-  
+  const [searchTerm, setSearchTerm] = useState('');
 
   return (
     <>
-    <Nav />
+    <Nav searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
     <Routes>
       <Route 
       path='/'
@@ -31,6 +31,9 @@ const Main = () => {
       <Route 
       path='/contact'
       element={<Contact />} /> 
+      <Route 
+      path='/books/search/:keyword'
+      element={<Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />} /> 
     </Routes>
     <Footer />
     </>

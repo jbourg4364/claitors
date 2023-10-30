@@ -1,6 +1,6 @@
 const express = require('express');
 const booksRouter = express.Router();
-const { createBooks, getAllBooks, getBookById } = require('../db');
+const { createBooks, getAllBooks, getBookById, searchBooks } = require('../db');
 
 booksRouter.get('/', async (req, res, next) => {
     try {
@@ -21,11 +21,17 @@ booksRouter.get('/details/:id', async (req, res, next) => {
     }
 });
 
+booksRouter.get('/search/:keyword', async (req, res, next) => {
+    const { keyword } = req.params;
+    try {
+        const book = await searchBooks(keyword);
+        res.json(book);
+    } catch (error) {
+        console.error(error, 'Error searching books in API');
+    }
+});
+
 
 module.exports = booksRouter;
 
-// Additional Routes
 
-// /:searchTerm
-// /category/:lawBooks
-// /details/:id
