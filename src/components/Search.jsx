@@ -2,20 +2,25 @@ import React, { useEffect, useState } from 'react';
 import { searchBooks } from '../api-client';
 import { useNavigate, useParams } from "react-router-dom";
 
-const Search = ({setSearchTerm, searchTerm}) => {
+const Search = () => {
     const [sortedBooks, setSortedBooks] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
   const booksPerPage = 10;
+  const { searchTerm } = useParams();
   const { id } = useParams();
   const navigate = useNavigate();
 
+
     useEffect(() => {
+   
         const getBookBySearch = async () => {
             const response = await searchBooks(searchTerm);
             setSortedBooks(response);
         };
         getBookBySearch();
-    }, []);
+    }, [searchTerm]);
+
+
 
     const handleDetail = async (id) => {
         navigate(`/books/details/${id}`);

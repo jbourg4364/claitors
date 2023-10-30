@@ -1,16 +1,20 @@
 import React, { useState, useRef } from 'react';
 import './Nav.css';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate, useParams } from 'react-router-dom';
 
 
 
-const Nav = ({setSearchTerm, searchTerm}) => {
+const Nav = () => {
     const inputElement = useRef();
     const navigate = useNavigate();
+    const { searchTerm } = useParams();
+
+    const defaultSearchTerm = searchTerm || '';
 
     function handleSubmit (e) {
         e.preventDefault();
-        navigate(`/books/search/${searchTerm}`);
+        const newSearchTerm = inputElement.current.value;
+        navigate(`/books/search/${newSearchTerm}`);
     }
 
   return (
@@ -42,11 +46,12 @@ const Nav = ({setSearchTerm, searchTerm}) => {
           <i id="cart" className="fa-solid fa-cart-shopping fa-xl"></i>
         </NavLink>
       </div>
-      <form id="input" ref={inputElement} onSubmit={handleSubmit}>
+      <form id="input" onSubmit={handleSubmit}>
         <input
           className="search-bar"
           placeholder="Title, Author, ISBN, Series or Keyword"
-          onChange={(e) => setSearchTerm(e.target.value)}
+          defaultValue={defaultSearchTerm}
+          ref={inputElement}
         />
         <i id="search-glass" className="fa-solid fa-magnifying-glass fa-xl"></i>
       </form>

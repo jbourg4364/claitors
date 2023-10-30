@@ -5,11 +5,11 @@ import './Main.css';
 
 
 const Main = () => {
-  const [searchTerm, setSearchTerm] = useState('');
+
 
   return (
     <>
-    <Nav searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
+    <Nav />
     <Routes>
       <Route 
       path='/'
@@ -32,8 +32,8 @@ const Main = () => {
       path='/contact'
       element={<Contact />} /> 
       <Route 
-      path='/books/search/:keyword'
-      element={<Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />} /> 
+      path='/books/search/:searchTerm'
+      element={<Search />} /> 
     </Routes>
     <Footer />
     </>
