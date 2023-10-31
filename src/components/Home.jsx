@@ -7,6 +7,12 @@ const Home = () => {
   const [email, setEmail] = useState('');
   const inputElement = useRef();
 
+  function handleSubmit(e) {
+    e.preventDefault();
+    window.alert(`You're subscribed!`);
+    setEmail('');
+  }
+
   return (
     <>
       <div id="home-banner">
@@ -65,8 +71,8 @@ const Home = () => {
       </div>
       <div id="newsletter">
         <h2>Join our mailing list for new titles, specials and more!</h2>
-        <form method='post' action='http://claitors.com/cgi-bin/clt/subscribe.cgi' ref={inputElement}>
-          <input className='mailingList-input' value={email} onChange={(e) => setEmail(e.target.value)} required/>
+        <form method='post' action='http://claitors.com/cgi-bin/clt/subscribe.cgi' ref={inputElement} onSubmit={handleSubmit}>
+          <input className='mailingList-input' value={email} onChange={(e) => setEmail(e.target.value)} required type='email'/>
           <button className="subscribe-button">Subscribe</button>
         </form>
         
