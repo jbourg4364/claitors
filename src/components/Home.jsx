@@ -1,81 +1,129 @@
-import React, { useState, useRef } from 'react';
-import './Home.css';
+import React, { useState, useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import "./Home.css";
 import Images from "../media";
-
+import { getAllContent } from "../api-client";
 
 const Home = () => {
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState("");
+  const [content, setContent] = useState([]);
   const inputElement = useRef();
+  const navigate = useNavigate();
 
   function handleSubmit(e) {
     e.preventDefault();
     window.alert(`You're subscribed!`);
-    setEmail('');
+    setEmail("");
   }
+
+  useEffect(() => {
+    const getContent = async () => {
+      const response = await getAllContent();
+      setContent(response);
+    };
+    getContent();
+  }, []);
+
+  console.log(content);
 
   return (
     <>
       <div id="home-banner">
-        <div id="home-banner-content">
-          <div id="home-banner-image">
-            <img className="home-image-main" src={Images.homeMainBook} />
-          </div>
-          <div id="home-banner-title">
-            <h3>
-              NEW 21ST EDITION! $45.00(Save 10% when you order 10+ copies)
-            </h3>
-            <button className="home-button-main">Order Now!</button>
-          </div>
-          <div id="home-banner-description">
-            <p>
-              The Twenty-first edition of The Bluebook retains the same basic
-              approach to legal citation established by its predecessors. The
-              layout of The Bluebook has been updated to make the information
-              easier to access. Some citation forms have been expanded,
-              elaborated upon, or modified from previous editions to reflect the
-              ever---expanding range of authorities used in legal writing and to
-              respond to suggestions from the community.
-            </p>
-          </div>
-        </div>
+        {content.map((cont) => {
+          if (cont.label === "home-main-banner") {
+            return (
+              <div id="home-banner-content" key={cont.id}>
+                <div id="home-banner-image">
+                  <img className="home-image-main" src={cont.imageurl} />
+                </div>
+                <div id="home-banner-title">
+                  <h3>{cont.title}</h3>
+                  <button
+                    className="home-button-main"
+                    onClick={() => (window.location.href = cont.buttonurl)}
+                  >
+                    Order Now!
+                  </button>
+                </div>
+                <div id="home-banner-description">
+                  <p>{cont.description}</p>
+                </div>
+              </div>
+            );
+          }
+        })}
         <div id="featured-container">
-          <div className="featured-ind-container">
-            <h3 className="featured-ind-heading">
-              Occupational Outlook Handbook
-            </h3>
-            <img src={Images.homeFeatBook1} className="featured-image" />
-            <h4 className="price-field">
-              Paperbound $25.00 | Hardcover $40.00
-            </h4>
-            <button className="featured-button">Order Now!</button>
-          </div>
-          <div className="featured-ind-container">
-            <h3 className="featured-ind-heading">
-              North American Industry Classification System
-            </h3>
-            <img src={Images.homeFeatBook2} className="featured-image" />
-            <h4 className="price-field">
-              Paperbound $55.00 | Hardcover $65.00
-            </h4>
-            <button className="featured-button">Order Now!</button>
-          </div>
-          <div className="featured-ind-container">
-            <h3 className="featured-ind-heading">
-              The United States Government Manual 2015
-            </h3>
-            <img src={Images.homeFeatBook3} className="featured-image" />
-            <h4 className="price-field">Paperbound $35.00</h4>
-            <button className="featured-button">Order Now!</button>
-          </div>
+          {content.map((cont) => {
+            if (cont.label === "home-ind-one") {
+              return (
+                <div className="featured-ind-container" key={cont.id}>
+                  <h3 className="featured-ind-heading">{cont.title}</h3>
+                  <img src={cont.imageurl} className="featured-image" />
+                  <h4 className="price-field">{cont.price}</h4>
+                  <button
+                    className="featured-button"
+                    onClick={() => (window.location.href = cont.buttonurl)}
+                  >
+                    Order Now!
+                  </button>
+                </div>
+              );
+            }
+          })}
+
+          {content.map((cont) => {
+            if (cont.label === "home-ind-two") {
+              return (
+                <div className="featured-ind-container" key={cont.id}>
+                  <h3 className="featured-ind-heading">{cont.title}</h3>
+                  <img src={cont.imageurl} className="featured-image" />
+                  <h4 className="price-field">{cont.price}</h4>
+                  <button
+                    className="featured-button"
+                    onClick={() => (window.location.href = cont.buttonurl)}
+                  >
+                    Order Now!
+                  </button>
+                </div>
+              );
+            }
+          })}
+          {content.map((cont) => {
+            if (cont.label === "home-ind-three") {
+              return (
+                <div className="featured-ind-container" key={cont.id}>
+                  <h3 className="featured-ind-heading">{cont.title}</h3>
+                  <img src={cont.imageurl} className="featured-image" />
+                  <h4 className="price-field">{cont.price}</h4>
+                  <button
+                    className="featured-button"
+                    onClick={() => (window.location.href = cont.buttonurl)}
+                  >
+                    Order Now!
+                  </button>
+                </div>
+              );
+            }
+          })}
         </div>
       </div>
       <div id="newsletter">
         <h2>Join our mailing list for new titles, specials and more!</h2>
-        <form method='post' action='http://claitors.com/cgi-bin/clt/subscribe.cgi' ref={inputElement} onSubmit={handleSubmit}>
-          <input className='mailingList-input' value={email} onChange={(e) => setEmail(e.target.value)} required type='email'/>
+        <form
+          method="post"
+          action="http://claitors.com/cgi-bin/clt/subscribe.cgi"
+          ref={inputElement}
+          onSubmit={handleSubmit}
+        >
+          <input
+            className="mailingList-input"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            type="email"
+          />
           <button className="subscribe-button">Subscribe</button>
         </form>
-        
       </div>
     </>
   );

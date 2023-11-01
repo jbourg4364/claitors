@@ -37,3 +37,33 @@
     margin-right: auto;
     border-radius: 10px 10px 10px 10px;
 }
+
+.home-edit-field {
+    font-size: 18px;
+    padding: 5px;
+    margin: 10px;
+}
+
+#home-edit-field-description {
+    text-wrap: wrap;
+    height: 200px;
+}
+
+.home-button-save {
+    padding: 10px;
+    font-size: 20px;
+    margin: 10px;
+    background-color: #79227b ;
+    color: white;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    width: 150px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.home-button-save:hover {
+    background-color: green;
+    cursor: pointer;
+}

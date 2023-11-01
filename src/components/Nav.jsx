@@ -3,7 +3,7 @@ import "./Nav.css";
 import { NavLink, useNavigate, useParams, useLocation } from "react-router-dom";
 import Admin from "./Admin";
 
-const Nav = ({isAdmin}) => {
+const Nav = () => {
   const inputElement = useRef();
   const navigate = useNavigate();
   const { searchTerm } = useParams();
@@ -16,9 +16,6 @@ const Nav = ({isAdmin}) => {
     navigate(`/books/search/${newSearchTerm}`);
   };
 
-  function handleLogout() {
-    localStorage.removeItem('id');
-  }
 
   return (
     <>
@@ -28,7 +25,7 @@ const Nav = ({isAdmin}) => {
         <h3 className="logo-caption">Established in 1922</h3>
         <hr className="logo-line"></hr>
       </div>
-      {location.pathname !== "/login" && !isAdmin && (
+      {location.pathname !== "/login" && (
       <div id="links">
         <NavLink to="/">
           <h3 className="nav-link">HOME</h3>
@@ -52,24 +49,6 @@ const Nav = ({isAdmin}) => {
         </NavLink>
       </div>
       )}
-      {isAdmin ? (
-      <div id="links">
-        <NavLink to="/admin/dashboard">
-          <h3 className="nav-link">DASHBOARD</h3>
-        </NavLink>
-        <NavLink to="/admin/homePageEdit">
-          <h3 className="nav-link">EDIT HOME PAGE</h3>
-        </NavLink>
-        <NavLink to="/gpotitles">
-          <h3 className="nav-link">ADD A BOOK</h3>
-        </NavLink>
-        <NavLink to="/" onClick={handleLogout}>
-          <h3 className="nav-link" id="contact-us">
-            LOGOUT
-          </h3>
-        </NavLink>
-      </div>
-      ) : null}
       {location.pathname !== "/login" && (
         <form id="input" onSubmit={handleSubmit}>
           <input

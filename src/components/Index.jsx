@@ -11,4 +11,5 @@ export { default as Search } from './Search';
 export { default as Login } from './Login';
 export { default as Admin } from './Admin';
 export { default as HomePageEdit } from './HomePageEdit';
+export { default as AdminNav } from './AdminNav';
 

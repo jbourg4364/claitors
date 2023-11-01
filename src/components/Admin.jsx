@@ -13,7 +13,7 @@ const Admin = ({isAdmin}) => {
 
   return (
     <div id='admin-dash-container'>
-        <h2>Welcome Back!</h2>
+        <h2 className='edit-title-banner'>Welcome Back!</h2>
         <h3>Recently Added Titles</h3>
     </div>
   )

@@ -1,21 +1,22 @@
 import React, { useState } from 'react';
-import { Routes, Route } from "react-router-dom";
-import { Home, Nav, LawBooks, IndBook, Footer, GPO, ClaitorsTitles, Contact, Search, Login, Admin, HomePageEdit } from './Index';
+import { Routes, Route, useLocation } from "react-router-dom";
+import { Home, Nav, LawBooks, IndBook, Footer, GPO, ClaitorsTitles, Contact, Search, Login, Admin, HomePageEdit, AdminNav } from './Index';
 import './Main.css';
 
 
 const Main = () => {
   const storedId = localStorage.getItem('id');
   const isAdmin = storedId === 'admin';
+  const location = useLocation();
 
-  const [mainBannerImg, setMainBannerImg] = useState('');
-  const [mainBannerTitle, setMainBannerTitle] = useState('');
-  const [mainBannerDescription, setMainBannerDescription] = useState('');
-  const [mainBannerButton, setMainBannerButton] = useState('');
 
   return (
     <>
-    <Nav isAdmin={isAdmin}/>
+    {!isAdmin ? (
+      <Nav />
+    ) : (
+      <AdminNav />
+    )}
     <Routes>
       <Route 
       path='/'
@@ -48,7 +49,7 @@ const Main = () => {
       element={<Admin isAdmin={isAdmin}/>} /> 
       <Route 
       path='/admin/homePageEdit'
-      element={<HomePageEdit isAdmin={isAdmin} setMainBannerImg={setMainBannerImg} mainBannerImg={mainBannerImg} mainBannerTitle={mainBannerTitle} setMainBannerTitle={setMainBannerTitle} mainBannerDescription={mainBannerDescription} setMainBannerDescription={setMainBannerDescription} mainBannerButton={mainBannerButton} setMainBannerButton={setMainBannerButton}/>} /> 
+      element={<HomePageEdit isAdmin={isAdmin} />} /> 
     </Routes>
     <Footer isAdmin={isAdmin} />
     </>

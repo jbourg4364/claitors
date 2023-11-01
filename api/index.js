@@ -21,6 +21,9 @@ router.use((req, res, next) => {
 const booksRouter = require('./books');
 router.use('/books', booksRouter);
 
+const contentRouter = require('./content');
+router.use('/content', contentRouter);
+
 
   router.use("/", (req, res, next) =>{
     res.status(404);
