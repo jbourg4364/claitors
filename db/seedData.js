@@ -117,6 +117,7 @@ function textFileToJSON(filePath) {
     try {
         const contentToCreate = [
             {
+                id: 1,
                 label: 'home-main-banner',
                 title: 'NEW 21ST EDITION! $45.00(Save 10% when you order 10+ copies)',
                 description: 'The Twenty-first edition of The Bluebook retains the same basic approach to legal citation established by its predecessors. The layout of The Bluebook has been updated to make the information easier to access. Some citation forms have been expanded, elaborated upon, or modified from previous editions to reflect the ever---expanding range of authorities used in legal writing and to respond to suggestions from the community.',
@@ -125,6 +126,7 @@ function textFileToJSON(filePath) {
                 price: '$10.00'
             },
             {
+                id: 2,
                 label: 'home-ind-one',
                 title: 'Occupational Outlook Handbook',
                 description: 'N/A',
@@ -133,6 +135,7 @@ function textFileToJSON(filePath) {
                 price: 'Paperbound $25.00 | Hardcover $40.00'
             },
             {
+                id: 3,
                 label: 'home-ind-two',
                 title: 'North American Industry Classification System',
                 description: 'N/A',
@@ -141,6 +144,7 @@ function textFileToJSON(filePath) {
                 price: 'Paperbound $55.00 | Hardcover $65.00'
             },
             {
+                id: 4,
                 label: 'home-ind-three',
                 title: 'The United States Government Manual 2015',
                 description: 'N/A',
@@ -157,6 +161,21 @@ function textFileToJSON(filePath) {
         console.error(error, 'Error creating initial content in DB');
     }
   };
+
+//   async function contentEdit() {
+//     console.log('Editing content...')
+//     try {
+
+//         const response = await editContent({id: 1, fields: {title: 'NEW TITLE',
+//         description: 'NEW DESCRIPTION', imageurl: 'hello'}});
+        
+//         console.log('Content edited:', response);
+
+        
+//     } catch (error) {
+//         console.error(error, 'error editing content in Seed')
+//     }
+//   };
 
 
 async function rebuildDB() {

@@ -68,3 +68,22 @@ export const getAllContent = async () => {
         console.error(error, 'Error getting all content in middleware');
     }
 };
+
+export const editContent = async (id, title, description, imageurl, buttonurl, price) => {
+    try {
+
+        const response = await fetch(`${BASE}/content/${id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-type': 'application/json',
+            },
+            body: JSON.stringify({ title, description, imageurl, buttonurl, price })
+        });
+        
+        const result = await response.json();
+    
+        return result;
+    } catch (error) {
+        console.error(error, 'Error editing content in middleware');
+    };
+};

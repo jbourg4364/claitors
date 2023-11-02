@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Home.css";
-import Images from "../media";
 import { getAllContent } from "../api-client";
 
 const Home = () => {
@@ -24,7 +23,6 @@ const Home = () => {
     getContent();
   }, []);
 
-  console.log(content);
 
   return (
     <>

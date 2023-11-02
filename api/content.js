@@ -14,9 +14,12 @@ contentRouter.get('/', async (req, res, next) => {
 
 contentRouter.patch('/:id', async (req, res, next) => {
     const { id } = req.params;
-    const { fields } = req.body;
+    const { description, title, imageurl, buttonurl, price } = req.body;
+
     try {
-        const updateContent = await editContent(id, fields);
+        const updateContent = await editContent({id: id, fields: {title: title,
+        description: description, imageurl: imageurl, buttonurl: buttonurl, price: price}});
+        
         res.status(200).json(updateContent);
     } catch (error) {
         console.error(error, 'Error editing content in API');

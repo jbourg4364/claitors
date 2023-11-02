@@ -3,6 +3,12 @@ import './Footer.css';
 import { Link } from "react-router-dom";
 
 const Footer = ( {isAdmin} ) => {
+
+  const scrollToTop = () => {
+    window.scrollTo(0, 0);
+  };
+
+
   return (
     <div id="footer-container">
       <h1 className="logo">Claitor's Law Books and Publishing Division</h1>
@@ -15,7 +21,7 @@ const Footer = ( {isAdmin} ) => {
         <br />
         <p>©️ Claitor's</p>
         {!isAdmin ? (
-          <Link className='login-link' to='/login'>Login</Link>
+          <Link onClick={scrollToTop} className='login-link' to='/login'>Login</Link>
         ) : null}
         
       </div>

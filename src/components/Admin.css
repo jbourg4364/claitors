@@ -67,3 +67,25 @@
     background-color: green;
     cursor: pointer;
 }
+
+.home-edit-form-ind {
+    width: 30%;
+    text-align: center;
+    padding: 5px;
+    color: black;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.home-edit-form-ind-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.home-edit-field-ind {
+    font-size: 18px;
+    padding: 5px;
+    margin: 10px;
+}

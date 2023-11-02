@@ -42,7 +42,7 @@ const Login = () => {
             className='login-input'
             />
             <button type="submit" className='login-button'>Log in</button>
-            <Link to='/'>Home</Link>
+            <Link to='/' className='home-button-login'>Home</Link>
         </form>
     </div>
   )
