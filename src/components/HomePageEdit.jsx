@@ -43,7 +43,7 @@ const HomePageEdit = ({ isAdmin }) => {
       const response = await getAllContent();
       setContent(response);
 
-      window.alert("Your changes were saved!");
+      window.alert("Your changes were saved to the main banner!");
     } catch (error) {
       console.error(error, "Error editing content in React");
     }
@@ -62,7 +62,7 @@ const HomePageEdit = ({ isAdmin }) => {
       const response = await getAllContent();
       setContent(response);
 
-      window.alert("Your changes were saved!");
+      window.alert("Your changes were saved to the featured section 1!");
     } catch (error) {
       console.error(error, "Error editing content in React");
     }
@@ -81,7 +81,7 @@ const HomePageEdit = ({ isAdmin }) => {
       const response = await getAllContent();
       setContent(response);
 
-      window.alert("Your changes were saved!");
+      window.alert("Your changes were saved to the featured section 2!");
     } catch (error) {
       console.error(error, "Error editing content in React");
     }
@@ -100,7 +100,7 @@ const HomePageEdit = ({ isAdmin }) => {
       const response = await getAllContent();
       setContent(response);
 
-      window.alert("Your changes were saved!");
+      window.alert("Your changes were saved to the featured section 3!");
     } catch (error) {
       console.error(error, "Error editing content in React");
     }

@@ -34,7 +34,7 @@ const AdminNav = () => {
           <NavLink to="/admin/homePageEdit">
             <h3 className="nav-link">EDIT HOME PAGE</h3>
           </NavLink>
-          <NavLink to="/gpotitles">
+          <NavLink to="/admin/addBook">
             <h3 className="nav-link">ADD A BOOK</h3>
           </NavLink>
           <NavLink to="/" onClick={handleLogout}>

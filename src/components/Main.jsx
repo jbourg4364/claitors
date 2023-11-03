@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Routes, Route, useLocation } from "react-router-dom";
-import { Home, Nav, LawBooks, IndBook, Footer, GPO, ClaitorsTitles, Contact, Search, Login, Admin, HomePageEdit, AdminNav } from './Index';
+import { Home, Nav, LawBooks, IndBook, Footer, GPO, ClaitorsTitles, Contact, Search, Login, Admin, HomePageEdit, AdminNav, AddBook } from './Index';
 import './Main.css';
 
 
@@ -52,6 +52,9 @@ const Main = () => {
       <Route 
       path='/admin/homePageEdit'
       element={<HomePageEdit isAdmin={isAdmin} />} /> 
+      <Route 
+      path='/admin/addBook'
+      element={<AddBook isAdmin={isAdmin} />} /> 
     </Routes>
     <Footer isAdmin={isAdmin} />
     </>

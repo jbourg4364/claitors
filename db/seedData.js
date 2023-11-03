@@ -35,7 +35,7 @@ async function createTables() {
                 Binding VARCHAR(400),
                 Cover VARCHAR(400),
                 CrossReference VARCHAR(400),
-                Description VARCHAR(400),
+                Description VARCHAR(1000),
                 ExtraDescription VARCHAR(400),
                 Format VARCHAR(400),
                 ISBN VARCHAR(400),
@@ -64,7 +64,7 @@ async function createTables() {
                 id SERIAL PRIMARY KEY,
                 label VARCHAR(255) UNIQUE,
                 title VARCHAR(255),
-                description VARCHAR(500),
+                description VARCHAR(1000),
                 imageURL VARCHAR(255),
                 buttonURL VARCHAR(255),
                 price VARCHAR(255)
@@ -162,20 +162,6 @@ function textFileToJSON(filePath) {
     }
   };
 
-//   async function contentEdit() {
-//     console.log('Editing content...')
-//     try {
-
-//         const response = await editContent({id: 1, fields: {title: 'NEW TITLE',
-//         description: 'NEW DESCRIPTION', imageurl: 'hello'}});
-        
-//         console.log('Content edited:', response);
-
-        
-//     } catch (error) {
-//         console.error(error, 'error editing content in Seed')
-//     }
-//   };
 
 
 async function rebuildDB() {
