@@ -31,6 +31,90 @@ booksRouter.get('/search/:keyword', async (req, res, next) => {
     }
 });
 
+booksRouter.post("/", async (req, res, next) => {
+  try {
+    const {
+      Field_1,
+      Field_2,
+      Field3,
+      Topic,
+      Family,
+      pk,
+      DOC,
+      Author,
+      Availability,
+      AvailableDate,
+      Binding,
+      Cover,
+      CrossReference,
+      Description,
+      ExtraDescription,
+      Format,
+      ISBN,
+      ISSN,
+      KeyPhrases,
+      ListID,
+      Note,
+      Price,
+      PriceNonUS,
+      Publisher,
+      QuantityPrice,
+      StandingOrderCode,
+      StatusDate,
+      StockNumber,
+      SubjectBibliography,
+      SuDocsClass,
+      Title,
+      Unit,
+      UnitNonUS,
+      Weight,
+      YearPages,
+      Hyperlink
+    } = req.body;
+
+    const newBook = await createBooks({ 
+        Field_1,
+        Field_2,
+        Field3,
+        Topic,
+        Family,
+        pk,
+        DOC,
+        Author,
+        Availability,
+        AvailableDate,
+        Binding,
+        Cover,
+        CrossReference,
+        Description,
+        ExtraDescription,
+        Format,
+        ISBN,
+        ISSN,
+        KeyPhrases,
+        ListID,
+        Note,
+        Price,
+        PriceNonUS,
+        Publisher,
+        QuantityPrice,
+        StandingOrderCode,
+        StatusDate,
+        StockNumber,
+        SubjectBibliography,
+        SuDocsClass,
+        Title,
+        Unit,
+        UnitNonUS,
+        Weight,
+        YearPages,
+        Hyperlink });
+
+        res.status(201).json(newBook);
+  } catch (error) {
+    console.error(error, "Error creating new book in API");
+  }
+});
 
 module.exports = booksRouter;
 

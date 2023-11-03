@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Admin.css";
+import {createBook} from '../api-client/index';
 
 const AddBook = ({ isAdmin }) => {
   const [title, setTitle] = useState("");
@@ -36,7 +37,7 @@ const AddBook = ({ isAdmin }) => {
   const [suDocsClass, setSuDocsClass] = useState("");
   const [unit, setUnit] = useState("");
   const [unitNonUS, setUnitNonUS] = useState("");
-  const [weight, setWeight] = useState("5.00");
+  const [weight, setWeight] = useState("");
   const [yearPages, setYearPages] = useState("");
   const [hyperlink, setHyperlink] = useState("");
 
@@ -45,13 +46,62 @@ const AddBook = ({ isAdmin }) => {
 
   if (!isAdmin) {
     navigate("/login");
-  }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await createBook(fieldOne,
+        fieldTwo,
+        fieldThree,
+        topic,
+        family,
+        pk,
+        DOC,
+        author,
+        availability,
+        availableDate,
+        binding,
+        cover,
+        crossReference,
+        description,
+        extraDescription,
+        format,
+        ISBN,
+        ISSN,
+        keyPhrases,
+        listID,
+        note,
+        price,
+        priceNonUS,
+        publisher,
+        quantityPrice,
+        standingOrderCode,
+        statusDate,
+        stockNumber,
+        subjectBibliography,
+        suDocsClass,
+        title,
+        unit,
+        unitNonUS,
+        weight,
+        yearPages,
+        hyperlink );
+
+        window.alert(`The book ${title} was created!`);
+        navigate('/admin/dashboard');
+
+    } catch (error) {
+      console.error(error, 'Error creating book in React');
+    }
+  };
+
 
   return (
     <>
       <div id="add-book-container">
         <h2 className="edit-title-banner">Add New Title</h2>
-        <form className="add-book-form" ref={inputElement}>
+        <form className="add-book-form" ref={inputElement} onSubmit={handleSubmit}>
           <input
             required
             placeholder="Title"
@@ -306,6 +356,7 @@ const AddBook = ({ isAdmin }) => {
             type="text"
             value={hyperlink}
           />
+          <button className="home-button-save" type="submit">Save</button>
         </form>
       </div>
     </>

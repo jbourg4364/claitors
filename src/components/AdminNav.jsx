@@ -35,7 +35,7 @@ const AdminNav = () => {
             <h3 className="nav-link">EDIT HOME PAGE</h3>
           </NavLink>
           <NavLink to="/admin/addBook">
-            <h3 className="nav-link">ADD A BOOK</h3>
+            <h3 className="nav-link">ADD NEW TITLE</h3>
           </NavLink>
           <NavLink to="/" onClick={handleLogout}>
             <h3 className="nav-link" id="contact-us">
