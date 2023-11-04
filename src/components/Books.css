@@ -136,6 +136,10 @@ h3.total-pages {
     text-align: center;
 }
 
+.ind-book-button-container {
+    display: flex;
+    flex-direction: row;
+}
 @media screen and (max-width: 800px) {
     #ind-book-container {
         flex-direction: column;

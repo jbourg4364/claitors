@@ -24,6 +24,7 @@ const LawBooks = () => {
 
   const handleDetail = async (id) => {
     navigate(`/books/details/${id}`);
+    window.scrollTo(0, 0);
   };
 
   const indexOfLastBook = currentPage * booksPerPage;
@@ -38,10 +39,7 @@ const LawBooks = () => {
 
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
-    const element = document.getElementById('books-heading');
-    if(element) {
-      element.scrollIntoView({behavior: "smooth"});
-    }
+    window.scrollTo(0, 0);
   };
 
   const renderPaginationButtons = () => {

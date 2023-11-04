@@ -24,6 +24,8 @@ const GPO = () => {
 
   const handleDetail = async (bookId) => {
     navigate(`/books/details/${bookId}`);
+    window.scrollTo(0, 0);
+
   };
 
   const indexOfLastBook = currentPage * booksPerPage;
@@ -37,10 +39,7 @@ const GPO = () => {
 
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
-    const element = document.getElementById('books-heading');
-    if(element) {
-      element.scrollIntoView({behavior: "smooth"});
-    }
+    window.scrollTo(0, 0);
   };
 
   const renderPaginationButtons = () => {

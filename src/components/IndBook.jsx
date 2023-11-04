@@ -3,7 +3,7 @@ import { getBookById } from "../api-client/index";
 import { useParams } from "react-router";
 import './IndBook.css';
 
-const IndBook = () => {
+const IndBook = ({isAdmin}) => {
   const [book, setBook] = useState({});
   const { id } = useParams();
   useEffect(() => {
@@ -86,7 +86,9 @@ const IndBook = () => {
           <option>${book.price} US</option>
           <option>${book.pricenonus} INT</option>
         </select>
-        <button className="ind-book-cart-detail">Add to Cart</button>
+        {isAdmin ? (null) : (
+          <button className="ind-book-cart-detail">Add to Cart</button>
+        )}
       </div>
     </div>
   );

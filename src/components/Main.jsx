@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Routes, Route, useLocation } from "react-router-dom";
-import { Home, Nav, LawBooks, IndBook, Footer, GPO, ClaitorsTitles, Contact, Search, Login, Admin, HomePageEdit, AdminNav, AddBook } from './Index';
+import { Home, Nav, LawBooks, IndBook, Footer, GPO, ClaitorsTitles, Contact, Search, Login, Admin, HomePageEdit, AdminNav, AddBook, EditBook } from './Index';
 import './Main.css';
 
 
@@ -9,8 +9,6 @@ const Main = () => {
   const isAdmin = storedId === 'admin';
   const location = useLocation();
 
-
-  
 
   return (
     <>
@@ -30,7 +28,7 @@ const Main = () => {
       />
       <Route 
       path='/books/details/:id'
-      element={<IndBook />} /> 
+      element={<IndBook isAdmin={isAdmin}/>} /> 
       <Route 
       path='/gpotitles'
       element={<GPO />} /> 
@@ -42,7 +40,7 @@ const Main = () => {
       element={<Contact />} /> 
       <Route 
       path='/books/search/:searchTerm'
-      element={<Search />} /> 
+      element={<Search isAdmin={isAdmin}/>} /> 
       <Route 
       path='/login'
       element={<Login />} /> 
@@ -50,11 +48,14 @@ const Main = () => {
       path='/admin/dashboard'
       element={<Admin isAdmin={isAdmin}/>} /> 
       <Route 
-      path='/admin/homePageEdit'
+      path='/content'
       element={<HomePageEdit isAdmin={isAdmin} />} /> 
       <Route 
       path='/admin/addBook'
       element={<AddBook isAdmin={isAdmin} />} /> 
+      <Route 
+      path='/books/edit/:id'
+      element={<EditBook isAdmin={isAdmin} />} /> 
     </Routes>
     <Footer isAdmin={isAdmin} />
     </>

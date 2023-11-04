@@ -31,7 +31,7 @@ const AdminNav = () => {
           <NavLink to="/admin/dashboard">
             <h3 className="nav-link">DASHBOARD</h3>
           </NavLink>
-          <NavLink to="/admin/homePageEdit">
+          <NavLink to="/content">
             <h3 className="nav-link">EDIT HOME PAGE</h3>
           </NavLink>
           <NavLink to="/admin/addBook">

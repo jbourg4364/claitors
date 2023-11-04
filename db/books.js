@@ -210,11 +210,33 @@ async function searchBooks(keyword) {
   } catch (error) {
     console.error(error, "Error searching books in DB");
   }
-}
+};
+
+async function editBook({ id, fields = {} }) {
+  const setString = Object.keys(fields).map((key, index) => `"${ key }"=$${ index + 1 }`).join(', ');
+
+  if (setString === 0) {
+      return;
+  };
+
+  try {
+      const { rows: [book] } = await client.query(`
+      UPDATE books
+      SET ${ setString }
+      WHERE id=${id}
+      RETURNING *;
+      `, Object.values(fields));
+
+      return book;
+  } catch (error) {
+      console.error(error, 'Error editing book in DB');
+  }
+};
 
 module.exports = {
   createBooks,
   getAllBooks,
   getBookById,
-  searchBooks
+  searchBooks,
+  editBook
 };

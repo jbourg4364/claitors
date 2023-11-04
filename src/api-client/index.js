@@ -1,7 +1,7 @@
 const BASE = 'http://localhost:8080/api';
 
 // deployment`
-// const BASE = 'api';
+// const BASE = '/api';
 
 export const getAllBooks = async () => {
     try {
@@ -178,4 +178,98 @@ export const createBook = async (
   } catch (error) {
     console.error(error, "Error creating book in middleware");
   }
+};
+
+export const editBook = async (
+    id,
+    Field_1,
+    Field_2,
+    Field3,
+    Topic,
+    Family,
+    pk,
+    DOC,
+    Author,
+    Availability,
+    AvailableDate,
+    Binding,
+    Cover,
+    CrossReference,
+    Description,
+    ExtraDescription,
+    Format,
+    ISBN,
+    ISSN,
+    KeyPhrases,
+    ListID,
+    Note,
+    Price,
+    PriceNonUS,
+    Publisher,
+    QuantityPrice,
+    StandingOrderCode,
+    StatusDate,
+    StockNumber,
+    SubjectBibliography,
+    SuDocsClass,
+    Title,
+    Unit,
+    UnitNonUS,
+    Weight,
+    YearPages,
+    Hyperlink,
+    ) => {
+    try {
+
+        const response = await fetch(`${BASE}/books/${id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-type': 'application/json',
+            },
+            body: JSON.stringify({ 
+                Field_1,
+                Field_2,
+                Field3,
+                Topic,
+                Family,
+                pk,
+                DOC,
+                Author,
+                Availability,
+                AvailableDate,
+                Binding,
+                Cover,
+                CrossReference,
+                Description,
+                ExtraDescription,
+                Format,
+                ISBN,
+                ISSN,
+                KeyPhrases,
+                ListID,
+                Note,
+                Price,
+                PriceNonUS,
+                Publisher,
+                QuantityPrice,
+                StandingOrderCode,
+                StatusDate,
+                StockNumber,
+                SubjectBibliography,
+                SuDocsClass,
+                Title,
+                Unit,
+                UnitNonUS,
+                Weight,
+                YearPages,
+                Hyperlink,
+             })
+        });
+        
+        const result = await response.json();
+    
+        return result;
+    } catch (error) {
+        console.error(error, 'Error editing book in middleware');
+    };
 };

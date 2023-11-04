@@ -25,9 +25,10 @@ const ClaitorsTitles = () => {
   
     const handleDetail = async (bookId) => {
       navigate(`/books/details/${bookId}`);
+      window.scrollTo(0, 0);
     };
 
-    console.log(allBooks)
+
   
     const indexOfLastBook = currentPage * booksPerPage;
     const indexOfFirstBook = indexOfLastBook - booksPerPage;
@@ -41,10 +42,7 @@ const ClaitorsTitles = () => {
   
     const paginate = (pageNumber) => {
       setCurrentPage(pageNumber);
-      const element = document.getElementById('books-heading');
-      if(element) {
-        element.scrollIntoView({behavior: "smooth"});
-      }
+      window.scrollTo(0, 0);
     };
   
     const renderPaginationButtons = () => {

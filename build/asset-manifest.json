@@ -1,17 +1,13 @@
 {
   "files": {
-    "main.css": "/static/css/main.be125125.css",
-    "main.js": "/static/js/main.ab4972e0.js",
-    "static/media/Claitors_OccupationalHandbook.png": "/static/media/Claitors_OccupationalHandbook.af6bc93fd88112aa8f07.png",
-    "static/media/Claitors_NorthAmerican.png": "/static/media/Claitors_NorthAmerican.dbef1ddfc36cf0c8c599.png",
-    "static/media/Claitors_Gov.png": "/static/media/Claitors_Gov.294c2f31cfe6e9315b9a.png",
-    "static/media/Claitors-Main.png": "/static/media/Claitors-Main.4215580ebb2ca5b592bc.png",
+    "main.css": "/static/css/main.708cf854.css",
+    "main.js": "/static/js/main.5b654d43.js",
     "index.html": "/index.html",
-    "main.be125125.css.map": "/static/css/main.be125125.css.map",
-    "main.ab4972e0.js.map": "/static/js/main.ab4972e0.js.map"
+    "main.708cf854.css.map": "/static/css/main.708cf854.css.map",
+    "main.5b654d43.js.map": "/static/js/main.5b654d43.js.map"
   },
   "entrypoints": [
-    "static/css/main.be125125.css",
-    "static/js/main.ab4972e0.js"
+    "static/css/main.708cf854.css",
+    "static/js/main.5b654d43.js"
   ]
 }
