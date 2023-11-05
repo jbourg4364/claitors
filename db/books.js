@@ -213,25 +213,28 @@ async function searchBooks(keyword) {
 };
 
 async function editBook({ id, fields = {} }) {
-  const setString = Object.keys(fields).map((key, index) => `"${ key }"=$${ index + 1 }`).join(', ');
+  const setString = Object.keys(fields).map((key, index) => `"${key}"=$${index + 1}`).join(', ');
 
-  if (setString === 0) {
-      return;
-  };
+  if (setString.length === 0) {
+    return; // If there are no fields to update, exit early.
+  }
 
   try {
-      const { rows: [book] } = await client.query(`
+    const { rows: [book] } = await client.query(`
       UPDATE books
-      SET ${ setString }
-      WHERE id=${id}
+      SET ${setString}
+      WHERE id = $${Object.keys(fields).length + 1} 
       RETURNING *;
-      `, Object.values(fields));
+    `, [...Object.values(fields), id]);
 
-      return book;
+    return book;
   } catch (error) {
-      console.error(error, 'Error editing book in DB');
+    throw error;
   }
-};
+}
+
+
+
 
 module.exports = {
   createBooks,

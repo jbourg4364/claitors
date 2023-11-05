@@ -109,7 +109,7 @@ const Home = () => {
         <h2>Join our mailing list for new titles, specials and more!</h2>
         <form
           method="post"
-          action="http://claitors.com/cgi-bin/clt/subscribe.cgi"
+          action="https://claitors.com/cgi-bin/clt/subscribe.cgi"
           ref={inputElement}
           onSubmit={handleSubmit}
         >

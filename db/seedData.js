@@ -1,6 +1,6 @@
 const client = require('./client');
 const fs = require('fs');
-const { createBooks } = require('./books');
+const { createBooks, editBook } = require('./books');
 const { createContent } = require('./content');
 
 
@@ -162,6 +162,54 @@ function textFileToJSON(filePath) {
     }
   };
 
+  async function tryEditBook() {
+    console.log("Editing book...");
+    try {
+        const edit = {
+            field_1: "fdsfd",
+            field_2: "",
+            field3: "",
+            topic: "",
+            family: "CFR15",
+            pk: "",
+            doc: "",
+            author: "",
+            availability: "Available at Claitors",
+            availabledate: "",
+            binding: "",
+            cover: "",
+            crossreference: "",
+            description: "",
+            extradescription: "",
+            format: "",
+            isbn: "",
+            issn: "",
+            keyphrases: "",
+            listid: "",
+            note: "",
+            price: "11.00",
+            pricenonus: "",
+            publisher: "",
+            quantityprice: "",
+            standingordercode: "",
+            statusdate: "",
+            stocknumber: "",
+            subjectbibliography: "",
+            sudocsclass: "",
+            title: "Code of Federal Regulations Title 1, General Provisions, 2015",
+            unit: "",
+            unitnonus: "",
+            weight: "2.50",
+            yearpages: "",
+            hyperlink: "",
+      };
+
+      const response = await editBook({id: 1, fields: edit})
+      console.log(response);
+    } catch (error) {
+      console.error(error, "Error editing initial book");
+    }
+  }
 
 
 async function rebuildDB() {

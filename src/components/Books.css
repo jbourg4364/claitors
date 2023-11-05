@@ -47,7 +47,7 @@
 .ind-book-title {
     font-weight: 800;
     font-size: 18px;
-    width: 400px;
+    width: 500px;
     text-align: center;
 }
 
@@ -140,10 +140,12 @@ h3.total-pages {
     display: flex;
     flex-direction: row;
 }
+
+
 @media screen and (max-width: 800px) {
     #ind-book-container {
         flex-direction: column;
-        height: 400px;
+        height: 450px;
         align-items: center;
     }
 
@@ -159,5 +161,15 @@ h3.total-pages {
 
     .ind-book-title {
         width: auto;
+    }
+
+    .ind-book-cart {
+        width: 150px;
+        height: 50px;
+        background-color: #79227b;
+        color: white;
+        border-radius: 10px 10px 10px 10px;
+        font-size: 18px;
+    
     }
 }
