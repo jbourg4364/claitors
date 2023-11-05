@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { getBookById, editBook } from "../api-client/index";
+import { getBookById, editBook, deleteBook } from "../api-client/index";
 import { useParams } from "react-router";
 import './IndBook.css';
 import { useNavigate } from "react-router-dom";
@@ -191,7 +191,22 @@ const EditBook = ({ isAdmin }) => {
 
   function handleSubmit(e) {
     e.preventDefault();
+  };
+
+  const handleDelete = async (id) => {
+    try {
+      const confirmDelete = window.confirm('Are you sure you want to delete this book?');
+  
+      if (confirmDelete) {
+        await deleteBook(id);
+        window.alert('This book has been deleted.');
+        navigate('/admin/dashboard');
+      }
+    } catch (error) {
+      console.error(error, 'Error deleting book in react');
+    }
   }
+  
 
   return (
     <div>
@@ -452,6 +467,7 @@ const EditBook = ({ isAdmin }) => {
             value={hyperlink}
           />
           <button className="home-button-save" type="submit" onClick={() => tryEditBook(book.id)}>Save</button>
+          <button className="home-button-save" onClick={() => handleDelete(book.id)}>Delete Book</button>
         </form>
     </div>
   )

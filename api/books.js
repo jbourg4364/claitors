@@ -1,6 +1,6 @@
 const express = require('express');
 const booksRouter = express.Router();
-const { createBooks, getAllBooks, getBookById, searchBooks, editBook } = require('../db');
+const { createBooks, getAllBooks, getBookById, searchBooks, editBook, deleteBook } = require('../db');
 
 booksRouter.get('/', async (req, res, next) => {
     try {
@@ -204,6 +204,16 @@ booksRouter.patch("/:id", async (req, res, next) => {
     res.status(200).json(updateBook);
   } catch (error) {
     console.error(error, "Error editing books in API");
+  }
+});
+
+booksRouter.delete('/:id', async (req, res, next) => {
+  const { id } = req.params;
+  try {
+      const book = await deleteBook(id);
+      res.status(200).json(book);
+  } catch (error) {
+      console.error(error, 'Error getting book details in API');
   }
 });
 

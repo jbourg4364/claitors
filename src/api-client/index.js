@@ -273,3 +273,27 @@ export const editBook = async (
         console.error(error, 'Error editing book in middleware');
     };
 };
+
+export const deleteBook = async (id) => {
+    try {
+      const response = await fetch(`${BASE}/books/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json"
+        }
+      });
+  
+      if (response.ok) {
+        // Check if the response status code is in the 2xx range
+        // If it is, return a success message or any relevant data
+        return { success: true, message: "Book deleted successfully" };
+      } else {
+        // If the response status code is not in the 2xx range, throw an error
+        throw new Error(`Failed to delete the book. Status: ${response.status}`);
+      }
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  };
+  

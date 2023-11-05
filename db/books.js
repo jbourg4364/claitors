@@ -231,7 +231,18 @@ async function editBook({ id, fields = {} }) {
   } catch (error) {
     throw error;
   }
-}
+};
+
+async function deleteBook(id) {
+  try {
+      await client.query(`
+      DELETE FROM books
+      WHERE id = $1;
+      `, [id]);
+  } catch (error) {
+      throw error; 
+  }
+};
 
 
 
@@ -241,5 +252,6 @@ module.exports = {
   getAllBooks,
   getBookById,
   searchBooks,
-  editBook
+  editBook,
+  deleteBook
 };
