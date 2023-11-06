@@ -5,7 +5,7 @@ import './IndBook.css';
 import { useNavigate } from "react-router-dom";
 
 const EditBook = ({ isAdmin }) => {
-    const [title, setTitle] = useState("");
+  const [title, setTitle] = useState("");
   const [fieldOne, setFieldOne] = useState("");
   const [fieldTwo, setFieldTwo] = useState("");
   const [fieldThree, setFieldThree] = useState("");

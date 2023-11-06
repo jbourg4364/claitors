@@ -44,7 +44,7 @@ const Nav = () => {
             CONTACT US
           </h3>
         </NavLink>
-        <NavLink to="/cart">
+        <NavLink to="https://www.cartmanager.net/cgi-bin/cart.cgi">
           <i id="cart" className="fa-solid fa-cart-shopping fa-xl"></i>
         </NavLink>
       </div>

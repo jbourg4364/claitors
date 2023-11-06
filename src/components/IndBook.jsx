@@ -3,16 +3,22 @@ import { getBookById } from "../api-client/index";
 import { useParams } from "react-router";
 import './IndBook.css';
 
-const IndBook = ({isAdmin}) => {
+const IndBook = ({ isAdmin }) => {
   const [book, setBook] = useState({});
+  const [price, setPrice] = useState(0);
+  const [qty, setQty] = useState(1);
   const { id } = useParams();
+
   useEffect(() => {
     const getBookDetails = async () => {
       const response = await getBookById(id);
       setBook(response);
+      setPrice(response.price)
     };
     getBookDetails();
   }, []);
+
+
 
   return (
     <div id="ind-detail-container">
@@ -82,13 +88,33 @@ const IndBook = ({isAdmin}) => {
         </tbody>
       </table>
       <div id="ind-book-detail-price-container">
-        <select className="ind-book-price-actual-detail">
-          <option>${book.price} US</option>
-          <option>${book.pricenonus} INT</option>
-        </select>
-        {isAdmin ? (null) : (
-          <button className="ind-book-cart-detail">Add to Cart</button>
-        )}
+        <form method="POST" action="https://www.cartmanager.net/cgi-bin/cart.cgi">
+          <input type="hidden" name="AddItem" value={`9917477|${book.title}|${price}|${qty}|${book.stocknumber}||prompt|${book.weight}||@10:10%`}/>
+          <select className="ind-book-price-actual-detail" onChange={((e) => setPrice(e.target.value))} name="VARcost1">
+            <option defaultValue={book.price} >{book.price} US</option>
+            <option value={book.pricenonus}>{book.pricenonus} INT</option>
+          </select>
+          {isAdmin ? null : (
+            <div id="qty-price-container">
+              <label>
+                Qty
+                <input 
+                className="qty-button" 
+                type="number" 
+                defaultValue={1} 
+                onChange={((e) => setQty(e.target.value))}
+                name="VARQuantity1"
+                />
+              </label>
+              <button
+                className="ind-book-cart-detail"
+                name="I3"
+              >
+                Add to Cart
+              </button>
+            </div>
+          )}
+        </form>
       </div>
     </div>
   );

@@ -20,24 +20,24 @@ const Main = () => {
     <Routes>
       <Route 
       path='/'
-      element={<Home />}
+      element={<Home isAdmin={isAdmin}/>}
       />
       <Route 
       exact path='/lawbooks'
-      element={<LawBooks />}
+      element={<LawBooks isAdmin={isAdmin}/>}
       />
       <Route 
       path='/books/details/:id'
       element={<IndBook isAdmin={isAdmin}/>} /> 
       <Route 
       path='/gpotitles'
-      element={<GPO />} /> 
+      element={<GPO isAdmin={isAdmin}/>} /> 
       <Route 
       path='/claitorstitles'
-      element={<ClaitorsTitles />} /> 
+      element={<ClaitorsTitles isAdmin={isAdmin}/>} /> 
       <Route 
       path='/contact'
-      element={<Contact />} /> 
+      element={<Contact isAdmin={isAdmin}/>} /> 
       <Route 
       path='/books/search/:searchTerm'
       element={<Search isAdmin={isAdmin}/>} /> 
