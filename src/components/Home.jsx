@@ -1,13 +1,19 @@
 import React, { useState, useRef, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import "./Home.css";
 import { getAllContent } from "../api-client";
+import Fade from 'react-reveal/Fade';
+
 
 const Home = () => {
   const [email, setEmail] = useState("");
   const [content, setContent] = useState([]);
+  const [mainBanner, setMainBanner] = useState([]);
+  const [mainBannerTwo, setMainBannerTwo] = useState([]);
+  const [mainBannerThree, setMainBannerThree] = useState([]);
+  const [bannerRotation, setRotation] = useState(1);
+  const [autoRotation, setAutoRotation] = useState(true);
+  const [rotationIntervalId, setRotationIntervalId] = useState(null);
   const inputElement = useRef();
-  const navigate = useNavigate();
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -15,41 +21,128 @@ const Home = () => {
     setEmail("");
   }
 
+  const startAutoRotation = () => {
+    if (autoRotation) {
+      const intervalId = setInterval(newRotation, 5000);
+      setRotationIntervalId(intervalId);
+    }
+
+    if (!autoRotation) {
+      setRotationIntervalId(null);
+      return () => {
+        clearInterval(rotationIntervalId);
+      };
+    }
+  };
+
   useEffect(() => {
     const getContent = async () => {
       const response = await getAllContent();
       setContent(response);
+
+      response.map((cont) => {
+        if (cont.label === "home-main-banner") {
+          setMainBanner(cont);
+        } else if (cont.label === "home-main-banner-two") {
+          setMainBannerTwo(cont);
+        } else if (cont.label === "home-main-banner-three") {
+          setMainBannerThree(cont);
+        }
+      });
     };
+
     getContent();
+
+    // Start auto rotation when the component mounts
+    if (autoRotation) {
+      startAutoRotation();
+    }
+
+    // Clear the interval when the component unmounts
+    return () => {
+      clearInterval(rotationIntervalId);
+    };
   }, []);
 
+  const newRotation = () => {
+    setRotation((prevRotation) => (prevRotation % 3) + 1);
+  };
+
+  const toggleAutoRotation = () => {
+    setAutoRotation(false);
+    newRotation();
+    clearInterval(rotationIntervalId);
+  };
+
+  const toggleAutoRotationLeft = () => {
+    setAutoRotation(false);
+    newRotationLeft();
+    clearInterval(rotationIntervalId);
+  };
+
+  const newRotationLeft = () => {
+    setRotation((prevRotation) => (prevRotation - 1) );
+  };
+
+  const carousel = (bannerRotation) => {
+    if (bannerRotation === 1) {
+      return mainBanner;
+    } else if (bannerRotation === 2) {
+      return mainBannerTwo;
+    } else if (bannerRotation === 3) {
+      return mainBannerThree;
+    } else {
+      return mainBanner;
+    }
+  };
+
+  const transitionStyle = {
+    transition: "opacity 0.5s",
+  };
 
   return (
     <>
       <div id="home-banner">
-        {content.map((cont) => {
-          if (cont.label === "home-main-banner") {
-            return (
-              <div id="home-banner-content" key={cont.id}>
-                <div id="home-banner-image">
-                  <img className="home-image-main" src={cont.imageurl} />
-                </div>
-                <div id="home-banner-title">
-                  <h3>{cont.title}</h3>
-                  <button
-                    className="home-button-main"
-                    onClick={() => (window.location.href = cont.buttonurl)}
-                  >
-                    Order Now!
-                  </button>
-                </div>
-                <div id="home-banner-description">
-                  <p>{cont.description}</p>
-                </div>
-              </div>
-            );
-          }
-        })}
+        <Fade key={bannerRotation}>
+          <div id="home-banner-content" style={transitionStyle}>
+            <div id="home-banner-left-arrow">
+              <i
+                className="fa-solid fa-chevron-left fa-2xl"
+                id="left-arrow"
+                onClick={toggleAutoRotationLeft}
+              ></i>
+            </div>
+            <div id="home-banner-image">
+              <img
+                style={{ opacity: 1 }}
+                className="home-image-main"
+                src={carousel(bannerRotation).imageurl}
+              />
+            </div>
+            <div id="home-banner-title">
+              <h3>{carousel(bannerRotation).title}</h3>
+              <button
+                className="home-button-main"
+                onClick={() =>
+                  (window.location.href = carousel(bannerRotation).buttonurl)
+                }
+              >
+                Order Now!
+              </button>
+            </div>
+            <div id="home-banner-description">
+              <p>{carousel(bannerRotation).description}</p>
+            </div>
+            <div id="home-banner-right-arrow">
+              <i
+                className="fa-solid fa-chevron-right fa-2xl"
+                id="right-arrow"
+                onClick={toggleAutoRotation}
+              ></i>
+            </div>
+          </div>
+        </Fade>
+
         <div id="featured-container">
           {content.map((cont) => {
             if (cont.label === "home-ind-one") {

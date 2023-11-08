@@ -76,7 +76,7 @@ const GPO = ({ isAdmin }) => {
       </ul>
     );
   };
-  console.log(price);
+
 
   return (
     <>

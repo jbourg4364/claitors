@@ -1,3 +1,12 @@
+html {
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    margin: 0 auto;
+    padding: 0 auto;
+    width: 100%;
+}
+
 #home-banner {
     background-color: #79227b;
     height: 500px;
@@ -25,7 +34,7 @@
 }
 
 #home-banner-description {
-    width: 50%;
+    width: 45%;
     font-size: 20px;
 }
 
@@ -122,6 +131,34 @@
     color: black;
 }
 
+#home-banner-right-arrow {
+    width: 5%;
+    margin-right: 0;
+    padding-right: 0;
+}
+
+#home-banner-left-arrow {
+    width: 5%;
+    margin-right: 0;
+    padding-right: 0;
+}
+
+#right-arrow {
+    color: white;
+}
+
+#right-arrow:hover {
+    cursor: pointer;
+}
+
+#left-arrow {
+    color: white;
+}
+
+#left-arrow:hover {
+    cursor: pointer;
+}
+
 @media screen and (max-width: 800px) {
     #featured-container {
         height: 1400px;
@@ -184,6 +221,14 @@
     #newsletter {
         margin-top: 1550px;
         text-align: center;
+    }
+
+    #right-arrow {
+        display: none;
+    }
+
+    #left-arrow {
+        display: none;
     }
 }
 

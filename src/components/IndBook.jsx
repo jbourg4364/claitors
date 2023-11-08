@@ -25,6 +25,10 @@ const IndBook = ({ isAdmin }) => {
       <h1 className="ind-detail-title">{book.title}</h1>
       <table className="ind-detail-table">
         <tbody>
+        <tr>
+            <td>Author:</td>
+            <td>{book.author}</td>
+          </tr>
           <tr>
             <td>Stock Number:</td>
             <td>{book.stocknumber}</td>

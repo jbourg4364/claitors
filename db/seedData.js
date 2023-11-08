@@ -127,15 +127,33 @@ function textFileToJSON(filePath) {
             },
             {
                 id: 2,
-                label: 'home-ind-one',
-                title: 'Occupational Outlook Handbook',
-                description: 'N/A',
-                imageURL: 'https://m.media-amazon.com/images/I/81yRCBNrA-L._AC_UF1000,1000_QL80_.jpg',
-                buttonURL: 'https://claitors.com/hblu21.jpg',
-                price: 'Paperbound $25.00 | Hardcover $40.00'
+                label: 'home-main-banner-two',
+                title: 'Louisiana Liability & Property Insurance Coverage Law:',
+                description: 'This is a handbook for those who practice law, handle claims, and write or sell insurance. Years ago, for my own use and for the benefit of clients and friends, I began writing and updating a booklet on insurance law in Louisiana. I finally decided that others could benefit from a coverage handbook. This is not an insurance law treatise — Louisiana already has an excellent one in the McKenzie and Johnson treatise. But for those liability and property insurance issues most commonly seen by lawyers and claims adjusters, this handbook hopefully provides some understanding and points those seeking answers in the right direction.',
+                imageURL: 'https://claitors.com/9781598048940.jpg',
+                buttonURL: 'http://claitors.com/cgi-bin/clt/cltdetails_ct.cgi?Stock_Number=9781598048940',
+                price: '$75.00'
             },
             {
                 id: 3,
+                label: 'home-main-banner-three',
+                title: 'LOUISIANA MINERAL LEASES: A TREATISE',
+                description: 'In rich detail, the Treatise examines the evolution of the mineral lease under the civil law that prevails in Louisiana; the contours and various attributes of the lease relationship; the statutory laws that regulate it, as well as the clauses (both customary and special) contained in the mineral lease forms used in Louisiana. Additionally, the Treatise analyzes the types and kinds of mineral lease; transfers of the lease contract, as well as security interests in the mineral lease, and remedies for the breach of the lease.',
+                imageURL: 'https://claitors.com/9871598047875.main.gif',
+                buttonURL: 'https://claitors.com/cgi-bin/clt/cltdetails_ct.cgi?Stock_Number=HBLU21',
+                price: '$10.00'
+            },
+            {
+                id: 4,
+                label: 'home-ind-one',
+                title: 'Occupational Outlook Handbook',
+                description: 'N/A',
+                imageURL: 'https://claitors.com/9871598047875.main.gif',
+                buttonURL: 'https://claitors.com/hblu21.jpg',
+                price: '$190.00'
+            },
+            {
+                id: 5,
                 label: 'home-ind-two',
                 title: 'North American Industry Classification System',
                 description: 'N/A',
@@ -144,7 +162,7 @@ function textFileToJSON(filePath) {
                 price: 'Paperbound $55.00 | Hardcover $65.00'
             },
             {
-                id: 4,
+                id: 6,
                 label: 'home-ind-three',
                 title: 'The United States Government Manual 2015',
                 description: 'N/A',

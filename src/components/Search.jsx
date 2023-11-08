@@ -10,6 +10,7 @@ const Search = ({ isAdmin }) => {
   const { searchTerm } = useParams();
   const { id } = useParams();
   const navigate = useNavigate();
+  
 
   useEffect(() => {
     const getBookBySearch = async () => {
@@ -19,8 +20,11 @@ const Search = ({ isAdmin }) => {
     getBookBySearch();
   }, [searchTerm]);
 
+  
   const handleDetail = async (id) => {
+
     navigate(`/books/details/${id}`);
+    window.scrollTo(0, 0);
   };
 
   const handleEdit = async (id) => {
