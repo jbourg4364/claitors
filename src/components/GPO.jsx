@@ -7,6 +7,7 @@ const GPO = ({ isAdmin }) => {
   const [allBooks, setAllBooks] = useState([]);
   const [price, setPrice] = useState(0);
   const [qty, setQty] = useState(1);
+  const [loading, setLoading] = useState(true);
   const { id } = useParams();
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
@@ -17,8 +18,10 @@ const GPO = ({ isAdmin }) => {
       try {
         const response = await getAllBooks();
         setAllBooks(response);
+        setLoading(false);
       } catch (error) {
         console.error("Error getting all GPO books", error);
+        setLoading(false);
       }
     };
     getAllGPOBooks();
@@ -83,7 +86,13 @@ const GPO = ({ isAdmin }) => {
       <div id="books-heading">
         <h1 className="books-heading-h1">GPO Titles</h1>
       </div>
-      <div id="all-books-container">
+      {loading ? (
+        <div>
+          <h1 id='loading-books'>Loading Books...</h1>
+        </div>
+      ) : (
+        <>
+        <div id="all-books-container">
         <h3 className="total-pages">
           Page {currentPage} of {totalPages}
         </h3>
@@ -137,6 +146,9 @@ const GPO = ({ isAdmin }) => {
       <div className="bottom-total-pages-container">
         <ul className="pagination">{renderPaginationButtons()}</ul>
       </div>
+        </>
+      )}
+      
     </>
   );
 };

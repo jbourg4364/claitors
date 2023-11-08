@@ -6,6 +6,7 @@ import "./Books.css";
 const Search = ({ isAdmin }) => {
   const [sortedBooks, setSortedBooks] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [loading, setLoading] = useState(true);
   const booksPerPage = 10;
   const { searchTerm } = useParams();
   const { id } = useParams();
@@ -16,6 +17,7 @@ const Search = ({ isAdmin }) => {
     const getBookBySearch = async () => {
       const response = await searchBooks(searchTerm);
       setSortedBooks(response);
+      setLoading(false);
     };
     getBookBySearch();
   }, [searchTerm]);
@@ -85,7 +87,13 @@ const Search = ({ isAdmin }) => {
       <div id="books-heading">
         <h1 className="books-heading-h1">Search results for "{searchTerm}"</h1>
       </div>
-      <div id="all-books-container">
+      {loading ? (
+        <div>
+        <h1 id='loading-books'>Loading Books...</h1>
+      </div>
+      ) : (
+        <>
+            <div id="all-books-container">
         <h3 className="total-pages">
           Page {currentPage} of {totalPages}
         </h3>
@@ -123,6 +131,9 @@ const Search = ({ isAdmin }) => {
       <div className="bottom-total-pages-container">
         <ul className="pagination">{renderPaginationButtons()}</ul>
       </div>
+        </>
+      )}
+  
     </>
   );
 };

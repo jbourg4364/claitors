@@ -101,7 +101,7 @@ function textFileToJSON(filePath) {
   async function createInitialBooks() {
     console.log('Creating initial books...');
     try {
-      const filePath = 'db/CATALOG_1.txt';
+      const filePath = 'db/CATALOG.txt';
       const jsonResult = textFileToJSON(filePath); // Calls the textFileToJSON for JSON data
   
       const books = await Promise.all(jsonResult.map(createBooks));

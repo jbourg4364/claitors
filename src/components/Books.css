@@ -157,6 +157,10 @@ h3.total-pages {
     align-items: center;
 }
 
+#loading-books {
+    text-align: center;
+}
+
 @media screen and (max-width: 800px) {
     #ind-book-container {
         flex-direction: column;
