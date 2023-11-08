@@ -189,6 +189,11 @@ h3.total-pages {
         color: white;
         border-radius: 10px 10px 10px 10px;
         font-size: 18px;
-    
+        margin: 15px;
+    }
+
+    #ind-form-books {
+        flex-direction: column;
+        margin: 10px;
     }
 }

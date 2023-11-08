@@ -81,3 +81,11 @@
     border: 3px solid #79227b;
     background-color: rgb(227, 227, 227);
 }
+
+
+@media screen and (max-width: 800px) {
+    .ind-detail-table {
+        width: 95vw;
+ 
+    }
+}
