@@ -119,7 +119,7 @@ function textFileToJSON(filePath) {
             {
                 id: 1,
                 label: 'home-main-banner',
-                title: 'NEW 21ST EDITION! $45.00(Save 10% when you order 10+ copies)',
+                title: 'NEW 21ST EDITION! (Save 10% when you order 10+ copies)',
                 description: 'The Twenty-first edition of The Bluebook retains the same basic approach to legal citation established by its predecessors. The layout of The Bluebook has been updated to make the information easier to access. Some citation forms have been expanded, elaborated upon, or modified from previous editions to reflect the ever---expanding range of authorities used in legal writing and to respond to suggestions from the community.',
                 imageURL: 'https://claitors.com/hblu21.jpg',
                 buttonURL: 'https://claitors.com/cgi-bin/clt/cltdetails_ct.cgi?Stock_Number=HBLU21',
@@ -128,7 +128,7 @@ function textFileToJSON(filePath) {
             {
                 id: 2,
                 label: 'home-main-banner-two',
-                title: 'Louisiana Liability & Property Insurance Coverage Law:',
+                title: 'Louisiana Liability & Property Insurance Coverage Law',
                 description: 'This is a handbook for those who practice law, handle claims, and write or sell insurance. Years ago, for my own use and for the benefit of clients and friends, I began writing and updating a booklet on insurance law in Louisiana. I finally decided that others could benefit from a coverage handbook. This is not an insurance law treatise — Louisiana already has an excellent one in the McKenzie and Johnson treatise. But for those liability and property insurance issues most commonly seen by lawyers and claims adjusters, this handbook hopefully provides some understanding and points those seeking answers in the right direction.',
                 imageURL: 'https://claitors.com/9781598048940.jpg',
                 buttonURL: 'http://claitors.com/cgi-bin/clt/cltdetails_ct.cgi?Stock_Number=9781598048940',

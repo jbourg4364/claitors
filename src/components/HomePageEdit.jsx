@@ -9,6 +9,14 @@ const HomePageEdit = ({ isAdmin }) => {
   const [mainBannerTitle, setMainBannerTitle] = useState("");
   const [mainBannerDescription, setMainBannerDescription] = useState("");
   const [mainBannerButton, setMainBannerButton] = useState("");
+  const [mainBannerImgTwo, setMainBannerImgTwo] = useState("");
+  const [mainBannerTitleTwo, setMainBannerTitleTwo] = useState("");
+  const [mainBannerDescriptionTwo, setMainBannerDescriptionTwo] = useState("");
+  const [mainBannerButtonTwo, setMainBannerButtonTwo] = useState("");
+  const [mainBannerImgThree, setMainBannerImgThree] = useState("");
+  const [mainBannerTitleThree, setMainBannerTitleThree] = useState("");
+  const [mainBannerDescriptionThree, setMainBannerDescriptionThree] = useState("");
+  const [mainBannerButtonThree, setMainBannerButtonThree] = useState("");
   const [oneBannerImg, setOneBannerImg] = useState("");
   const [oneBannerTitle, setOneBannerTitle] = useState("");
   const [oneBannerPrice, setOneBannerPrice] = useState("");
@@ -44,6 +52,44 @@ const HomePageEdit = ({ isAdmin }) => {
       setContent(response);
 
       window.alert("Your changes were saved to the main banner!");
+    } catch (error) {
+      console.error(error, "Error editing content in React");
+    }
+  };
+
+  const tryEditContentMainTwo = async (id) => {
+    try {
+      await editContent(
+        id,
+        mainBannerTitleTwo,
+        mainBannerDescriptionTwo,
+        mainBannerImgTwo,
+        mainBannerButtonTwo,
+        "n/a"
+      );
+      const response = await getAllContent();
+      setContent(response);
+
+      window.alert("Your changes were saved to the 2nd main banner!");
+    } catch (error) {
+      console.error(error, "Error editing content in React");
+    }
+  };
+
+  const tryEditContentMainThree = async (id) => {
+    try {
+      await editContent(
+        id,
+        mainBannerTitleThree,
+        mainBannerDescriptionThree,
+        mainBannerImgThree,
+        mainBannerButtonThree,
+        "n/a"
+      );
+      const response = await getAllContent();
+      setContent(response);
+
+      window.alert("Your changes were saved to the 3rd main banner!");
     } catch (error) {
       console.error(error, "Error editing content in React");
     }
@@ -121,12 +167,14 @@ const HomePageEdit = ({ isAdmin }) => {
     };
     getContent();
   }, []);
+  console.log(content);
 
   return (
     <div id="home-page-edit-container">
       <h2 className="edit-title-banner">Edit Home Page</h2>
       <div className="home-edit-container">
-        <h2>Main Banner</h2>
+
+        <h2>Main Banner One</h2>
         <div className="home-edit-content-container">
           <div className="home-banner-preview">
             {content.map((cont) => {
@@ -193,6 +241,162 @@ const HomePageEdit = ({ isAdmin }) => {
                       key={cont.id}
                       className="home-button-save"
                       onClick={() => tryEditContent(cont.id)}
+                    >
+                      {" "}
+                      Save
+                    </button>
+                  );
+                }
+              })}
+            </form>
+          </div>
+        </div>
+
+        <h2>Main Banner Two</h2>
+        <div className="home-edit-content-container">
+          <div className="home-banner-preview">
+            {content.map((cont) => {
+              if (cont.label === "home-main-banner-two") {
+                return (
+                  <div id="home-banner-content" key={cont.id}>
+                    <div id="home-banner-image">
+                      <img className="home-image-main" src={cont.imageurl} />
+                    </div>
+                    <div id="home-banner-title">
+                      <h3>{cont.title}</h3>
+                      <button
+                        className="home-button-main"
+                        onClick={() => (window.location.href = cont.buttonurl)}
+                      >
+                        Order Now!
+                      </button>
+                    </div>
+                    <div id="home-banner-description">
+                      <p>{cont.description}</p>
+                    </div>
+                  </div>
+                );
+              }
+            })}
+            <form
+              ref={inputElement}
+              className="home-edit-form"
+              onSubmit={handleMainSubmit}
+            >
+              <input
+                placeholder="Image URL"
+                type="url"
+                value={mainBannerImgTwo}
+                className="home-edit-field"
+                onChange={(e) => setMainBannerImgTwo(e.target.value)}
+              />
+              <input
+                placeholder="Title"
+                type="text"
+                value={mainBannerTitleTwo}
+                className="home-edit-field"
+                onChange={(e) => setMainBannerTitleTwo(e.target.value)}
+              />
+              <textarea
+                placeholder="Description"
+                type="text"
+                value={mainBannerDescriptionTwo}
+                className="home-edit-field"
+                id="home-edit-field-description"
+                onChange={(e) => setMainBannerDescriptionTwo(e.target.value)}
+              />
+              <input
+                placeholder="Button URL"
+                type="url"
+                value={mainBannerButtonTwo}
+                className="home-edit-field"
+                onChange={(e) => setMainBannerButtonTwo(e.target.value)}
+              />
+              {content.map((cont) => {
+                if (cont.label === "home-main-banner-two") {
+                  return (
+                    <button
+                      key={cont.id}
+                      className="home-button-save"
+                      onClick={() => tryEditContentMainTwo(cont.id)}
+                    >
+                      {" "}
+                      Save
+                    </button>
+                  );
+                }
+              })}
+            </form>
+          </div>
+        </div>
+
+        <h2>Main Banner Three</h2>
+        <div className="home-edit-content-container">
+          <div className="home-banner-preview">
+            {content.map((cont) => {
+              if (cont.label === "home-main-banner-three") {
+                return (
+                  <div id="home-banner-content" key={cont.id}>
+                    <div id="home-banner-image">
+                      <img className="home-image-main" src={cont.imageurl} />
+                    </div>
+                    <div id="home-banner-title">
+                      <h3>{cont.title}</h3>
+                      <button
+                        className="home-button-main"
+                        onClick={() => (window.location.href = cont.buttonurl)}
+                      >
+                        Order Now!
+                      </button>
+                    </div>
+                    <div id="home-banner-description">
+                      <p>{cont.description}</p>
+                    </div>
+                  </div>
+                );
+              }
+            })}
+            <form
+              ref={inputElement}
+              className="home-edit-form"
+              onSubmit={handleMainSubmit}
+            >
+              <input
+                placeholder="Image URL"
+                type="url"
+                value={mainBannerImgThree}
+                className="home-edit-field"
+                onChange={(e) => setMainBannerImgThree(e.target.value)}
+              />
+              <input
+                placeholder="Title"
+                type="text"
+                value={mainBannerTitleThree}
+                className="home-edit-field"
+                onChange={(e) => setMainBannerTitleThree(e.target.value)}
+              />
+              <textarea
+                placeholder="Description"
+                type="text"
+                value={mainBannerDescriptionThree}
+                className="home-edit-field"
+                id="home-edit-field-description"
+                onChange={(e) => setMainBannerDescriptionThree(e.target.value)}
+              />
+              <input
+                placeholder="Button URL"
+                type="url"
+                value={mainBannerButtonThree}
+                className="home-edit-field"
+                onChange={(e) => setMainBannerButtonThree(e.target.value)}
+              />
+              {content.map((cont) => {
+                if (cont.label === "home-main-banner-three") {
+                  return (
+                    <button
+                      key={cont.id}
+                      className="home-button-save"
+                      onClick={() => tryEditContentMainThree(cont.id)}
                     >
                       {" "}
                       Save

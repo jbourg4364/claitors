@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./Home.css";
 import { getAllContent } from "../api-client";
-import Fade from 'react-reveal/Fade';
+import { motion } from "framer-motion";
 
 
 const Home = () => {
@@ -23,7 +23,7 @@ const Home = () => {
 
   const startAutoRotation = () => {
     if (autoRotation) {
-      const intervalId = setInterval(newRotation, 5000);
+      const intervalId = setInterval(newRotation, 6000);
       setRotationIntervalId(intervalId);
     }
 
@@ -81,7 +81,7 @@ const Home = () => {
   };
 
   const newRotationLeft = () => {
-    setRotation((prevRotation) => (prevRotation - 1) );
+    setRotation((prevRotation) => prevRotation - 1);
   };
 
   const carousel = (bannerRotation) => {
@@ -96,52 +96,56 @@ const Home = () => {
     }
   };
 
-  const transitionStyle = {
-    transition: "opacity 0.5s",
-  };
-
   return (
     <>
       <div id="home-banner">
-        <Fade key={bannerRotation}>
-          <div id="home-banner-content" style={transitionStyle}>
-            <div id="home-banner-left-arrow">
-              <i
-                className="fa-solid fa-chevron-left fa-2xl"
-                id="left-arrow"
-                onClick={toggleAutoRotationLeft}
-              ></i>
-            </div>
-            <div id="home-banner-image">
-              <img
-                style={{ opacity: 1 }}
-                className="home-image-main"
-                src={carousel(bannerRotation).imageurl}
-              />
-            </div>
-            <div id="home-banner-title">
-              <h3>{carousel(bannerRotation).title}</h3>
-              <button
-                className="home-button-main"
-                onClick={() =>
-                  (window.location.href = carousel(bannerRotation).buttonurl)
-                }
-              >
-                Order Now!
-              </button>
-            </div>
-            <div id="home-banner-description">
-              <p>{carousel(bannerRotation).description}</p>
-            </div>
-            <div id="home-banner-right-arrow">
-              <i
-                className="fa-solid fa-chevron-right fa-2xl"
-                id="right-arrow"
-                onClick={toggleAutoRotation}
-              ></i>
-            </div>
+        <motion.div
+          id="home-banner-content"
+          initial={{ opacity: 0 }} // Set initial opacity to 0
+          animate={{ opacity: 1 }} // Animate opacity to 1
+          exit={{ opacity: 0 }} // Animate opacity to 0 when exiting
+          key={bannerRotation}
+          transition={{
+            ease: "linear",
+            duration: 1,
+            x: { duration: 1 }
+          }}
+        >
+          <div id="home-banner-left-arrow">
+            <i
+              className="fa-solid fa-chevron-left fa-2xl"
+              id="left-arrow"
+              onClick={toggleAutoRotationLeft}
+            ></i>
           </div>
-        </Fade>
+          <div id="home-banner-image">
+            <img
+              className="home-image-main"
+              src={carousel(bannerRotation).imageurl}
+            />
+          </div>
+          <div id="home-banner-title">
+            <h3>{carousel(bannerRotation).title}</h3>
+            <button
+              className="home-button-main"
+              onClick={() =>
+                (window.location.href = carousel(bannerRotation).buttonurl)
+              }
+            >
+              Order Now!
+            </button>
+          </div>
+          <div id="home-banner-description">
+            <p>{carousel(bannerRotation).description}</p>
+          </div>
+          <div id="home-banner-right-arrow">
+            <i
+              className="fa-solid fa-chevron-right fa-2xl"
+              id="right-arrow"
+              onClick={toggleAutoRotation}
+            ></i>
+          </div>
+        </motion.div>
 
         <div id="featured-container">
           {content.map((cont) => {
