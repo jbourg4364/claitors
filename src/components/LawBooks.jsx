@@ -36,10 +36,11 @@ const LawBooks = () => {
   const indexOfFirstBook = indexOfLastBook - booksPerPage;
   const filteredBooks = allBooks.filter(
     (book) =>
-      book.availability.includes("lacode") ||
-      book.availability.includes("lacode lalaw") ||
-      book.availability.includes("lalaw")
+      book.field_1.includes("lacode") ||
+      book.field_1.includes("lacode lalaw") ||
+      book.field_1.includes("lalaw")
   );
+  const currentBooks = filteredBooks.slice(indexOfFirstBook, indexOfLastBook);
 
   const totalPages = Math.ceil(filteredBooks.length / booksPerPage); // Calculate the total number of pages
 
@@ -95,18 +96,10 @@ const LawBooks = () => {
       ) : (
         <>
           <div id="all-books-container">
-            {totalPages === 0 ? (null) : (
                <h3 className="total-pages">
               Page {currentPage} of {totalPages}
             </h3>
-            )}
-            {allBooks.map((book) => {
-              if (
-                (book.field_1 === "lacode") |
-                (book.field_1 === "lacode lalaw") |
-                (book.field_1 === "lalaw")
-              ) {
-                return (
+            {currentBooks.map((book) => (
                   <div key={book.id} id="ind-book-container">
                     <div className="ind-book-left-container">
                       <h2 className="ind-book-title">{book.title}</h2>
@@ -159,9 +152,7 @@ const LawBooks = () => {
                       </form>
                     </div>
                   </div>
-                );
-              }
-            })}
+                ))}
           </div>
           <div className="bottom-total-pages-container">
             <ul className="pagination">{renderPaginationButtons()}</ul>
