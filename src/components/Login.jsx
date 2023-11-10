@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import './Login.css';
 import { useNavigate, Link } from 'react-router-dom';
+import { loginAdmin } from '../api-client';
 
 const Login = () => {
     const [username, setUsername] = useState('');
@@ -8,9 +9,12 @@ const Login = () => {
     const inputElement = useRef();
     let navigate = useNavigate();
 
-    function handleSubmit(e) {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        if (username === 'cladmin' && password ==='Claitors225') {
+        const data = await loginAdmin({ username: username, password: password });
+   
+      
+        if (data.token) {
           localStorage.setItem("id", "admin");
           navigate('/admin/dashboard');
         }

@@ -123,7 +123,7 @@ function textFileToJSON(filePath) {
                 title: 'NEW 21ST EDITION! (Save 10% when you order 10+ copies)',
                 description: 'The Twenty-first edition of The Bluebook retains the same basic approach to legal citation established by its predecessors. The layout of The Bluebook has been updated to make the information easier to access. Some citation forms have been expanded, elaborated upon, or modified from previous editions to reflect the ever---expanding range of authorities used in legal writing and to respond to suggestions from the community.',
                 imageURL: 'https://claitors.com/hblu21.jpg',
-                buttonURL: 'https://claitors.com/cgi-bin/clt/cltdetails_ct.cgi?Stock_Number=HBLU21',
+                buttonURL: 'https://claitors.fly.dev/books/details/4139',
                 price: '$10.00'
             },
             {
@@ -132,7 +132,7 @@ function textFileToJSON(filePath) {
                 title: 'Louisiana Liability & Property Insurance Coverage Law',
                 description: 'This is a handbook for those who practice law, handle claims, and write or sell insurance. Years ago, for my own use and for the benefit of clients and friends, I began writing and updating a booklet on insurance law in Louisiana. I finally decided that others could benefit from a coverage handbook. This is not an insurance law treatise — Louisiana already has an excellent one in the McKenzie and Johnson treatise. But for those liability and property insurance issues most commonly seen by lawyers and claims adjusters, this handbook hopefully provides some understanding and points those seeking answers in the right direction.',
                 imageURL: 'https://claitors.com/9781598048940.jpg',
-                buttonURL: 'http://claitors.com/cgi-bin/clt/cltdetails_ct.cgi?Stock_Number=9781598048940',
+                buttonURL: 'https://claitors.fly.dev/books/details/46721',
                 price: '$75.00'
             },
             {
@@ -141,7 +141,7 @@ function textFileToJSON(filePath) {
                 title: 'LOUISIANA MINERAL LEASES: A TREATISE',
                 description: 'In rich detail, the Treatise examines the evolution of the mineral lease under the civil law that prevails in Louisiana; the contours and various attributes of the lease relationship; the statutory laws that regulate it, as well as the clauses (both customary and special) contained in the mineral lease forms used in Louisiana. Additionally, the Treatise analyzes the types and kinds of mineral lease; transfers of the lease contract, as well as security interests in the mineral lease, and remedies for the breach of the lease.',
                 imageURL: 'https://claitors.com/9871598047875.main.gif',
-                buttonURL: 'https://claitors.com/cgi-bin/clt/cltdetails_ct.cgi?Stock_Number=HBLU21',
+                buttonURL: 'https://claitors.fly.dev/books/details/36823',
                 price: '$10.00'
             },
             {
@@ -150,8 +150,8 @@ function textFileToJSON(filePath) {
                 title: 'Occupational Outlook Handbook',
                 description: 'N/A',
                 imageURL: 'https://claitors.com/9871598047875.main.gif',
-                buttonURL: 'https://claitors.com/hblu21.jpg',
-                price: '$190.00'
+                buttonURL: 'https://claitors.fly.dev/books/details/4044',
+                price: 'Paperbound $25.00 | Hardcover $40.00'
             },
             {
                 id: 5,
@@ -159,7 +159,7 @@ function textFileToJSON(filePath) {
                 title: 'North American Industry Classification System',
                 description: 'N/A',
                 imageURL: 'https://www.census.gov/naics/resources/img/2022_manual_cover.png',
-                buttonURL: 'https://claitors.com/hblu21.jpg',
+                buttonURL: 'https://claitors.fly.dev/books/details/46696',
                 price: 'Paperbound $55.00 | Hardcover $65.00'
             },
             {
@@ -168,7 +168,7 @@ function textFileToJSON(filePath) {
                 title: 'The United States Government Manual 2015',
                 description: 'N/A',
                 imageURL: 'https://m.media-amazon.com/images/I/61j-5SpcsnL._AC_UF1000,1000_QL80_.jpg',
-                buttonURL: 'https://claitors.com/hblu21.jpg',
+                buttonURL: 'https://claitors.fly.dev/books/details/36702',
                 price: 'Paperbound $35.00'
             }
             

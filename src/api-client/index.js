@@ -3,6 +3,25 @@ const BASE = 'http://localhost:8080/api';
 // deployment`
 // const BASE = '/api';
 
+
+export const loginAdmin = async ({username, password}) => {
+    try {
+        const response = await fetch(`${BASE}/login`, {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json',
+            },
+            body: JSON.stringify({ username, password })
+        });
+
+        const result = await response.json();
+     
+        return result;
+    } catch (error) {
+        console.error(error, 'Error logging in Admin in middleware');
+    }
+};
+
 export const getAllBooks = async () => {
     try {
         const response = await fetch(`${BASE}/books`, {
