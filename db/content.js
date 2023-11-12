@@ -67,4 +67,16 @@ async function getContentById(id) {
     }
 };
 
-module.exports = { createContent, editContent, getAllContent, getContentById };
+async function deleteIndContent(id) {
+    try {
+        const { rows: [content] } = await client.query(`
+        DELETE FROM content
+        WHERE id=$1;
+        `, [id]);
+
+    } catch (error) {
+        console.error(error, 'Error deleting individual content in DB');
+    }
+};
+
+module.exports = { createContent, editContent, getAllContent, getContentById, deleteIndContent };

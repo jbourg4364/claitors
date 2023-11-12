@@ -149,42 +149,7 @@ const Home = () => {
 
         <div id="featured-container">
           {content.map((cont) => {
-            if (cont.label === "home-ind-one") {
-              return (
-                <div className="featured-ind-container" key={cont.id}>
-                  <h3 className="featured-ind-heading">{cont.title}</h3>
-                  <img src={cont.imageurl} className="featured-image" />
-                  <h4 className="price-field">{cont.price}</h4>
-                  <button
-                    className="featured-button"
-                    onClick={() => (window.location.href = cont.buttonurl)}
-                  >
-                    Order Now!
-                  </button>
-                </div>
-              );
-            }
-          })}
-
-          {content.map((cont) => {
-            if (cont.label === "home-ind-two") {
-              return (
-                <div className="featured-ind-container" key={cont.id}>
-                  <h3 className="featured-ind-heading">{cont.title}</h3>
-                  <img src={cont.imageurl} className="featured-image" />
-                  <h4 className="price-field">{cont.price}</h4>
-                  <button
-                    className="featured-button"
-                    onClick={() => (window.location.href = cont.buttonurl)}
-                  >
-                    Order Now!
-                  </button>
-                </div>
-              );
-            }
-          })}
-          {content.map((cont) => {
-            if (cont.label === "home-ind-three") {
+            if (cont.label === "home-ind") {
               return (
                 <div className="featured-ind-container" key={cont.id}>
                   <h3 className="featured-ind-heading">{cont.title}</h3>

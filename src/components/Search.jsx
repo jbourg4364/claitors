@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { searchBooks } from "../api-client";
+import { searchBooks, addIndBookToHome } from "../api-client";
 import { useNavigate, useParams } from "react-router-dom";
 import "./Books.css";
 
@@ -7,24 +7,28 @@ const Search = ({ isAdmin }) => {
   const [sortedBooks, setSortedBooks] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(true);
+  const [noResult, setNoResult] = useState(false);
   const booksPerPage = 10;
   const { searchTerm } = useParams();
   const { id } = useParams();
   const navigate = useNavigate();
-  
 
   useEffect(() => {
     const getBookBySearch = async () => {
       const response = await searchBooks(searchTerm);
       setSortedBooks(response);
       setLoading(false);
+      if (response.length === 0) {
+        setNoResult(true);
+      } else {
+        setNoResult(false);
+      }
     };
     getBookBySearch();
   }, [searchTerm]);
 
-  
-  const handleDetail = async (id) => {
 
+  const handleDetail = async (id) => {
     navigate(`/books/details/${id}`);
     window.scrollTo(0, 0);
   };
@@ -33,9 +37,25 @@ const Search = ({ isAdmin }) => {
     navigate(`/books/edit/${id}`);
   };
 
+  const handleAddToHome = async (book) => {
+    try {
+      const response = await addIndBookToHome({
+        label: "home-ind",
+        title: book.title,
+        description: book.description,
+        imageurl: book.hyperlink,
+        buttonurl: `/books/details/${book.id}`,
+        price: book.price
+      });
+      window.alert(`${book.title} added to home page!`);
+    } catch (error) {
+      console.error(error, 'Error adding book to home page in React');
+    }
+  };
+  
+
   const indexOfLastBook = currentPage * booksPerPage;
   const indexOfFirstBook = indexOfLastBook - booksPerPage;
-  const filteredBooks = sortedBooks;
   const displayedBooks = sortedBooks.slice(indexOfFirstBook, indexOfLastBook);
 
   const totalPages = Math.ceil(sortedBooks.length / booksPerPage); // Calculate the total number of pages
@@ -89,51 +109,71 @@ const Search = ({ isAdmin }) => {
       </div>
       {loading ? (
         <div>
-        <h1 id='loading-books'>Loading Books...</h1>
-      </div>
+          <h1 id="loading-books">Loading Books...</h1>
+        </div>
       ) : (
         <>
-            <div id="all-books-container">
-        <h3 className="total-pages">
-          Page {currentPage} of {totalPages}
-        </h3>
-        {displayedBooks.map((book) => {
-          return (
-            <div key={book.id} id="ind-book-container">
-              <div className="ind-book-left-container">
-                <h2 className="ind-book-title">{book.title}</h2>
-                <div className="ind-book-button-container">
-                  <button
-                    className="ind-book-details"
-                    onClick={() => handleDetail(book.id)}
-                  >
-                    Details
-                  </button>
-                  {isAdmin ? (
-                    <button className="ind-book-details" onClick={() => handleEdit(book.id)}>Edit Book</button>
-                  ) : null}
-                </div>
-              </div>
-              <div className="ind-price-container">
-                <h3 className="ind-book-price">Price</h3>
-                <select className="ind-book-price-actual">
-                  <option>${book.price} US</option>
-                  <option>${book.pricenonus} INT</option>
-                </select>
-              </div>
-              {isAdmin ? (null) : (
-                <button className="ind-book-cart">Add to Cart</button>
-              )}
+          {noResult ? (
+            <div>
+              <h1 id="loading-books">No books found.</h1>
             </div>
-          );
-        })}
-      </div>
-      <div className="bottom-total-pages-container">
-        <ul className="pagination">{renderPaginationButtons()}</ul>
-      </div>
+          ) : (
+            <>
+              <div id="all-books-container">
+                <h3 className="total-pages">
+                  Page {currentPage} of {totalPages}
+                </h3>
+                {displayedBooks.map((book) => {
+                  return (
+                    <div key={book.id} id="ind-book-container">
+                      <div className="ind-book-left-container">
+                        <h2 className="ind-book-title">{book.title}</h2>
+                        <div className="ind-book-button-container">
+                          <button
+                            className="ind-book-details"
+                            onClick={() => handleDetail(book.id)}
+                          >
+                            Details
+                          </button>
+                          {isAdmin ? (
+                            <>
+                              <button
+                                className="ind-book-details"
+                                onClick={() => handleEdit(book.id)}
+                              >
+                                Edit Book
+                              </button>
+                              <button 
+                                className="ind-book-details"
+                                onClick={() => handleAddToHome(book)}
+                              >
+                                <i className="fa-solid fa-plus fa-xl"></i>
+                              </button>
+                            </>
+                          ) : null}
+                        </div>
+                      </div>
+                      <div className="ind-price-container">
+                        <h3 className="ind-book-price">Price</h3>
+                        <select className="ind-book-price-actual">
+                          <option>${book.price} US</option>
+                          <option>${book.pricenonus} INT</option>
+                        </select>
+                      </div>
+                      {isAdmin ? null : (
+                        <button className="ind-book-cart">Add to Cart</button>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+              <div className="bottom-total-pages-container">
+                <ul className="pagination">{renderPaginationButtons()}</ul>
+              </div>
+            </>
+          )}
         </>
       )}
-  
     </>
   );
 };

@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Admin.css";
-import { getAllContent, editContent } from "../api-client";
+import { getAllContent, editContent, deleteContent } from "../api-client";
 
 const HomePageEdit = ({ isAdmin }) => {
   const [content, setContent] = useState([]);
@@ -17,18 +17,7 @@ const HomePageEdit = ({ isAdmin }) => {
   const [mainBannerTitleThree, setMainBannerTitleThree] = useState("");
   const [mainBannerDescriptionThree, setMainBannerDescriptionThree] = useState("");
   const [mainBannerButtonThree, setMainBannerButtonThree] = useState("");
-  const [oneBannerImg, setOneBannerImg] = useState("");
-  const [oneBannerTitle, setOneBannerTitle] = useState("");
-  const [oneBannerPrice, setOneBannerPrice] = useState("");
-  const [oneBannerButton, setOneBannerButton] = useState("");
-  const [twoBannerImg, setTwoBannerImg] = useState("");
-  const [twoBannerTitle, setTwoBannerTitle] = useState("");
-  const [twoBannerPrice, setTwoBannerPrice] = useState("");
-  const [twoBannerButton, setTwoBannerButton] = useState("");
-  const [threeBannerImg, setThreeBannerImg] = useState("");
-  const [threeBannerTitle, setThreeBannerTitle] = useState("");
-  const [threeBannerPrice, setThreeBannerPrice] = useState("");
-  const [threeBannerButton, setThreeBannerButton] = useState("");
+  
 
   const inputElement = useRef();
   let navigate = useNavigate();
@@ -95,70 +84,18 @@ const HomePageEdit = ({ isAdmin }) => {
     }
   };
 
-  const tryEditContentIndOne = async (id) => {
-    try {
-      await editContent(
-        id,
-        oneBannerTitle,
-        "n/a",
-        oneBannerImg,
-        oneBannerButton,
-        oneBannerPrice
-      );
-      const response = await getAllContent();
-      setContent(response);
-
-      window.alert("Your changes were saved to the featured section 1!");
-    } catch (error) {
-      console.error(error, "Error editing content in React");
-    }
-  };
-
-  const tryEditContentIndTwo = async (id) => {
-    try {
-      await editContent(
-        id,
-        twoBannerTitle,
-        "n/a",
-        twoBannerImg,
-        twoBannerButton,
-        twoBannerPrice
-      );
-      const response = await getAllContent();
-      setContent(response);
-
-      window.alert("Your changes were saved to the featured section 2!");
-    } catch (error) {
-      console.error(error, "Error editing content in React");
-    }
-  };
-
-  const tryEditContentIndThree = async (id) => {
-    try {
-      await editContent(
-        id,
-        threeBannerTitle,
-        "n/a",
-        threeBannerImg,
-        threeBannerButton,
-        threeBannerPrice
-      );
-      const response = await getAllContent();
-      setContent(response);
-
-      window.alert("Your changes were saved to the featured section 3!");
-    } catch (error) {
-      console.error(error, "Error editing content in React");
-    }
-  };
 
   function handleMainSubmit(e) {
     e.preventDefault();
   }
 
-  function handleSubmit(e) {
-    e.preventDefault();
+  const handleDelete = async (book) => {
+    await deleteContent(book.id);
+    window.alert(`${book.title} removed from home page!`)
+    const response = await getAllContent();
+    setContent(response);
   }
+
 
   useEffect(() => {
     const getContent = async () => {
@@ -167,7 +104,7 @@ const HomePageEdit = ({ isAdmin }) => {
     };
     getContent();
   }, []);
-  console.log(content);
+
 
   return (
     <div id="home-page-edit-container">
@@ -411,206 +348,30 @@ const HomePageEdit = ({ isAdmin }) => {
         <h2>Sub Features</h2>
         <div className="home-edit-content-container">
           <div className="home-banner-preview">
-            <div id="featured-container">
+            <div id="featured-container-edit">
               {content.map((cont) => {
-                if (cont.label === "home-ind-one") {
+                if (cont.label === "home-ind") {
                   return (
                     <div className="featured-ind-container" key={cont.id}>
                       <h3 className="featured-ind-heading">{cont.title}</h3>
                       <img src={cont.imageurl} className="featured-image" />
                       <h4 className="price-field">{cont.price}</h4>
-                      <button
+                      <div id='edit-ind-home-container-buttons'>
+                        <button
                         className="featured-button"
                         onClick={() => (window.location.href = cont.buttonurl)}
                       >
                         Order Now!
                       </button>
-                    </div>
-                  );
-                }
-              })}
-
-              {content.map((cont) => {
-                if (cont.label === "home-ind-two") {
-                  return (
-                    <div className="featured-ind-container" key={cont.id}>
-                      <h3 className="featured-ind-heading">{cont.title}</h3>
-                      <img src={cont.imageurl} className="featured-image" />
-                      <h4 className="price-field">{cont.price}</h4>
-                      <button
-                        className="featured-button"
-                        onClick={() => (window.location.href = cont.buttonurl)}
-                      >
-                        Order Now!
+                      <button className="featured-button" onClick={() => handleDelete(cont)}>
+                      <i className="fa-solid fa-trash fa-xl"></i>
                       </button>
-                    </div>
-                  );
-                }
-              })}
-              {content.map((cont) => {
-                if (cont.label === "home-ind-three") {
-                  return (
-                    <div className="featured-ind-container" key={cont.id}>
-                      <h3 className="featured-ind-heading">{cont.title}</h3>
-                      <img src={cont.imageurl} className="featured-image" />
-                      <h4 className="price-field">{cont.price}</h4>
-                      <button
-                        className="featured-button"
-                        onClick={() => (window.location.href = cont.buttonurl)}
-                      >
-                        Order Now!
-                      </button>
+                      </div>
                     </div>
                   );
                 }
               })}
             </div>
-          </div>
-          <div className="home-edit-form-ind-container">
-            <form
-              ref={inputElement}
-              className="home-edit-form-ind"
-              onSubmit={handleSubmit}
-            >
-              <input
-                placeholder="Image URL"
-                type="url"
-                value={oneBannerImg}
-                className="home-edit-field-ind"
-                onChange={(e) => setOneBannerImg(e.target.value)}
-              />
-              <input
-                placeholder="Title"
-                type="text"
-                value={oneBannerTitle}
-                className="home-edit-field-ind"
-                onChange={(e) => setOneBannerTitle(e.target.value)}
-              />
-              <input
-                placeholder="Price"
-                type="text"
-                value={oneBannerPrice}
-                className="home-edit-field-ind"
-                onChange={(e) => setOneBannerPrice(e.target.value)}
-              />
-              <input
-                placeholder="Button URL"
-                type="url"
-                value={oneBannerButton}
-                className="home-edit-field-ind"
-                onChange={(e) => setOneBannerButton(e.target.value)}
-              />
-              {content.map((cont) => {
-                if (cont.label === "home-ind-one") {
-                  return (
-                    <button
-                      key={cont.id}
-                      className="home-button-save"
-                      onClick={() => tryEditContentIndOne(cont.id)}
-                    >
-                      {" "}
-                      Save
-                    </button>
-                  );
-                }
-              })}
-            </form>
-            <form
-              ref={inputElement}
-              className="home-edit-form-ind"
-              onSubmit={handleSubmit}
-            >
-              <input
-                placeholder="Image URL"
-                type="url"
-                value={twoBannerImg}
-                className="home-edit-field-ind"
-                onChange={(e) => setTwoBannerImg(e.target.value)}
-              />
-              <input
-                placeholder="Title"
-                type="text"
-                value={twoBannerTitle}
-                className="home-edit-field-ind"
-                onChange={(e) => setTwoBannerTitle(e.target.value)}
-              />
-              <input
-                placeholder="Price"
-                type="text"
-                value={twoBannerPrice}
-                className="home-edit-field-ind"
-                onChange={(e) => setTwoBannerPrice(e.target.value)}
-              />
-              <input
-                placeholder="Button URL"
-                type="url"
-                value={twoBannerButton}
-                className="home-edit-field-ind"
-                onChange={(e) => setTwoBannerButton(e.target.value)}
-              />
-              {content.map((cont) => {
-                if (cont.label === "home-ind-two") {
-                  return (
-                    <button
-                      key={cont.id}
-                      className="home-button-save"
-                      onClick={() => tryEditContentIndTwo(cont.id)}
-                    >
-                      {" "}
-                      Save
-                    </button>
-                  );
-                }
-              })}
-            </form>
-            <form
-              ref={inputElement}
-              className="home-edit-form-ind"
-              onSubmit={handleSubmit}
-            >
-              <input
-                placeholder="Image URL"
-                type="url"
-                value={threeBannerImg}
-                className="home-edit-field-ind"
-                onChange={(e) => setThreeBannerImg(e.target.value)}
-              />
-              <input
-                placeholder="Title"
-                type="text"
-                value={threeBannerTitle}
-                className="home-edit-field-ind"
-                onChange={(e) => setThreeBannerTitle(e.target.value)}
-              />
-              <input
-                placeholder="Price"
-                type="text"
-                value={threeBannerPrice}
-                className="home-edit-field-ind"
-                onChange={(e) => setThreeBannerPrice(e.target.value)}
-              />
-              <input
-                placeholder="Button URL"
-                type="url"
-                value={threeBannerButton}
-                className="home-edit-field-ind"
-                onChange={(e) => setThreeBannerButton(e.target.value)}
-              />
-              {content.map((cont) => {
-                if (cont.label === "home-ind-three") {
-                  return (
-                    <button
-                      key={cont.id}
-                      className="home-button-save"
-                      onClick={() => tryEditContentIndThree(cont.id)}
-                    >
-                      {" "}
-                      Save
-                    </button>
-                  );
-                }
-              })}
-            </form>
           </div>
         </div>
       </div>

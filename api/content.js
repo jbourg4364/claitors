@@ -1,6 +1,6 @@
 const express = require('express');
 const contentRouter = express.Router();
-const { getAllContent, editContent, getContentById } = require('../db');
+const { getAllContent, editContent, getContentById, createContent, deleteIndContent } = require('../db');
 
 
 contentRouter.get('/', async (req, res, next) => {
@@ -23,6 +23,28 @@ contentRouter.patch('/:id', async (req, res, next) => {
         res.status(200).json(updateContent);
     } catch (error) {
         console.error(error, 'Error editing content in API');
+    }
+});
+
+contentRouter.post('/', async (req, res, next) => {
+    const { label, title, description, imageurl, buttonurl, price } = req.body;
+    try {
+        const newContent = await createContent({ label: label, title: title, description: description, imageurl: imageurl, buttonurl: buttonurl, price: price });
+
+        res.status(200).json(newContent);
+    } catch (error) {
+        console.error(error, 'Error posting book to home page in API')
+    }
+});
+
+contentRouter.delete('/:id', async (req, res, next) => {
+    const { id } = req.params;
+    try {
+        const deleteContent = await deleteIndContent(id);
+
+        res.status(200).json(deleteContent);
+    } catch (error) {
+        console.error(error, 'Error posting book to home page in API')
     }
 });
 

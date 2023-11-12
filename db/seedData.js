@@ -62,12 +62,12 @@ async function createTables() {
 
             CREATE TABLE content (
                 id SERIAL PRIMARY KEY,
-                label VARCHAR(255) UNIQUE,
-                title VARCHAR(255),
+                label VARCHAR(255),
+                title VARCHAR(1000),
                 description VARCHAR(1000),
-                imageURL VARCHAR(255),
-                buttonURL VARCHAR(255),
-                price VARCHAR(255)
+                imageURL VARCHAR(1000),
+                buttonURL VARCHAR(1000),
+                price VARCHAR(1000)
             );
         `);
         console.log('Finished creating tables...');
@@ -146,7 +146,7 @@ function textFileToJSON(filePath) {
             },
             {
                 id: 4,
-                label: 'home-ind-one',
+                label: 'home-ind',
                 title: 'Occupational Outlook Handbook',
                 description: 'N/A',
                 imageURL: 'https://claitors.com/9871598047875.main.gif',
@@ -155,7 +155,7 @@ function textFileToJSON(filePath) {
             },
             {
                 id: 5,
-                label: 'home-ind-two',
+                label: 'home-ind',
                 title: 'North American Industry Classification System',
                 description: 'N/A',
                 imageURL: 'https://www.census.gov/naics/resources/img/2022_manual_cover.png',
@@ -164,7 +164,7 @@ function textFileToJSON(filePath) {
             },
             {
                 id: 6,
-                label: 'home-ind-three',
+                label: 'home-ind',
                 title: 'The United States Government Manual 2015',
                 description: 'N/A',
                 imageURL: 'https://m.media-amazon.com/images/I/61j-5SpcsnL._AC_UF1000,1000_QL80_.jpg',

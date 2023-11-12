@@ -142,13 +142,24 @@ const LawBooks = () => {
                           onChange={(e) => setQty(e.target.value)}
                           name="VARQuantity1"
                         />
-                        <button
+                        {book.availability.includes('out of print') ? (
+                          <button
+                          className="ind-book-cart"
+                          name="I3"
+                          onClick={() => navigate('/contact')}
+                        >
+                          Contact for Availability
+                        </button>
+                        ) : (
+                          <button
                           className="ind-book-cart"
                           name="I3"
                           onClick={() => setPrice(book.price)}
                         >
                           Add to Cart
                         </button>
+                        )}
+                        
                       </form>
                     </div>
                   </div>

@@ -1,19 +1,25 @@
 import React, { useState, useEffect } from "react";
 import { getBookById } from "../api-client/index";
 import { useParams } from "react-router";
+import { useNavigate } from "react-router-dom";
 import './IndBook.css';
 
 const IndBook = ({ isAdmin }) => {
   const [book, setBook] = useState({});
   const [price, setPrice] = useState(0);
   const [qty, setQty] = useState(1);
+  const [unavailable, setUnavailable] = useState(false);
   const { id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getBookDetails = async () => {
       const response = await getBookById(id);
       setBook(response);
-      setPrice(response.price)
+      setPrice(response.price);
+      if(response.availability.includes('out of print')) {
+        setUnavailable(true)
+      }
     };
     getBookDetails();
   }, []);
@@ -110,12 +116,23 @@ const IndBook = ({ isAdmin }) => {
                 name="VARQuantity1"
                 />
               </label>
-              <button
+              {unavailable ? (
+                <button
+                className="ind-book-cart-detail"
+                name="I3"
+                onClick={(() => navigate('/contact'))}
+              >
+                Contact for Availability
+              </button>
+              ) : (
+                <button
                 className="ind-book-cart-detail"
                 name="I3"
               >
                 Add to Cart
               </button>
+              )}
+              
             </div>
           )}
         </form>
