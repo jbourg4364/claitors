@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
 import "./Nav.css";
 
-const AdminNav = () => {
+const AdminNav = ({ category, setCategory }) => {
   function handleLogout() {
     localStorage.removeItem("id");
   }
@@ -18,6 +18,11 @@ const AdminNav = () => {
     const newSearchTerm = inputElement.current.value;
     navigate(`/books/search/${newSearchTerm}`);
   }
+
+  function setSelectCategory(term) {
+    setCategory(term);
+  };
+
 
   return (
     <>
@@ -44,9 +49,15 @@ const AdminNav = () => {
           </NavLink>
         </div>
         <form id="input" onSubmit={handleSubmit}>
+          <select id='select-search-input' onChange={(e) => setSelectCategory(e.target.value)} defaultValue={category}>
+            <option value={''}>All</option>
+            <option value={'title'}>Title</option>
+            <option value={'author'}>Author</option>
+            <option value={'publisher'}>Publisher</option>
+          </select>
           <input
             className="search-bar"
-            placeholder="Title, Author, ISBN, Series or Keyword"
+            placeholder="Search Claitor's"
             defaultValue={defaultSearchTerm}
             ref={inputElement}
           />

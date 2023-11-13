@@ -122,8 +122,8 @@ function textFileToJSON(filePath) {
                 label: 'home-main-banner',
                 title: 'NEW 21ST EDITION! (Save 10% when you order 10+ copies)',
                 description: 'The Twenty-first edition of The Bluebook retains the same basic approach to legal citation established by its predecessors. The layout of The Bluebook has been updated to make the information easier to access. Some citation forms have been expanded, elaborated upon, or modified from previous editions to reflect the ever---expanding range of authorities used in legal writing and to respond to suggestions from the community.',
-                imageURL: 'https://claitors.com/hblu21.jpg',
-                buttonURL: 'https://claitors.fly.dev/books/details/4139',
+                imageurl: 'https://claitors.com/hblu21.jpg',
+                buttonurl: 'https://claitors.fly.dev/books/details/4139',
                 price: '$10.00'
             },
             {
@@ -131,8 +131,8 @@ function textFileToJSON(filePath) {
                 label: 'home-main-banner-two',
                 title: 'Louisiana Liability & Property Insurance Coverage Law',
                 description: 'This is a handbook for those who practice law, handle claims, and write or sell insurance. Years ago, for my own use and for the benefit of clients and friends, I began writing and updating a booklet on insurance law in Louisiana. I finally decided that others could benefit from a coverage handbook. This is not an insurance law treatise — Louisiana already has an excellent one in the McKenzie and Johnson treatise. But for those liability and property insurance issues most commonly seen by lawyers and claims adjusters, this handbook hopefully provides some understanding and points those seeking answers in the right direction.',
-                imageURL: 'https://claitors.com/9781598048940.jpg',
-                buttonURL: 'https://claitors.fly.dev/books/details/46721',
+                imageurl: 'https://claitors.com/9781598048940.jpg',
+                buttonurl: 'https://claitors.fly.dev/books/details/46721',
                 price: '$75.00'
             },
             {
@@ -140,8 +140,8 @@ function textFileToJSON(filePath) {
                 label: 'home-main-banner-three',
                 title: 'LOUISIANA MINERAL LEASES: A TREATISE',
                 description: 'In rich detail, the Treatise examines the evolution of the mineral lease under the civil law that prevails in Louisiana; the contours and various attributes of the lease relationship; the statutory laws that regulate it, as well as the clauses (both customary and special) contained in the mineral lease forms used in Louisiana. Additionally, the Treatise analyzes the types and kinds of mineral lease; transfers of the lease contract, as well as security interests in the mineral lease, and remedies for the breach of the lease.',
-                imageURL: 'https://claitors.com/9871598047875.main.gif',
-                buttonURL: 'https://claitors.fly.dev/books/details/36823',
+                imageurl: 'https://claitors.com/9871598047875.main.gif',
+                buttonurl: 'https://claitors.fly.dev/books/details/36823',
                 price: '$10.00'
             },
             {
@@ -149,8 +149,8 @@ function textFileToJSON(filePath) {
                 label: 'home-ind',
                 title: 'Occupational Outlook Handbook',
                 description: 'N/A',
-                imageURL: 'https://claitors.com/9871598047875.main.gif',
-                buttonURL: 'https://claitors.fly.dev/books/details/4044',
+                imageurl: 'https://claitors.com/9871598047875.main.gif',
+                buttonurl: 'https://claitors.fly.dev/books/details/4044',
                 price: 'Paperbound $25.00 | Hardcover $40.00'
             },
             {
@@ -158,8 +158,8 @@ function textFileToJSON(filePath) {
                 label: 'home-ind',
                 title: 'North American Industry Classification System',
                 description: 'N/A',
-                imageURL: 'https://www.census.gov/naics/resources/img/2022_manual_cover.png',
-                buttonURL: 'https://claitors.fly.dev/books/details/46696',
+                imageurl: 'https://www.census.gov/naics/resources/img/2022_manual_cover.png',
+                buttonurl: 'https://claitors.fly.dev/books/details/46696',
                 price: 'Paperbound $55.00 | Hardcover $65.00'
             },
             {
@@ -167,10 +167,28 @@ function textFileToJSON(filePath) {
                 label: 'home-ind',
                 title: 'The United States Government Manual 2015',
                 description: 'N/A',
-                imageURL: 'https://m.media-amazon.com/images/I/61j-5SpcsnL._AC_UF1000,1000_QL80_.jpg',
-                buttonURL: 'https://claitors.fly.dev/books/details/36702',
+                imageurl: 'https://m.media-amazon.com/images/I/61j-5SpcsnL._AC_UF1000,1000_QL80_.jpg',
+                buttonurl: 'https://claitors.fly.dev/books/details/36702',
                 price: 'Paperbound $35.00'
-            }
+            },
+            {
+                id: 7,
+                label: 'home-ind',
+                title: 'Louisiana Wild Turkeys: History, Science, Management, & Hunting',
+                description: 'N/A',
+                imageurl: 'https://m.media-amazon.com/images/I/91qpNfDmeyL._AC_UF1000,1000_QL80_.jpg',
+                buttonurl: 'https://claitors.fly.dev/books/details/46695',
+                price: '$24.95'
+            },
+            {
+                id: 8,
+                label: 'home-ind',
+                title: 'Official Congressional Directory,2015-16, 114th Congress',
+                description: 'N/A',
+                imageurl: 'https://m.media-amazon.com/images/I/51AN4rye55L.jpg',
+                buttonurl: 'https://claitors.fly.dev/books/details/36825',
+                price: '$45.00'
+            },
             
         ];
 

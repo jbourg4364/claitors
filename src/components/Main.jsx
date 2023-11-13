@@ -16,7 +16,7 @@ const Main = () => {
     {!isAdmin ? (
       <Nav category={category} setCategory={setCategory}/>
     ) : (
-      <AdminNav />
+      <AdminNav category={category} setCategory={setCategory}/>
     )}
     <Routes>
       <Route 
