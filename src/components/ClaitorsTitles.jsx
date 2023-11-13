@@ -33,6 +33,25 @@ const ClaitorsTitles = () => {
       window.scrollTo(0, 0);
     };
 
+    const compareAvailability = (bookA, bookB) => {
+      const availabilityA = bookA.availability.toLowerCase();
+      const availabilityB = bookB.availability.toLowerCase();
+  
+      const isAvailableA = availabilityA.includes("available");
+      const isAvailableB = availabilityB.includes("available");
+  
+      if (isAvailableA && !isAvailableB) {
+        return -1;
+      } else if (!isAvailableA && isAvailableB) {
+        return 1;
+      }
+  
+      // If both books have the same availability or none of them have "available" status,
+      // then you can add additional comparison logic here if needed.
+      // For example, you may want to sort alphabetically if neither has "available" status.
+  
+      return 0;
+    };
 
   
     const indexOfLastBook = currentPage * booksPerPage;
@@ -41,7 +60,8 @@ const ClaitorsTitles = () => {
       book.availability.includes("Available at Claitors") &&
       !book.availability.includes("0. out of print")
     );
-    const currentBooks = filteredBooks.slice(indexOfFirstBook, indexOfLastBook);
+    const sortedBooks = filteredBooks.sort(compareAvailability);
+    const currentBooks = sortedBooks.slice(indexOfFirstBook, indexOfLastBook);
   
     const totalPages = Math.ceil(filteredBooks.length / booksPerPage); // Calculate the total number of pages
   
@@ -101,6 +121,15 @@ const ClaitorsTitles = () => {
           </h3>
           {currentBooks.map((book) => (
             <div key={book.id} id="ind-book-container">
+              <img
+                  className="ind-book-image"
+                  src={`https://claitors.com/${book.pk}`}
+                  alt={book.title}
+                  onError={(e) => {
+                    e.target.src =
+                      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDerD4C_lpCr2YTNZBx9Xh89ynpRld6Pzv5Tp_JDbf&s";
+                  }}
+                />
               <div className="ind-book-left-container">
                 <h2 className="ind-book-title">{book.title}</h2>
                 <button

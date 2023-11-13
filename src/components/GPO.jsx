@@ -44,11 +44,6 @@ const GPO = ({ isAdmin }) => {
     } else if (!isAvailableA && isAvailableB) {
       return 1;
     }
-
-    // If both books have the same availability or none of them have "available" status,
-    // then you can add additional comparison logic here if needed.
-    // For example, you may want to sort alphabetically if neither has "available" status.
-
     return 0;
   };
 
@@ -120,6 +115,15 @@ const GPO = ({ isAdmin }) => {
             </h3>
             {currentBooks.map((book) => (
               <div key={book.id} id="ind-book-container">
+                <img
+                  className="ind-book-image"
+                  src={`https://claitors.com/${book.pk}`}
+                  alt={book.title}
+                  onError={(e) => {
+                    e.target.src =
+                      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDerD4C_lpCr2YTNZBx9Xh89ynpRld6Pzv5Tp_JDbf&s";
+                  }}
+                />
                 <div className="ind-book-left-container">
                   <h2 className="ind-book-title">{book.title}</h2>
                   <button
