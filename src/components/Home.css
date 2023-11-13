@@ -64,30 +64,41 @@ html {
     height: 500px;
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
     padding: 10px;
+    align-items: center;
+    justify-content: space-evenly;
 }
 
 .featured-ind-container {
     background-color: lightgray;
-    width: 30%;
     text-align: center;
     padding: 5px;
     color: black;
+    height: 500px;
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .featured-image {
     height: 250px;
+    width: 175px;
+    margin-bottom: 10px;
 }
 
 .featured-ind-heading {
-    height: 50px;
+    height: 100px;
+    font-size: 17px;
+    display: flex;
+    align-items: center;
 }
 
 .featured-button {
     padding: 10px;
     font-size: 17px;
     border-radius: 15px 15px 15px 15px;
+    margin-top: 20px;
 }
 
 .featured-button:hover {
@@ -156,6 +167,38 @@ html {
 }
 
 #left-arrow:hover {
+    cursor: pointer;
+}
+
+#ind-banner-right-arrow {
+    width: 5%;
+    margin-right: 0;
+    padding-right: 0;
+    display: flex;
+    justify-content: center;
+}
+
+#ind-banner-left-arrow {
+    width: 5%;
+    margin-right: 0;
+    padding-right: 0;
+    display: flex;
+    justify-content: center;
+}
+
+#right-arrow-ind {
+    color: black;
+}
+
+#left-arrow-ind {
+    color: black;
+}
+
+#right-arrow-ind:hover {
+    cursor: pointer;
+}
+
+#left-arrow-ind:hover {
     cursor: pointer;
 }
 

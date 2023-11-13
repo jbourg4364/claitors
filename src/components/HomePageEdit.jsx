@@ -110,7 +110,6 @@ const HomePageEdit = ({ isAdmin }) => {
     <div id="home-page-edit-container">
       <h2 className="edit-title-banner">Edit Home Page</h2>
       <div className="home-edit-container">
-
         <h2>Main Banner One</h2>
         <div className="home-edit-content-container">
           <div className="home-banner-preview">
@@ -346,26 +345,32 @@ const HomePageEdit = ({ isAdmin }) => {
         </div>
 
         <h2>Sub Features</h2>
-        <div className="home-edit-content-container">
+        <div className="home-edit-content-container-ind">
           <div className="home-banner-preview">
             <div id="featured-container-edit">
               {content.map((cont) => {
                 if (cont.label === "home-ind") {
                   return (
-                    <div className="featured-ind-container" key={cont.id}>
-                      <h3 className="featured-ind-heading">{cont.title}</h3>
-                      <img src={cont.imageurl} className="featured-image" />
-                      <h4 className="price-field">{cont.price}</h4>
-                      <div id='edit-ind-home-container-buttons'>
+                    <div className="featured-ind-container-edit" key={cont.id}>
+                       <img src={cont.imageurl} className="featured-image-edit" />
+                      <h3 className="featured-ind-heading-edit">{cont.title}</h3>
+                    
+                      <div id="edit-ind-home-container-buttons">
                         <button
-                        className="featured-button"
-                        onClick={() => (window.location.href = cont.buttonurl)}
-                      >
-                        Order Now!
-                      </button>
-                      <button className="featured-button" onClick={() => handleDelete(cont)}>
-                      <i className="fa-solid fa-trash fa-xl"></i>
-                      </button>
+                          className="featured-button-edit"
+                          onClick={() =>
+                            (window.location.href = cont.buttonurl)
+                          }
+                        >
+                          Order Now!
+                        </button>
+                        <button
+                          className="featured-button-edit"
+                          id='trash-edit-admin'
+                          onClick={() => handleDelete(cont)}
+                        >
+                          <i className="fa-solid fa-trash fa-xl"></i>
+                        </button>
                       </div>
                     </div>
                   );

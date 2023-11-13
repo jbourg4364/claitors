@@ -3,17 +3,19 @@ import "./Home.css";
 import { getAllContent } from "../api-client";
 import { motion } from "framer-motion";
 
-
 const Home = () => {
   const [email, setEmail] = useState("");
   const [content, setContent] = useState([]);
   const [mainBanner, setMainBanner] = useState([]);
   const [mainBannerTwo, setMainBannerTwo] = useState([]);
   const [mainBannerThree, setMainBannerThree] = useState([]);
+  const [indContent, setIndContent] = useState([]);
   const [bannerRotation, setRotation] = useState(1);
+  const [indContentRotation, setIndContentRotation] = useState(0);
   const [autoRotation, setAutoRotation] = useState(true);
   const [rotationIntervalId, setRotationIntervalId] = useState(null);
   const inputElement = useRef();
+  const maxBooksToShow = 5;
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -40,7 +42,12 @@ const Home = () => {
       const response = await getAllContent();
       setContent(response);
 
-      response.map((cont) => {
+      const indContentArray = response.filter(
+        (cont) => cont.label === "home-ind"
+      );
+      setIndContent(indContentArray);
+
+      response.forEach((cont) => {
         if (cont.label === "home-main-banner") {
           setMainBanner(cont);
         } else if (cont.label === "home-main-banner-two") {
@@ -96,6 +103,29 @@ const Home = () => {
     }
   };
 
+  const indCarousel = (rotation) => {
+    const totalIndContent = indContent.length;
+
+    if (totalIndContent === 0) {
+      return null; // No content to display
+    }
+
+    // Ensure rotation is within bounds
+    const newIndex = (rotation + totalIndContent) % totalIndContent;
+
+    return indContent[newIndex];
+  };
+
+  const rotateIndCarouselRight = () => {
+    setIndContentRotation((prevRotation) => (prevRotation + 1) % maxBooksToShow);
+  };
+  
+  const rotateIndCarouselLeft = () => {
+    setIndContentRotation((prevRotation) => (prevRotation - 1 + maxBooksToShow) % maxBooksToShow);
+  };
+  
+  
+
   return (
     <>
       <div id="home-banner">
@@ -108,7 +138,7 @@ const Home = () => {
           transition={{
             ease: "linear",
             duration: 1,
-            x: { duration: 1 }
+            x: { duration: 1 },
           }}
         >
           <div id="home-banner-left-arrow">
@@ -148,16 +178,25 @@ const Home = () => {
         </motion.div>
 
         <div id="featured-container">
-          {content.map((cont) => {
-            if (cont.label === "home-ind") {
+          <div id="ind-banner-left-arrow">
+            <i
+              className="fa-solid fa-chevron-left fa-2xl"
+              id="left-arrow-ind"
+              onClick={rotateIndCarouselLeft}
+            ></i>
+          </div>
+          {indContent.slice(0, maxBooksToShow).map((cont, index) => {
+            const adjustedIndex = (index + indContentRotation) % indContent.length;
+            const adjustedBook = indContent[adjustedIndex];
+          
+            if (adjustedBook.label === "home-ind") {
               return (
-                <div className="featured-ind-container" key={cont.id}>
-                  <h3 className="featured-ind-heading">{cont.title}</h3>
-                  <img src={cont.imageurl} className="featured-image" />
-                  <h4 className="price-field">{cont.price}</h4>
+                <div className="featured-ind-container" key={adjustedBook.id}>
+                  <h3 className="featured-ind-heading">{adjustedBook.title}</h3>
+                  <img src={adjustedBook.imageurl} className="featured-image" />
                   <button
                     className="featured-button"
-                    onClick={() => (window.location.href = cont.buttonurl)}
+                    onClick={() => (window.location.href = adjustedBook.buttonurl)}
                   >
                     Order Now!
                   </button>
@@ -165,6 +204,13 @@ const Home = () => {
               );
             }
           })}
+          <div id="ind-banner-right-arrow">
+            <i
+              className="fa-solid fa-chevron-right fa-2xl"
+              id="right-arrow-ind"
+              onClick={rotateIndCarouselRight}
+            ></i>
+          </div>
         </div>
       </div>
       <div id="newsletter">

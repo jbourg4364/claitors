@@ -4,16 +4,16 @@ async function createContent({
     label,
     title, 
     description,
-    imageURL,
-    buttonURL,
+    imageurl,
+    buttonurl,
     price
 }) {
     try {
         const { rows: [content] } = await client.query(`
-        INSERT INTO content(label, title, description, imageURL, buttonURL, price)
+        INSERT INTO content(label, title, description, imageurl, buttonurl, price)
         VALUES($1, $2, $3, $4, $5, $6)
         RETURNING *;
-        `, [label, title, description, imageURL, buttonURL, price]);
+        `, [label, title, description, imageurl, buttonurl, price]);
 
         return content;
     } catch (error) {

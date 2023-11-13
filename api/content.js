@@ -28,6 +28,7 @@ contentRouter.patch('/:id', async (req, res, next) => {
 
 contentRouter.post('/', async (req, res, next) => {
     const { label, title, description, imageurl, buttonurl, price } = req.body;
+  
     try {
         const newContent = await createContent({ label: label, title: title, description: description, imageurl: imageurl, buttonurl: buttonurl, price: price });
 

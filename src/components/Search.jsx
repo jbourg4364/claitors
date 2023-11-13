@@ -38,15 +38,17 @@ const Search = ({ isAdmin }) => {
   };
 
   const handleAddToHome = async (book) => {
+
     try {
-      const response = await addIndBookToHome({
-        label: "home-ind",
-        title: book.title,
-        description: book.description,
-        imageurl: book.hyperlink,
-        buttonurl: `/books/details/${book.id}`,
-        price: book.price
-      });
+      const response = await addIndBookToHome(
+        "home-ind",
+        book.title,
+        book.description,
+        book.hyperlink,
+        `/books/details/${book.id}`,
+        book.price
+    );
+
       window.alert(`${book.title} added to home page!`);
     } catch (error) {
       console.error(error, 'Error adding book to home page in React');

@@ -317,13 +317,14 @@ export const deleteBook = async (id) => {
   };
 
   export const addIndBookToHome = async (label, title, description, imageurl, buttonurl, price) => {
+
     try {
         const response = await fetch(`${BASE}/content`, {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json',
             },
-            body: JSON.stringify( label, title, description, imageurl, buttonurl, price )
+            body: JSON.stringify({ label, title, description, imageurl, buttonurl, price })
         });
       
         const result = await response.json();
@@ -344,11 +345,8 @@ export const deleteBook = async (id) => {
           });
 
           if (response.ok) {
-            // Check if the response status code is in the 2xx range
-            // If it is, return a success message or any relevant data
             return { success: true, message: "Book deleted successfully from home page" };
           } else {
-            // If the response status code is not in the 2xx range, throw an error
             throw new Error(`Failed to delete the book from home page. Status: ${response.status}`);
           }
     } catch (error) {
