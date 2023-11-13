@@ -5,6 +5,7 @@ import './Main.css';
 
 
 const Main = () => {
+  const [category, setCategory] = useState("");
   const storedId = localStorage.getItem('id');
   const isAdmin = storedId === 'admin';
   const location = useLocation();
@@ -13,7 +14,7 @@ const Main = () => {
   return (
     <>
     {!isAdmin ? (
-      <Nav />
+      <Nav category={category} setCategory={setCategory}/>
     ) : (
       <AdminNav />
     )}
@@ -40,7 +41,7 @@ const Main = () => {
       element={<Contact isAdmin={isAdmin}/>} /> 
       <Route 
       path='/books/search/:searchTerm'
-      element={<Search isAdmin={isAdmin}/>} /> 
+      element={<Search isAdmin={isAdmin} category={category} setCategory={setCategory}/>} /> 
       <Route 
       path='/login'
       element={<Login />} /> 

@@ -202,9 +202,9 @@ html {
     cursor: pointer;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 975px) {
     #featured-container {
-        height: 1400px;
+        height: 2500px;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -219,6 +219,7 @@ html {
         text-align: center;
         padding: 5px;
         color: black;
+        padding: 0;
     }
 
     #home-banner-content {
@@ -262,7 +263,7 @@ html {
     }
 
     #newsletter {
-        margin-top: 1550px;
+        margin-top: 2600px;
         text-align: center;
     }
 
@@ -271,6 +272,14 @@ html {
     }
 
     #left-arrow {
+        display: none;
+    }
+
+    #right-arrow-ind {
+        display: none;
+    }
+    
+    #left-arrow-ind {
         display: none;
     }
 }

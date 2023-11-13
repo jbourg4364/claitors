@@ -2,18 +2,26 @@ import React, { useState, useRef } from "react";
 import "./Nav.css";
 import { NavLink, useNavigate, useParams, useLocation } from "react-router-dom";
 import Admin from "./Admin";
+import Search from "./Search";
 
-const Nav = () => {
+const Nav = ({ category, setCategory }) => {
   const inputElement = useRef();
   const navigate = useNavigate();
   const { searchTerm } = useParams();
   const location = useLocation();
   const defaultSearchTerm = searchTerm || "";
+  
+
+  
 
   function handleSubmit(e) {
     e.preventDefault();
     const newSearchTerm = inputElement.current.value;
     navigate(`/books/search/${newSearchTerm}`);
+  };
+
+  function setSelectCategory(term) {
+    setCategory(term);
   };
 
 
@@ -25,6 +33,7 @@ const Nav = () => {
         <h3 className="logo-caption">Established in 1922</h3>
         <hr className="logo-line"></hr>
       </div>
+
       {location.pathname !== "/login" && (
       <div id="links">
         <NavLink to="/">
@@ -51,9 +60,15 @@ const Nav = () => {
       )}
       {location.pathname !== "/login" && (
         <form id="input" onSubmit={handleSubmit}>
+          <select id='select-search-input' onChange={(e) => setSelectCategory(e.target.value)} defaultValue={category}>
+            <option value={''}>All</option>
+            <option value={'title'}>Title</option>
+            <option value={'author'}>Author</option>
+            <option value={'publisher'}>Publisher</option>
+          </select>
           <input
             className="search-bar"
-            placeholder="Title, Author, ISBN, Series or Keyword"
+            placeholder="Search Claitor's"
             defaultValue={defaultSearchTerm}
             ref={inputElement}
           />

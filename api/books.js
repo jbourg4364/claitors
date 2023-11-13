@@ -1,6 +1,6 @@
 const express = require('express');
 const booksRouter = express.Router();
-const { createBooks, getAllBooks, getBookById, searchBooks, editBook, deleteBook } = require('../db');
+const { createBooks, getAllBooks, getBookById, searchBooks, editBook, deleteBook, searchAuthor, searchTitle, searchPublisher } = require('../db');
 
 booksRouter.get('/', async (req, res, next) => {
     try {
@@ -29,6 +29,36 @@ booksRouter.get('/search/:keyword', async (req, res, next) => {
     } catch (error) {
         console.error(error, 'Error searching books in API');
     }
+});
+
+booksRouter.get('/search/title/:keyword', async (req, res, next) => {
+  const { keyword } = req.params;
+  try {
+      const book = await searchTitle(keyword);
+      res.json(book);
+  } catch (error) {
+      console.error(error, 'Error searching books for title in API');
+  }
+});
+
+booksRouter.get('/search/author/:keyword', async (req, res, next) => {
+  const { keyword } = req.params;
+  try {
+      const book = await searchAuthor(keyword);
+      res.json(book);
+  } catch (error) {
+      console.error(error, 'Error searching books for author in API');
+  }
+});
+
+booksRouter.get('/search/publisher/:keyword', async (req, res, next) => {
+  const { keyword } = req.params;
+  try {
+      const book = await searchPublisher(keyword);
+      res.json(book);
+  } catch (error) {
+      console.error(error, 'Error searching books for publisher in API');
+  }
 });
 
 booksRouter.post("/", async (req, res, next) => {

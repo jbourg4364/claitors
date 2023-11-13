@@ -244,6 +244,45 @@ async function deleteBook(id) {
   }
 };
 
+async function searchTitle(keyword) {
+  try {
+    const { rows } = await client.query(`
+    SELECT * FROM books
+    WHERE Title ILIKE '%' || $1 || '%'
+    `, [keyword]);
+
+    return rows;
+  } catch (error) {
+    console.error(error, 'Error searching books for title in DB');
+  }
+};
+
+async function searchAuthor(keyword) {
+  try {
+    const { rows } = await client.query(`
+    SELECT * FROM books
+    WHERE Author ILIKE '%' || $1 || '%'
+    `, [keyword]);
+
+    return rows;
+  } catch (error) {
+    console.error(error, 'Error searching books for author in DB');
+  }
+};
+
+async function searchPublisher(keyword) {
+  try {
+    const { rows } = await client.query(`
+    SELECT * FROM books
+    WHERE Publisher ILIKE '%' || $1 || '%'
+    `, [keyword]);
+
+    return rows;
+  } catch (error) {
+    console.error(error, 'Error searching books for publisher in DB');
+  }
+};
+
 
 
 
@@ -253,5 +292,8 @@ module.exports = {
   getBookById,
   searchBooks,
   editBook,
-  deleteBook
+  deleteBook,
+  searchAuthor,
+  searchPublisher,
+  searchTitle
 };

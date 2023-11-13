@@ -84,7 +84,7 @@ a:hover {
 #input {
     display: inline-flex;
     align-items: center;
-    transform: translate(15%);
+    transform: translate(10%);
     margin-bottom: 30px;
 }
 
@@ -98,7 +98,18 @@ a:hover {
     color:#79227b;
 }
 
-@media screen and (max-width: 800px) {
+#select-search-input {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    padding: 10px;
+    border: 2px solid gray;
+    margin-right: 0px;
+    font-size: 16px;
+}
+
+@media screen and (max-width: 900px) {
     .nav-link {
         font-size: 15px;
         margin: 5px;
@@ -116,5 +127,15 @@ a:hover {
 
     #links {
         flex-direction: column;
+    }
+
+    #select-search-input {
+        display: none;
+    }
+
+    #input {
+        display: inline-flex;
+        align-items: center;
+        transform: translate(20%);
     }
 }

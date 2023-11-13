@@ -72,6 +72,54 @@ export const searchBooks = async (keyword) => {
     };
 };
 
+export const searchTitle = async (keyword) => {
+    try {
+        const response = await fetch(`${BASE}/books/search/title/${keyword}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+        
+        const result = await response.json();
+        return result;
+    } catch (error) {
+        console.error(error, 'Error searching books for title in middleware')
+    };
+};
+
+export const searchAuthor = async (keyword) => {
+    try {
+        const response = await fetch(`${BASE}/books/search/author/${keyword}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+        
+        const result = await response.json();
+        return result;
+    } catch (error) {
+        console.error(error, 'Error searching books for author in middleware')
+    };
+};
+
+export const searchPublisher = async (keyword) => {
+    try {
+        const response = await fetch(`${BASE}/books/search/publisher/${keyword}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+        
+        const result = await response.json();
+        return result;
+    } catch (error) {
+        console.error(error, 'Error searching books for publisher in middleware')
+    };
+};
+
 export const getAllContent = async () => {
     try {
         const response = await fetch(`${BASE}/content`, {

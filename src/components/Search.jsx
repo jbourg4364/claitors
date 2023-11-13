@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { searchBooks, addIndBookToHome } from "../api-client";
+import { searchBooks, addIndBookToHome, searchAuthor, searchPublisher, searchTitle } from "../api-client";
 import { useNavigate, useParams } from "react-router-dom";
 import "./Books.css";
 
-const Search = ({ isAdmin }) => {
+const Search = ({ isAdmin, category }) => {
   const [sortedBooks, setSortedBooks] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(true);
@@ -13,17 +13,47 @@ const Search = ({ isAdmin }) => {
   const { id } = useParams();
   const navigate = useNavigate();
 
+ 
   useEffect(() => {
     const getBookBySearch = async () => {
-      const response = await searchBooks(searchTerm);
-      setSortedBooks(response);
-      setLoading(false);
-      if (response.length === 0) {
-        setNoResult(true);
-      } else {
-        setNoResult(false);
+      if (category === "") {
+        const response = await searchBooks(searchTerm);
+        setSortedBooks(response);
+        setLoading(false);
+        if (response.length === 0) {
+          setNoResult(true);
+        } else {
+          setNoResult(false);
+        }
+      } else if (category === 'title') {
+        const response = await searchTitle(searchTerm);
+        setSortedBooks(response);
+        setLoading(false);
+        if (response.length === 0) {
+          setNoResult(true);
+        } else {
+          setNoResult(false);
+        }
+      } else if (category === 'author') {
+        const response = await searchAuthor(searchTerm);
+        setSortedBooks(response);
+        setLoading(false);
+        if (response.length === 0) {
+          setNoResult(true);
+        } else {
+          setNoResult(false);
+        }
+      } else if (category === 'publisher') {
+        const response = await searchPublisher(searchTerm);
+        setSortedBooks(response);
+        setLoading(false);
+        if (response.length === 0) {
+          setNoResult(true);
+        } else {
+          setNoResult(false);
+        }
       }
-    };
+    }; 
     getBookBySearch();
   }, [searchTerm]);
 
