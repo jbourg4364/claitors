@@ -119,7 +119,7 @@ const LawBooks = () => {
               <div key={book.id} id="ind-book-container">
                 <img
                   className="ind-book-image"
-                  src={`https://claitors.com/${book.pk}`}
+                  src={`https://claitors.com/tphotos/${book.pk}`}
                   alt={book.title}
                   onError={(e) => {
                     e.target.src = Images.claitorsLogo;

@@ -147,7 +147,7 @@ const Search = ({ isAdmin, category }) => {
         "home-ind",
         book.title,
         book.description,
-        `https://claitors.com/${book.pk}`,
+        `https://claitors.com/tphotos/${book.pk}`,
         `/books/details/${book.id}`,
         book.price
     );
@@ -233,7 +233,7 @@ const Search = ({ isAdmin, category }) => {
                     <div key={book.id} id="ind-book-container">
                       <img
                         className="ind-book-image"
-                        src={`https://claitors.com/${book.pk}`}
+                        src={`https://claitors.com/tphotos/${book.pk}`}
                         alt={book.title}
                         onError={(e) => {
                           e.target.src = Images.claitorsLogo;

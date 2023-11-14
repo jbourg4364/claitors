@@ -103,18 +103,6 @@ const Home = () => {
     }
   };
 
-  const indCarousel = (rotation) => {
-    const totalIndContent = indContent.length;
-
-    if (totalIndContent === 0) {
-      return null; // No content to display
-    }
-
-    // Ensure rotation is within bounds
-    const newIndex = (rotation + totalIndContent) % totalIndContent;
-
-    return indContent[newIndex];
-  };
 
   const rotateIndCarouselRight = () => {
     setIndContentRotation((prevRotation) => (prevRotation + 1) % maxBooksToShow);

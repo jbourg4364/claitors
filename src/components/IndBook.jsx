@@ -28,15 +28,16 @@ const IndBook = ({ isAdmin }) => {
   return (
     <div id="ind-detail-container">
       <h1 className="ind-detail-title">{book.title}</h1>
-      <img
-        className="ind-book-image"
-        src={`https://claitors.com/${book.pk}`}
+      <div id='ind-detail-img-table-container'>
+        <img
+        className="ind-book-image-detail"
+        src={`https://claitors.com/tphotos/${book.pk}`}
         alt={book.title}
         onError={(e) => {
           e.target.src = Images.claitorsLogo;
         }}
-      />
-      <table className="ind-detail-table">
+        />
+        <table className="ind-detail-table">
         <tbody>
           <tr>
             <td>Author:</td>
@@ -103,7 +104,9 @@ const IndBook = ({ isAdmin }) => {
             <td>{book.statusdate}</td>
           </tr>
         </tbody>
-      </table>
+        </table>
+      </div>
+      
       <div id="ind-book-detail-price-container">
         <form
           method="POST"

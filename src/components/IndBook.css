@@ -82,6 +82,12 @@
     background-color: rgb(227, 227, 227);
 }
 
+.ind-book-image-detail {
+    height: 300px;
+    width: auto;
+    margin-bottom: 15px;
+}
+
 
 @media screen and (max-width: 800px) {
     .ind-detail-table {
@@ -92,6 +98,12 @@
     .ind-detail-title {
         height: auto;
         font-size: 20px;
+    }
+
+    .ind-book-image-detail {
+        height: 200px;
+        width: auto;
+        margin-bottom: 15px;
     }
 
 
