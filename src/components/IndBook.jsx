@@ -3,6 +3,7 @@ import { getBookById } from "../api-client/index";
 import { useParams } from "react-router";
 import { useNavigate } from "react-router-dom";
 import './IndBook.css';
+import Images from '../media'
 
 const IndBook = ({ isAdmin }) => {
   const [book, setBook] = useState({});
@@ -32,8 +33,7 @@ const IndBook = ({ isAdmin }) => {
         src={`https://claitors.com/${book.pk}`}
         alt={book.title}
         onError={(e) => {
-          e.target.src =
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDerD4C_lpCr2YTNZBx9Xh89ynpRld6Pzv5Tp_JDbf&s";
+          e.target.src = Images.claitorsLogo;
         }}
       />
       <table className="ind-detail-table">

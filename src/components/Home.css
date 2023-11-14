@@ -1,4 +1,4 @@
-html {
+html, body {
     overflow-x: hidden;
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
@@ -202,6 +202,35 @@ html {
     cursor: pointer;
 }
 
+@media screen and (max-width: 1200px) {
+    #home-banner-description {
+        width: 45%;
+        font-size: 17px;
+    }
+
+    #home-banner-title {
+        font-size: 17px;
+    }
+
+    .home-image-main {
+        height: 300px;
+    }
+
+    .featured-ind-heading {
+        height: 100px;
+        font-size: 15px;
+        display: flex;
+        align-items: center;
+    }
+
+    .featured-image {
+        height: 200px;
+        width: 150px;
+        margin-bottom: 20px;
+    }
+}
+
+
 @media screen and (max-width: 975px) {
     #featured-container {
         height: 2500px;
@@ -210,7 +239,7 @@ html {
         justify-content: center;
         align-items: center;
         padding: 10px;
-        margin-top: 200px;
+        margin-top: 175px;
     }
 
     .featured-ind-container {
@@ -220,6 +249,8 @@ html {
         padding: 5px;
         color: black;
         padding: 0;
+        margin: 0;
+        height: 450px;
     }
 
     #home-banner-content {
@@ -236,7 +267,7 @@ html {
         height: 225px;
         margin: 0px;
         padding: 0px;
-        margin-top: 125px;
+        padding-top: 225px;
     }
     
     #home-banner-description {
@@ -259,11 +290,11 @@ html {
     }
 
     #home-banner {
-        height: 700px;
+        height: 800px;
     }
 
     #newsletter {
-        margin-top: 2600px;
+        margin-top: 2400px;
         text-align: center;
     }
 
@@ -281,6 +312,18 @@ html {
     
     #left-arrow-ind {
         display: none;
+    }
+
+    .featured-ind-heading {
+        height: 50px;
+        font-size: 18px;
+        padding: 15px;
+    }
+
+    .featured-image {
+        height: 225px;
+        width: 175px;
+        margin-bottom: 20px;
     }
 }
 
