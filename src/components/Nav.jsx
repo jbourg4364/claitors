@@ -14,8 +14,7 @@ const Nav = ({ category, setCategory }) => {
 
   
 
-  function handleSubmit(e) {
-    e.preventDefault();
+  function handleSubmit() {
     const newSearchTerm = inputElement.current.value;
     navigate(`/books/search/${newSearchTerm}`);
   };
@@ -25,7 +24,6 @@ const Nav = ({ category, setCategory }) => {
   };
 
   useEffect(() => {
-    // Reload the page only if searchTerm is different from defaultSearchTerm
     if (searchTerm && searchTerm !== defaultSearchTerm) {
       window.location.reload();
     }
