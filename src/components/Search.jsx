@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { searchBooks, addIndBookToHome, searchAuthor, searchPublisher, searchTitle } from "../api-client";
+import { searchBooks, addIndBookToHome, searchAuthor, searchPublisher, searchTitle, searchISBN } from "../api-client";
 import { useNavigate, useParams } from "react-router-dom";
 import "./Books.css";
 
@@ -47,6 +47,15 @@ const Search = ({ isAdmin, category }) => {
         }
       } else if (category === 'publisher') {
         const response = await searchPublisher(searchTerm);
+        setSortedBooks(response);
+        setLoading(false);
+        if (response.length === 0) {
+          setNoResult(true);
+        } else {
+          setNoResult(false);
+        }
+      } else if (category === 'isbn') {
+        const response = await searchISBN(searchTerm);
         setSortedBooks(response);
         setLoading(false);
         if (response.length === 0) {

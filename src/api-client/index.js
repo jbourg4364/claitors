@@ -120,6 +120,22 @@ export const searchPublisher = async (keyword) => {
     };
 };
 
+export const searchISBN = async (keyword) => {
+    try {
+        const response = await fetch(`${BASE}/books/search/isbn/${keyword}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+        
+        const result = await response.json();
+        return result;
+    } catch (error) {
+        console.error(error, 'Error searching books for ISBN in middleware')
+    };
+};
+
 export const getAllContent = async () => {
     try {
         const response = await fetch(`${BASE}/content`, {

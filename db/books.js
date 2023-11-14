@@ -283,6 +283,19 @@ async function searchPublisher(keyword) {
   }
 };
 
+async function searchISBN(keyword) {
+  try {
+    const { rows } = await client.query(`
+    SELECT * FROM books
+    WHERE ISBN ILIKE '%' || $1 || '%'
+    `, [keyword]);
+
+    return rows;
+  } catch (error) {
+    console.error(error, 'Error searching books for publisher in DB');
+  }
+};
+
 
 
 
@@ -295,5 +308,6 @@ module.exports = {
   deleteBook,
   searchAuthor,
   searchPublisher,
-  searchTitle
+  searchTitle,
+  searchISBN
 };

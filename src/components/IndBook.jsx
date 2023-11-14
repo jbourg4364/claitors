@@ -17,21 +17,28 @@ const IndBook = ({ isAdmin }) => {
       const response = await getBookById(id);
       setBook(response);
       setPrice(response.price);
-      if(response.availability.includes('out of print')) {
-        setUnavailable(true)
+      if (response.availability.includes("out of print")) {
+        setUnavailable(true);
       }
     };
     getBookDetails();
   }, []);
 
-
-
   return (
     <div id="ind-detail-container">
       <h1 className="ind-detail-title">{book.title}</h1>
+      <img
+        className="ind-book-image"
+        src={`https://claitors.com/${book.pk}`}
+        alt={book.title}
+        onError={(e) => {
+          e.target.src =
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDerD4C_lpCr2YTNZBx9Xh89ynpRld6Pzv5Tp_JDbf&s";
+        }}
+      />
       <table className="ind-detail-table">
         <tbody>
-        <tr>
+          <tr>
             <td>Author:</td>
             <td>{book.author}</td>
           </tr>
@@ -98,41 +105,48 @@ const IndBook = ({ isAdmin }) => {
         </tbody>
       </table>
       <div id="ind-book-detail-price-container">
-        <form method="POST" action="https://www.cartmanager.net/cgi-bin/cart.cgi">
-          <input type="hidden" name="AddItem" value={`9917477|${book.title}|${price}|${qty}|${book.stocknumber}||prompt|${book.weight}||@10:10%`}/>
-          <select className="ind-book-price-actual-detail" onChange={((e) => setPrice(e.target.value))} name="VARcost1">
-            <option defaultValue={book.price} >{book.price} US</option>
+        <form
+          method="POST"
+          action="https://www.cartmanager.net/cgi-bin/cart.cgi"
+        >
+          <input
+            type="hidden"
+            name="AddItem"
+            value={`9917477|${book.title}|${price}|${qty}|${book.stocknumber}||prompt|${book.weight}||@10:10%`}
+          />
+          <select
+            className="ind-book-price-actual-detail"
+            onChange={(e) => setPrice(e.target.value)}
+            name="VARcost1"
+          >
+            <option defaultValue={book.price}>{book.price} US</option>
             <option value={book.pricenonus}>{book.pricenonus} INT</option>
           </select>
           {isAdmin ? null : (
             <div id="qty-price-container">
               <label>
                 Qty
-                <input 
-                className="qty-button" 
-                type="number" 
-                defaultValue={1} 
-                onChange={((e) => setQty(e.target.value))}
-                name="VARQuantity1"
+                <input
+                  className="qty-button"
+                  type="number"
+                  defaultValue={1}
+                  onChange={(e) => setQty(e.target.value)}
+                  name="VARQuantity1"
                 />
               </label>
               {unavailable ? (
                 <button
-                className="ind-book-cart-detail"
-                name="I3"
-                onClick={(() => navigate('/contact'))}
-              >
-                Contact for Availability
-              </button>
+                  className="ind-book-cart-detail"
+                  name="I3"
+                  onClick={() => navigate("/contact")}
+                >
+                  Contact for Availability
+                </button>
               ) : (
-                <button
-                className="ind-book-cart-detail"
-                name="I3"
-              >
-                Add to Cart
-              </button>
+                <button className="ind-book-cart-detail" name="I3">
+                  Add to Cart
+                </button>
               )}
-              
             </div>
           )}
         </form>

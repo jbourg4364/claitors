@@ -1,6 +1,6 @@
 const express = require('express');
 const booksRouter = express.Router();
-const { createBooks, getAllBooks, getBookById, searchBooks, editBook, deleteBook, searchAuthor, searchTitle, searchPublisher } = require('../db');
+const { createBooks, getAllBooks, getBookById, searchBooks, editBook, deleteBook, searchAuthor, searchTitle, searchPublisher, searchISBN } = require('../db');
 
 booksRouter.get('/', async (req, res, next) => {
     try {
@@ -58,6 +58,16 @@ booksRouter.get('/search/publisher/:keyword', async (req, res, next) => {
       res.json(book);
   } catch (error) {
       console.error(error, 'Error searching books for publisher in API');
+  }
+});
+
+booksRouter.get('/search/isbn/:keyword', async (req, res, next) => {
+  const { keyword } = req.params;
+  try {
+      const book = await searchISBN(keyword);
+      res.json(book);
+  } catch (error) {
+      console.error(error, 'Error searching books for ISBN in API');
   }
 });
 
