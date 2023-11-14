@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import "./Nav.css";
 import { NavLink, useNavigate, useParams, useLocation } from "react-router-dom";
 import Admin from "./Admin";
@@ -23,6 +23,13 @@ const Nav = ({ category, setCategory }) => {
   function setSelectCategory(term) {
     setCategory(term);
   };
+
+  useEffect(() => {
+    // Reload the page only if searchTerm is different from defaultSearchTerm
+    if (searchTerm && searchTerm !== defaultSearchTerm) {
+      window.location.reload();
+    }
+  }, [searchTerm, defaultSearchTerm]);
 
 
   return (

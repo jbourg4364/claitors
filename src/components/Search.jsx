@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { searchBooks, addIndBookToHome, searchAuthor, searchPublisher, searchTitle, searchISBN } from "../api-client";
 import { useNavigate, useParams } from "react-router-dom";
 import "./Books.css";
+import Images from "../media";
 
 const Search = ({ isAdmin, category }) => {
   const [sortedBooks, setSortedBooks] = useState([]);
@@ -15,12 +16,25 @@ const Search = ({ isAdmin, category }) => {
   const { id } = useParams();
   const navigate = useNavigate();
 
- 
+  
+
   useEffect(() => {
     const getBookBySearch = async () => {
       if (category === "") {
         const response = await searchBooks(searchTerm);
-        setSortedBooks(response);
+        
+        const sortedResponse = response.sort((a, b) => {
+          const availabilityA = a.availability.toLowerCase();
+          const availabilityB = b.availability.toLowerCase();
+          if (availabilityA === 'available at claitors' && availabilityB !== 'available at claitors') {
+            return -1;
+          } else if (availabilityA !== 'available at claitors' && availabilityB === 'available at claitors') {
+            return 1;
+          };
+          return 0;
+        });
+
+        setSortedBooks(sortedResponse);
         setLoading(false);
         if (response.length === 0) {
           setNoResult(true);
@@ -29,7 +43,19 @@ const Search = ({ isAdmin, category }) => {
         }
       } else if (category === 'title') {
         const response = await searchTitle(searchTerm);
-        setSortedBooks(response);
+
+        const sortedResponse = response.sort((a, b) => {
+          const availabilityA = a.availability.toLowerCase();
+          const availabilityB = b.availability.toLowerCase();
+          if (availabilityA === 'available at claitors' && availabilityB !== 'available at claitors') {
+            return -1;
+          } else if (availabilityA !== 'available at claitors' && availabilityB === 'available at claitors') {
+            return 1;
+          };
+          return 0;
+        });
+
+        setSortedBooks(sortedResponse);
         setLoading(false);
         if (response.length === 0) {
           setNoResult(true);
@@ -38,7 +64,19 @@ const Search = ({ isAdmin, category }) => {
         }
       } else if (category === 'author') {
         const response = await searchAuthor(searchTerm);
-        setSortedBooks(response);
+
+        const sortedResponse = response.sort((a, b) => {
+          const availabilityA = a.availability.toLowerCase();
+          const availabilityB = b.availability.toLowerCase();
+          if (availabilityA === 'available at claitors' && availabilityB !== 'available at claitors') {
+            return -1;
+          } else if (availabilityA !== 'available at claitors' && availabilityB === 'available at claitors') {
+            return 1;
+          };
+          return 0;
+        });
+
+        setSortedBooks(sortedResponse);
         setLoading(false);
         if (response.length === 0) {
           setNoResult(true);
@@ -47,7 +85,19 @@ const Search = ({ isAdmin, category }) => {
         }
       } else if (category === 'publisher') {
         const response = await searchPublisher(searchTerm);
-        setSortedBooks(response);
+
+        const sortedResponse = response.sort((a, b) => {
+          const availabilityA = a.availability.toLowerCase();
+          const availabilityB = b.availability.toLowerCase();
+          if (availabilityA === 'available at claitors' && availabilityB !== 'available at claitors') {
+            return -1;
+          } else if (availabilityA !== 'available at claitors' && availabilityB === 'available at claitors') {
+            return 1;
+          };
+          return 0;
+        });
+
+        setSortedBooks(sortedResponse);
         setLoading(false);
         if (response.length === 0) {
           setNoResult(true);
@@ -56,7 +106,19 @@ const Search = ({ isAdmin, category }) => {
         }
       } else if (category === 'isbn') {
         const response = await searchISBN(searchTerm);
-        setSortedBooks(response);
+
+        const sortedResponse = response.sort((a, b) => {
+          const availabilityA = a.availability.toLowerCase();
+          const availabilityB = b.availability.toLowerCase();
+          if (availabilityA === 'available at claitors' && availabilityB !== 'available at claitors') {
+            return -1;
+          } else if (availabilityA !== 'available at claitors' && availabilityB === 'available at claitors') {
+            return 1;
+          };
+          return 0;
+        });
+
+        setSortedBooks(sortedResponse);
         setLoading(false);
         if (response.length === 0) {
           setNoResult(true);
@@ -85,7 +147,7 @@ const Search = ({ isAdmin, category }) => {
         "home-ind",
         book.title,
         book.description,
-        book.hyperlink,
+        `https://claitors.com/${book.pk}`,
         `/books/details/${book.id}`,
         book.price
     );
@@ -101,7 +163,7 @@ const Search = ({ isAdmin, category }) => {
   const indexOfFirstBook = indexOfLastBook - booksPerPage;
   const displayedBooks = sortedBooks.slice(indexOfFirstBook, indexOfLastBook);
 
-  const totalPages = Math.ceil(sortedBooks.length / booksPerPage); // Calculate the total number of pages
+  const totalPages = Math.ceil(sortedBooks.length / booksPerPage);
 
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -174,8 +236,7 @@ const Search = ({ isAdmin, category }) => {
                         src={`https://claitors.com/${book.pk}`}
                         alt={book.title}
                         onError={(e) => {
-                          e.target.src =
-                            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDerD4C_lpCr2YTNZBx9Xh89ynpRld6Pzv5Tp_JDbf&s";
+                          e.target.src = Images.claitorsLogo;
                         }}
                       />
                       <div className="ind-book-left-container">

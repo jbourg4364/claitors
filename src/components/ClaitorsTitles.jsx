@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getAllBooks } from "../api-client/index";
 import "./Books.css";
+import Images from "../media";
 
 const ClaitorsTitles = () => {
     const [allBooks, setAllBooks] = useState([]);
@@ -126,8 +127,7 @@ const ClaitorsTitles = () => {
                   src={`https://claitors.com/${book.pk}`}
                   alt={book.title}
                   onError={(e) => {
-                    e.target.src =
-                      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDerD4C_lpCr2YTNZBx9Xh89ynpRld6Pzv5Tp_JDbf&s";
+                    e.target.src = Images.claitorsLogo;
                   }}
                 />
               <div className="ind-book-left-container">
