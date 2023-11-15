@@ -1,7 +1,7 @@
-// const BASE = 'http://localhost:8080/api';
+const BASE = 'http://localhost:8080/api';
 
 // deployment`
-const BASE = '/api';
+// const BASE = '/api';
 
 
 export const loginAdmin = async ({username, password}) => {
@@ -415,6 +415,22 @@ export const deleteBook = async (id) => {
           }
     } catch (error) {
         console.error(error, 'Error deleting book from home page in middleware')
+    }
+  };
+
+  export const getLast10Books = async () => {
+    try {
+        const response = await fetch(`${BASE}/books/admin/dash`, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json"
+            }
+          });
+
+          const result = await response.json();
+          return result;
+    } catch (error) {
+        console.error(error, 'Error getting last 10 books in middleware');
     }
   };
   

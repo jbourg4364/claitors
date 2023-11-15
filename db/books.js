@@ -299,6 +299,19 @@ async function searchISBN(keyword) {
   }
 };
 
+async function getLastTenBooks() {
+  try {
+    const { rows } = await client.query(`
+    SELECT * FROM books
+    ORDER BY id DESC
+    LIMIT 10;
+    `);
+
+    return rows;
+  } catch (error) {
+    console.error(error, 'Error getting last 10 books in DB');
+  }
+};
 
 
 
@@ -312,5 +325,6 @@ module.exports = {
   searchAuthor,
   searchPublisher,
   searchTitle,
-  searchISBN
+  searchISBN,
+  getLastTenBooks
 };

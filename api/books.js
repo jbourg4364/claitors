@@ -1,6 +1,6 @@
 const express = require('express');
 const booksRouter = express.Router();
-const { createBooks, getAllBooks, getBookById, searchBooks, editBook, deleteBook, searchAuthor, searchTitle, searchPublisher, searchISBN } = require('../db');
+const { createBooks, getAllBooks, getBookById, searchBooks, editBook, deleteBook, searchAuthor, searchTitle, searchPublisher, searchISBN, getLastTenBooks } = require('../db');
 
 booksRouter.get('/', async (req, res, next) => {
     try {
@@ -254,6 +254,15 @@ booksRouter.delete('/:id', async (req, res, next) => {
       res.status(200).json(book);
   } catch (error) {
       console.error(error, 'Error getting book details in API');
+  }
+});
+
+booksRouter.get('/admin/dash', async (req, res, next) => {
+  try {
+    const response = await getLastTenBooks();
+    res.status(200).json(response);
+  } catch (error) {
+    console.errror(error, 'Error getting last 10 books in API');
   }
 });
 

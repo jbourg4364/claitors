@@ -1,6 +1,7 @@
 #admin-dash-container {
     text-align: center;
-    height: 300px;
+    height: auto;
+
 }
 
 #home-page-edit-container {
@@ -170,3 +171,38 @@
     font-size: 17px;
     width: 30%;
 }
+
+#books-admin-dash-container {
+    display: flex;
+    flex-direction: column;
+    width: 70vw;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.featured-ind-container-edit-admin {
+    background-color: lightgray;
+    text-align: center;
+    padding: 15px;
+    color: black;
+    display: flex;
+    align-items: center;
+    margin: 5px;
+    justify-content: space-evenly;
+    border-radius: 10px 10px 10px 10px;
+}
+
+.ind-book-details-admin {
+    background-color: #79227b;
+    color: white;
+    border-radius: 10px 10px 10px 10px;
+    font-size: 18px;
+    padding: 10px;
+}
+
+.ind-book-details-admin:hover {
+    cursor: pointer;
+    background-color: black;
+    color: white;
+}
+
