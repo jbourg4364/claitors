@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 
 const Home = () => {
   const [email, setEmail] = useState("");
-  const [content, setContent] = useState([]);
   const [mainBanner, setMainBanner] = useState([]);
   const [mainBannerTwo, setMainBannerTwo] = useState([]);
   const [mainBannerThree, setMainBannerThree] = useState([]);
@@ -16,6 +15,7 @@ const Home = () => {
   const [rotationIntervalId, setRotationIntervalId] = useState(null);
   const inputElement = useRef();
   const maxBooksToShow = 5;
+ 
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -40,7 +40,7 @@ const Home = () => {
   useEffect(() => {
     const getContent = async () => {
       const response = await getAllContent();
-      setContent(response);
+
 
       const indContentArray = response.filter(
         (cont) => cont.label === "home-ind"
@@ -112,6 +112,7 @@ const Home = () => {
     setIndContentRotation((prevRotation) => (prevRotation - 1 + maxBooksToShow) % maxBooksToShow);
   };
   
+
   
 
   return (
@@ -165,7 +166,7 @@ const Home = () => {
           </div>
         </motion.div>
 
-        <div id="featured-container">
+        <div id="featured-container" >
           <div id="ind-banner-left-arrow">
             <i
               className="fa-solid fa-chevron-left fa-2xl"
@@ -173,13 +174,16 @@ const Home = () => {
               onClick={rotateIndCarouselLeft}
             ></i>
           </div>
-          {indContent.slice(0, maxBooksToShow).map((cont, index) => {
+            {indContent.slice(0, maxBooksToShow).map((cont, index) => {
             const adjustedIndex = (index + indContentRotation) % indContent.length;
             const adjustedBook = indContent[adjustedIndex];
           
             if (adjustedBook.label === "home-ind") {
               return (
-                <div className="featured-ind-container" key={adjustedBook.id}>
+                <div 
+                className="featured-ind-container" 
+                key={adjustedBook.id}
+                >
                   <h3 className="featured-ind-heading">{adjustedBook.title}</h3>
                   <img src={adjustedBook.imageurl} className="featured-image" />
                   <button

@@ -206,3 +206,22 @@
     color: white;
 }
 
+@media screen and (max-width: 800px) {
+    .featured-ind-container-edit-admin {
+        flex-direction: column;
+        height: auto;
+        justify-content: space-evenly;
+    }
+
+    #books-admin-dash-container {
+        height: auto;
+        width: 90vw;
+    }
+
+    .featured-ind-heading-edit {
+        width: auto;
+        text-align: center;
+    }
+    
+}
+

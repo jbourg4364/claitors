@@ -36,3 +36,21 @@
     background-color: black;
 }
 
+#state-dropdown {
+    font-size: 20px;
+    height: 50px;
+    border-radius: 5px;
+    width: 90vw;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border: 2px solid black;
+    max-width: 425px;
+    color: gray;
+    padding: 10px;
+}
+
+#message-contact {
+    border: 2px solid black;
+}
+

@@ -344,7 +344,7 @@ const HomePageEdit = ({ isAdmin }) => {
           </div>
         </div>
 
-        <h2>Sub Features</h2>
+        <h2>Featured Titles</h2>
         <div className="home-edit-content-container-ind">
           <div className="home-banner-preview">
             <div id="featured-container-edit">
