@@ -128,6 +128,7 @@ const Search = ({ isAdmin, category }) => {
       }
     }; 
     getBookBySearch();
+    paginate(1); 
   }, [searchTerm]);
 
 
