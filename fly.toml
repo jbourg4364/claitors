@@ -6,8 +6,7 @@
 app = "claitors"
 primary_region = "atl"
 
-[deploy]
-  release_command = "npm run seed"
+
 
 
 [http_service]

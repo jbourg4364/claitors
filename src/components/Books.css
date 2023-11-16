@@ -168,6 +168,10 @@ h3.total-pages {
     text-align: center;
 }
 
+.books-heading-h1 {
+    text-align: center;
+}
+
 @media screen and (max-width: 1150px) {
     .ind-book-title {
         width: auto;

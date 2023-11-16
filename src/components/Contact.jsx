@@ -32,10 +32,10 @@ const Contact = () => {
         <h1 className="books-heading-h1">Contact Us</h1>
       </div>
       <div id='form-content'>
-      <form onSubmit={handleSubmit} ref={inputElement} id='contact-form' method="POST" action="http://claitors.com/cgi-bin/clt/claitorsbnb.cgi">
+      <form onSubmit={handleSubmit} ref={inputElement} id='contact-form' method="POST" action="https://claitors.com/cgi-bin/clt/claitorsbnb.cgi">
         <input type="hidden" name="submit_to" value="claitors@claitors.com" />
         <input type="hidden" name="form_id" value="Information_Request" />
-        <input type="hidden" name="ok_url" value="http://claitors.com/thankyou.htm"/>
+        <input type="hidden" name="ok_url" value="https://claitors.com/thankyou.htm"/>
         <input type="hidden" name="outputfile" value="chamerinfolog.log" />
         <input type="hidden" name="automessage"  value="replytext.txt"/>
         <input type="hidden" name="data_order" value="Name,submit_by,Phone,Company,State,ZIP,Comments" />
