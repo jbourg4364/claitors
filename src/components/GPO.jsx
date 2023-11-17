@@ -4,6 +4,7 @@ import { getAllBooks } from "../api-client/index";
 import "./Books.css";
 import Images from "../media";
 
+
 const GPO = ({ isAdmin }) => {
   const [allBooks, setAllBooks] = useState([]);
   const [price, setPrice] = useState(0);
@@ -106,7 +107,7 @@ const GPO = ({ isAdmin }) => {
       </div>
       {loading ? (
         <div>
-          <h1 id="loading-books">Loading Books...</h1>
+          <h1 id="loading-books">Loading Books<span class="loading-dots"></span></h1>
         </div>
       ) : (
         <>

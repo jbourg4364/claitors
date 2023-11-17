@@ -107,7 +107,7 @@ const LawBooks = () => {
       </div>
       {loading ? (
         <div>
-          <h1 id="loading-books">Loading Books...</h1>
+          <h1 id="loading-books">Loading Books<span class="loading-dots"></span></h1>
         </div>
       ) : (
         <>
