@@ -72,6 +72,38 @@ export const searchBooks = async (keyword) => {
     };
 };
 
+export const searchBooksExactString = async (keyword) => {
+    try {
+        const response = await fetch(`${BASE}/books/search/fullstring/${keyword}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+        
+        const result = await response.json();
+        return result;
+    } catch (error) {
+        console.error(error, 'Error searching books in middleware')
+    };
+};
+
+export const searchBooksByTwo = async (keyword) => {
+    try {
+        const response = await fetch(`${BASE}/books/search/bytwo/${keyword}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+        
+        const result = await response.json();
+        return result;
+    } catch (error) {
+        console.error(error, 'Error searching books in middleware')
+    };
+};
+
 export const searchTitle = async (keyword) => {
     try {
         const response = await fetch(`${BASE}/books/search/title/${keyword}`, {

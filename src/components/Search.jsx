@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { searchBooks, addIndBookToHome, searchAuthor, searchPublisher, searchTitle, searchISBN } from "../api-client";
+import { searchBooks, addIndBookToHome, searchAuthor, searchPublisher, searchTitle, searchISBN, searchBooksExactString, searchBooksByTwo } from "../api-client";
 import { useNavigate, useParams } from "react-router-dom";
 import "./Books.css";
 import Images from "../media";
@@ -21,9 +21,23 @@ const Search = ({ isAdmin, category }) => {
   useEffect(() => {
     const getBookBySearch = async () => {
       if (category === "") {
-        const response = await searchBooks(searchTerm);
-        
-        const sortedResponse = response.sort((a, b) => {
+        const responseOne = await searchBooksExactString(searchTerm);
+        const responseTwo = await searchBooksByTwo(searchTerm);
+        const responseThree = await searchBooks(searchTerm);
+
+        const combinedResponse = [...responseOne, ...responseTwo, ...responseThree];
+
+        const uniqueIds = new Set();
+
+        const filteredResponse = combinedResponse.filter((item) => {
+          if (!uniqueIds.has(item.id)) {
+            uniqueIds.add(item.id);
+            return true;
+          }
+          return false;
+        });
+     
+        const sortedResponse = filteredResponse.sort((a, b) => {
           const availabilityA = a.availability.toLowerCase();
           const availabilityB = b.availability.toLowerCase();
           if (availabilityA === 'available at claitors' && availabilityB !== 'available at claitors') {
@@ -36,7 +50,7 @@ const Search = ({ isAdmin, category }) => {
 
         setSortedBooks(sortedResponse);
         setLoading(false);
-        if (response.length === 0) {
+        if (combinedResponse.length === 0) {
           setNoResult(true);
         } else {
           setNoResult(false);
@@ -215,7 +229,7 @@ const Search = ({ isAdmin, category }) => {
       </div>
       {loading ? (
         <div>
-          <h1 id="loading-books">Loading Books<span class="loading-dots"></span></h1>
+          <h1 id="loading-books">Loading Books<span className="loading-dots"></span></h1>
         </div>
       ) : (
         <>
