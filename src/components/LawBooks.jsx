@@ -106,9 +106,10 @@ const LawBooks = () => {
         <h1 className="books-heading-h1">Law Books</h1>
       </div>
       {loading ? (
-        <div>
-          <h1 id="loading-books">Loading Books<span class="loading-dots"></span></h1>
-        </div>
+        <div id='loading-container'>
+        <i className="fa-solid fa-gear fa-spin fa-2xl" id='gear'></i>
+        <h1 id="loading-books">Loading Books<span className="loading-dots"></span></h1>
+      </div>
       ) : (
         <>
           <div id="all-books-container">
