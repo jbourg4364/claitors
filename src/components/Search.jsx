@@ -19,132 +19,62 @@ const Search = ({ isAdmin, category }) => {
   
 
   useEffect(() => {
-    const getBookBySearch = async () => {
-      if (category === "") {
-        const responseOne = await searchBooksExactString(searchTerm);
-        const responseTwo = await searchBooksByTwo(searchTerm);
-        const responseThree = await searchBooks(searchTerm);
+  const handleSearch = async (response) => {
+    const sortedResponse = response.sort((a, b) => {
+      const availabilityA = a.availability.toLowerCase();
+      const availabilityB = b.availability.toLowerCase();
+      return (availabilityA === 'available at claitors' && availabilityB !== 'available at claitors') ? -1 :
+             (availabilityA !== 'available at claitors' && availabilityB === 'available at claitors') ? 1 : 0;
+    });
 
-        const combinedResponse = [...responseOne, ...responseTwo, ...responseThree];
+    setSortedBooks(sortedResponse);
+    setLoading(false);
+    setNoResult(response.length === 0);
+  };
 
-        const uniqueIds = new Set();
+  const getBookBySearch = async () => {
+    let response;
 
-        const filteredResponse = combinedResponse.filter((item) => {
-          if (!uniqueIds.has(item.id)) {
-            uniqueIds.add(item.id);
-            return true;
-          }
-          return false;
-        });
-     
-        const sortedResponse = filteredResponse.sort((a, b) => {
-          const availabilityA = a.availability.toLowerCase();
-          const availabilityB = b.availability.toLowerCase();
-          if (availabilityA === 'available at claitors' && availabilityB !== 'available at claitors') {
-            return -1;
-          } else if (availabilityA !== 'available at claitors' && availabilityB === 'available at claitors') {
-            return 1;
-          };
-          return 0;
-        });
+    switch (category) {
+      case "":
+        const [responseOne, responseTwo, responseThree] = await Promise.all([
+          searchBooksExactString(searchTerm),
+          searchBooksByTwo(searchTerm),
+          searchBooks(searchTerm)
+        ]);
+        response = [...responseOne, ...responseTwo, ...responseThree];
+        break;
+      case 'title':
+        response = await searchTitle(searchTerm);
+        break;
+      case 'author':
+        response = await searchAuthor(searchTerm);
+        break;
+      case 'publisher':
+        response = await searchPublisher(searchTerm);
+        break;
+      case 'isbn':
+        response = await searchISBN(searchTerm);
+        break;
+      default:
+        response = [];
+    }
 
-        setSortedBooks(sortedResponse);
-        setLoading(false);
-        if (combinedResponse.length === 0) {
-          setNoResult(true);
-        } else {
-          setNoResult(false);
-        }
-      } else if (category === 'title') {
-        const response = await searchTitle(searchTerm);
-
-        const sortedResponse = response.sort((a, b) => {
-          const availabilityA = a.availability.toLowerCase();
-          const availabilityB = b.availability.toLowerCase();
-          if (availabilityA === 'available at claitors' && availabilityB !== 'available at claitors') {
-            return -1;
-          } else if (availabilityA !== 'available at claitors' && availabilityB === 'available at claitors') {
-            return 1;
-          };
-          return 0;
-        });
-
-        setSortedBooks(sortedResponse);
-        setLoading(false);
-        if (response.length === 0) {
-          setNoResult(true);
-        } else {
-          setNoResult(false);
-        }
-      } else if (category === 'author') {
-        const response = await searchAuthor(searchTerm);
-
-        const sortedResponse = response.sort((a, b) => {
-          const availabilityA = a.availability.toLowerCase();
-          const availabilityB = b.availability.toLowerCase();
-          if (availabilityA === 'available at claitors' && availabilityB !== 'available at claitors') {
-            return -1;
-          } else if (availabilityA !== 'available at claitors' && availabilityB === 'available at claitors') {
-            return 1;
-          };
-          return 0;
-        });
-
-        setSortedBooks(sortedResponse);
-        setLoading(false);
-        if (response.length === 0) {
-          setNoResult(true);
-        } else {
-          setNoResult(false);
-        }
-      } else if (category === 'publisher') {
-        const response = await searchPublisher(searchTerm);
-
-        const sortedResponse = response.sort((a, b) => {
-          const availabilityA = a.availability.toLowerCase();
-          const availabilityB = b.availability.toLowerCase();
-          if (availabilityA === 'available at claitors' && availabilityB !== 'available at claitors') {
-            return -1;
-          } else if (availabilityA !== 'available at claitors' && availabilityB === 'available at claitors') {
-            return 1;
-          };
-          return 0;
-        });
-
-        setSortedBooks(sortedResponse);
-        setLoading(false);
-        if (response.length === 0) {
-          setNoResult(true);
-        } else {
-          setNoResult(false);
-        }
-      } else if (category === 'isbn') {
-        const response = await searchISBN(searchTerm);
-
-        const sortedResponse = response.sort((a, b) => {
-          const availabilityA = a.availability.toLowerCase();
-          const availabilityB = b.availability.toLowerCase();
-          if (availabilityA === 'available at claitors' && availabilityB !== 'available at claitors') {
-            return -1;
-          } else if (availabilityA !== 'available at claitors' && availabilityB === 'available at claitors') {
-            return 1;
-          };
-          return 0;
-        });
-
-        setSortedBooks(sortedResponse);
-        setLoading(false);
-        if (response.length === 0) {
-          setNoResult(true);
-        } else {
-          setNoResult(false);
-        }
+    const uniqueIds = new Set();
+    const filteredResponse = response.filter((item) => {
+      if (!uniqueIds.has(item.id)) {
+        uniqueIds.add(item.id);
+        return true;
       }
-    }; 
-    getBookBySearch();
-    paginate(1); 
-  }, [searchTerm]);
+      return false;
+    });
 
+    handleSearch(filteredResponse);
+  };
+
+  getBookBySearch();
+  paginate(1);
+}, [searchTerm]);
 
   const handleDetail = async (id) => {
     navigate(`/books/details/${id}`);
@@ -228,7 +158,8 @@ const Search = ({ isAdmin, category }) => {
         <h1 className="books-heading-h1">Search results for "{searchTerm}"</h1>
       </div>
       {loading ? (
-        <div>
+        <div id='loading-container'>
+          <i className="fa-solid fa-gear fa-spin fa-2xl" id='gear'></i>
           <h1 id="loading-books">Loading Books<span className="loading-dots"></span></h1>
         </div>
       ) : (
