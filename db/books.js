@@ -226,37 +226,23 @@ async function searchBooksExactString(keyword) {
       Field3 ILIKE '%' || $1 || '%' OR
       Topic ILIKE '%' || $1 || '%' OR
       Family ILIKE '%' || $1 || '%' OR
-      pk ILIKE '%' || $1 || '%' OR
       DOC ILIKE '%' || $1 || '%' OR
       Author ILIKE '%' || $1 || '%' OR
       Availability ILIKE '%' || $1 || '%' OR
-      AvailableDate ILIKE '%' || $1 || '%' OR
-      Binding ILIKE '%' || $1 || '%' OR
-      Cover ILIKE '%' || $1 || '%' OR
       CrossReference ILIKE '%' || $1 || '%' OR
       Description ILIKE '%' || $1 || '%' OR
       ExtraDescription ILIKE '%' || $1 || '%' OR
-      Format ILIKE '%' || $1 || '%' OR
       ISBN ILIKE '%' || $1 || '%' OR
       ISSN ILIKE '%' || $1 || '%' OR
       KeyPhrases ILIKE '%' || $1 || '%' OR
       ListID ILIKE '%' || $1 || '%' OR
       Note ILIKE '%' || $1 || '%' OR
-      Price ILIKE '%' || $1 || '%' OR
-      PriceNonUS ILIKE '%' || $1 || '%' OR
       Publisher ILIKE '%' || $1 || '%' OR
-      QuantityPrice ILIKE '%' || $1 || '%' OR
-      StandingOrderCode ILIKE '%' || $1 || '%' OR
-      StatusDate ILIKE '%' || $1 || '%' OR
       StockNumber ILIKE '%' || $1 || '%' OR
       SubjectBibliography ILIKE '%' || $1 || '%' OR
       SuDocsClass ILIKE '%' || $1 || '%' OR
       Title ILIKE '%' || $1 || '%' OR
-      Unit ILIKE '%' || $1 || '%' OR
-      UnitNonUS ILIKE '%' || $1 || '%' OR
-      Weight ILIKE '%' || $1 || '%' OR
-      YearPages ILIKE '%' || $1 || '%' OR
-      Hyperlink ILIKE '%' || $1 || '%'
+      YearPages ILIKE '%' || $1 || '%'
     `,
       [keyword]
     );
@@ -280,37 +266,17 @@ async function searchBooksByTwo(keyword) {
         Field3 ILIKE '%' || $${index + 1} || '%' OR
         Topic ILIKE '%' || $${index + 1} || '%' OR
         Family ILIKE '%' || $${index + 1} || '%' OR
-        pk ILIKE '%' || $${index + 1} || '%' OR
-        DOC ILIKE '%' || $${index + 1} || '%' OR
         Author ILIKE '%' || $${index + 1} || '%' OR
-        Availability ILIKE '%' || $${index + 1} || '%' OR
-        AvailableDate ILIKE '%' || $${index + 1} || '%' OR
-        Binding ILIKE '%' || $${index + 1} || '%' OR
-        Cover ILIKE '%' || $${index + 1} || '%' OR
         CrossReference ILIKE '%' || $${index + 1} || '%' OR
         Description ILIKE '%' || $${index + 1} || '%' OR
         ExtraDescription ILIKE '%' || $${index + 1} || '%' OR
-        Format ILIKE '%' || $${index + 1} || '%' OR
-        ISBN ILIKE '%' || $${index + 1} || '%' OR
-        ISSN ILIKE '%' || $${index + 1} || '%' OR
         KeyPhrases ILIKE '%' || $${index + 1} || '%' OR
-        ListID ILIKE '%' || $${index + 1} || '%' OR
         Note ILIKE '%' || $${index + 1} || '%' OR
-        Price ILIKE '%' || $${index + 1} || '%' OR
-        PriceNonUS ILIKE '%' || $${index + 1} || '%' OR
         Publisher ILIKE '%' || $${index + 1} || '%' OR
-        QuantityPrice ILIKE '%' || $${index + 1} || '%' OR
-        StandingOrderCode ILIKE '%' || $${index + 1} || '%' OR
-        StatusDate ILIKE '%' || $${index + 1} || '%' OR
-        StockNumber ILIKE '%' || $${index + 1} || '%' OR
         SubjectBibliography ILIKE '%' || $${index + 1} || '%' OR
         SuDocsClass ILIKE '%' || $${index + 1} || '%' OR
         Title ILIKE '%' || $${index + 1} || '%' OR
-        Unit ILIKE '%' || $${index + 1} || '%' OR
-        UnitNonUS ILIKE '%' || $${index + 1} || '%' OR
-        Weight ILIKE '%' || $${index + 1} || '%' OR
-        YearPages ILIKE '%' || $${index + 1} || '%' OR
-        Hyperlink ILIKE '%' || $${index + 1} || '%'
+        YearPages ILIKE '%' || $${index + 1} || '%'
       `;
     });
 

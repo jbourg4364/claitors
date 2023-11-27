@@ -270,4 +270,8 @@ h3.total-pages {
         height: auto;
         width: 100px;
     }
+
+    #books-heading {
+        height: auto;
+    }
 }

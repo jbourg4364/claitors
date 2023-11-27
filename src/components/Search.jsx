@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { searchBooks, addIndBookToHome, searchAuthor, searchPublisher, searchTitle, searchISBN, searchBooksExactString, searchBooksByTwo } from "../api-client";
+import { searchBooks, addIndBookToHome, searchAuthor, searchPublisher, searchTitle, searchISBN } from "../api-client";
 import { useNavigate, useParams } from "react-router-dom";
 import "./Books.css";
 import Images from "../media";
@@ -37,12 +37,7 @@ const Search = ({ isAdmin, category }) => {
 
     switch (category) {
       case "":
-        const [responseOne, responseTwo, responseThree] = await Promise.all([
-          searchBooksExactString(searchTerm),
-          searchBooksByTwo(searchTerm),
-          searchBooks(searchTerm)
-        ]);
-        response = [...responseOne, ...responseTwo, ...responseThree];
+        response = await searchBooks(searchTerm);
         break;
       case 'title':
         response = await searchTitle(searchTerm);

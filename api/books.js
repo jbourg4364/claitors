@@ -1,6 +1,7 @@
 const express = require('express');
 const booksRouter = express.Router();
 const { createBooks, getAllBooks, getBookById, searchBooks, editBook, deleteBook, searchAuthor, searchTitle, searchPublisher, searchISBN, getLastTenBooks, searchBooksExactString, searchBooksByTwo } = require('../db');
+const { response } = require('../app');
 
 booksRouter.get('/', async (req, res, next) => {
     try {
@@ -22,34 +23,46 @@ booksRouter.get('/details/:id', async (req, res, next) => {
 });
 
 booksRouter.get('/search/:keyword', async (req, res, next) => {
-    const { keyword } = req.params;
-    try {
-        const book = await searchBooks(keyword);
-        res.json(book);
-    } catch (error) {
-        console.error(error, 'Error searching books in API');
-    }
-});
-
-booksRouter.get('/search/fullstring/:keyword', async (req, res, next) => {
   const { keyword } = req.params;
+
   try {
-      const book = await searchBooksExactString(keyword);
-      res.json(book);
+      // Run the search functions concurrently using Promise.all
+      const [booksExactString, booksByTwo, booksDefault] = await Promise.all([
+          searchBooksExactString(keyword),
+          searchBooksByTwo(keyword),
+          searchBooks(keyword)
+      ]);
+
+      // Combine the results from all three search functions
+      const response = [...booksExactString, ...booksByTwo, ...booksDefault];
+
+      res.json(response);
   } catch (error) {
-      console.error(error, 'Error searching books in API');
+      console.error('Error searching books in API:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
   }
 });
 
-booksRouter.get('/search/bytwo/:keyword', async (req, res, next) => {
-  const { keyword } = req.params;
-  try {
-      const book = await searchBooksByTwo(keyword);
-      res.json(book);
-  } catch (error) {
-      console.error(error, 'Error searching books in API');
-  }
-});
+
+// booksRouter.get('/search/fullstring/:keyword', async (req, res, next) => {
+//   const { keyword } = req.params;
+//   try {
+//       const book = await searchBooksExactString(keyword);
+//       res.json(book);
+//   } catch (error) {
+//       console.error(error, 'Error searching books in API');
+//   }
+// });
+
+// booksRouter.get('/search/bytwo/:keyword', async (req, res, next) => {
+//   const { keyword } = req.params;
+//   try {
+//       const book = await searchBooksByTwo(keyword);
+//       res.json(book);
+//   } catch (error) {
+//       console.error(error, 'Error searching books in API');
+//   }
+// });
 
 booksRouter.get('/search/title/:keyword', async (req, res, next) => {
   const { keyword } = req.params;
