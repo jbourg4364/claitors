@@ -44,25 +44,6 @@ booksRouter.get('/search/:keyword', async (req, res, next) => {
 });
 
 
-// booksRouter.get('/search/fullstring/:keyword', async (req, res, next) => {
-//   const { keyword } = req.params;
-//   try {
-//       const book = await searchBooksExactString(keyword);
-//       res.json(book);
-//   } catch (error) {
-//       console.error(error, 'Error searching books in API');
-//   }
-// });
-
-// booksRouter.get('/search/bytwo/:keyword', async (req, res, next) => {
-//   const { keyword } = req.params;
-//   try {
-//       const book = await searchBooksByTwo(keyword);
-//       res.json(book);
-//   } catch (error) {
-//       console.error(error, 'Error searching books in API');
-//   }
-// });
 
 booksRouter.get('/search/title/:keyword', async (req, res, next) => {
   const { keyword } = req.params;

@@ -3,6 +3,8 @@ import { searchBooks, addIndBookToHome, searchAuthor, searchPublisher, searchTit
 import { useNavigate, useParams } from "react-router-dom";
 import "./Books.css";
 import Images from "../media";
+import LazyLoad from 'react-lazyload';
+
 
 const Search = ({ isAdmin, category }) => {
   const [sortedBooks, setSortedBooks] = useState([]);
@@ -172,6 +174,7 @@ const Search = ({ isAdmin, category }) => {
                 {displayedBooks.map((book) => {
                   return (
                     <div key={book.id} id="ind-book-container">
+                    <LazyLoad height={200} offset={100}>
                       <img
                         className="ind-book-image"
                         src={`https://claitors.com/tphotos/${book.pk}`}
@@ -180,6 +183,7 @@ const Search = ({ isAdmin, category }) => {
                           e.target.src = Images.claitorsLogo;
                         }}
                       />
+                    </LazyLoad>
                       <div className="ind-book-left-container">
                         <h2 className="ind-book-title">{book.title}</h2>
                         <div className="ind-book-button-container">
