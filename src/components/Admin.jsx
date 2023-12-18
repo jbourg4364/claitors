@@ -47,7 +47,7 @@ const Admin = ({ isAdmin }) => {
       <h3>Recently Added Titles</h3>
       <div id="books-admin-dash-container">
         {books.map((book) => (
-          <>
+   
             <div className="featured-ind-container-edit-admin" key={book.id}>
               <img
                 src={`https://claitors.com/tphotos/${book.pk}`}
@@ -72,7 +72,7 @@ const Admin = ({ isAdmin }) => {
                 <i className="fa-solid fa-trash fa-xl"></i>
               </button>
             </div>
-          </>
+    
         ))}
       </div>
     </div>

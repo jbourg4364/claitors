@@ -10,7 +10,8 @@ loginRouter.post('/', async (req, res, next) => {
 
 
     try {
-        if (username === 'cladmin' && password ==='Claitors225') {
+        
+        if (username === process.env.ADMIN_LOGIN_ID && password ===process.env.ADMIN_LOGIN_PASS) {
             const token = jwt.sign({ username: username }, SECRET, { expiresIn: '24h' });
             res.status(200).json({
                 message: `You're logged in!`,
