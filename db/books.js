@@ -164,42 +164,7 @@ async function searchBooks(keyword) {
   try {
     const keywords = keyword.split(/\s+/); 
     const conditions = keywords.map((word, index) => `
-      Field_1 ILIKE $${index + 1} OR
-      Field_2 ILIKE $${index + 1} OR
-      Field3 ILIKE $${index + 1} OR
-      Topic ILIKE $${index + 1} OR
-      Family ILIKE $${index + 1} OR
-      pk ILIKE $${index + 1} OR
-      DOC ILIKE $${index + 1} OR
-      Author ILIKE $${index + 1} OR
-      Availability ILIKE $${index + 1} OR
-      AvailableDate ILIKE $${index + 1} OR
-      Binding ILIKE $${index + 1} OR
-      Cover ILIKE $${index + 1} OR
-      CrossReference ILIKE $${index + 1} OR
-      Description ILIKE $${index + 1} OR
-      ExtraDescription ILIKE $${index + 1} OR
-      Format ILIKE $${index + 1} OR
-      ISBN ILIKE $${index + 1} OR
-      ISSN ILIKE $${index + 1} OR
-      KeyPhrases ILIKE $${index + 1} OR
-      ListID ILIKE $${index + 1} OR
-      Note ILIKE $${index + 1} OR
-      Price ILIKE $${index + 1} OR
-      PriceNonUS ILIKE $${index + 1} OR
-      Publisher ILIKE $${index + 1} OR
-      QuantityPrice ILIKE $${index + 1} OR
-      StandingOrderCode ILIKE $${index + 1} OR
-      StatusDate ILIKE $${index + 1} OR
-      StockNumber ILIKE $${index + 1} OR
-      SubjectBibliography ILIKE $${index + 1} OR
-      SuDocsClass ILIKE $${index + 1} OR
-      Title ILIKE $${index + 1} OR
-      Unit ILIKE $${index + 1} OR
-      UnitNonUS ILIKE $${index + 1} OR
-      Weight ILIKE $${index + 1} OR
-      YearPages ILIKE $${index + 1} OR
-      Hyperlink ILIKE $${index + 1}
+      Title ILIKE $${index + 1}
     `).join(' OR ');
 
     const query = `
@@ -219,16 +184,12 @@ async function searchBooks(keyword) {
 async function searchBooksExactString(keyword) {
   try {
     const conditions = [
-      'Field_1', 'Field_2', 'Field3', 'Topic', 'Family', 'DOC', 'Author',
-      'Availability', 'CrossReference', 'Description', 'ExtraDescription',
-      'ISBN', 'ISSN', 'KeyPhrases', 'ListID', 'Note', 'Publisher',
-      'StockNumber', 'SubjectBibliography', 'SuDocsClass', 'Title',
-      'YearPages'
+      'Title'
     ].map((field, index) => `${field} ILIKE $1`).join(' OR ');
 
     const query = `
-      SELECT * FROM books
-      WHERE ${conditions}
+    SELECT * FROM books
+    WHERE ${conditions}
     `;
 
     const { rows } = await client.query(query, [`%${keyword}%`]);
@@ -242,44 +203,35 @@ async function searchBooksExactString(keyword) {
 
 async function searchBooksByTwo(keyword) {
   try {
+    // Define a list of common stop words
+    const stopWords = ['the', 'and', 'a', 'an', 'in', 'on', 'at', 'with', 'by', 'for', 'to', 'from'];
+
     // Split the input keyword into individual words
     const keywords = keyword.split(' ');
 
+    // Filter out stop words from the keywords
+    const filteredKeywords = keywords.filter(kw => !stopWords.includes(kw.toLowerCase()));
+
     // Generate an array to hold the conditions for each keyword
-    const conditions = keywords.map((kw, index) => `
-      Field_1 ILIKE $${index + 1} OR
-      Field_2 ILIKE $${index + 1} OR
-      Field3 ILIKE $${index + 1} OR
-      Topic ILIKE $${index + 1} OR
-      Family ILIKE $${index + 1} OR
-      Author ILIKE $${index + 1} OR
-      CrossReference ILIKE $${index + 1} OR
-      Description ILIKE $${index + 1} OR
-      ExtraDescription ILIKE $${index + 1} OR
-      KeyPhrases ILIKE $${index + 1} OR
-      Note ILIKE $${index + 1} OR
-      Publisher ILIKE $${index + 1} OR
-      SubjectBibliography ILIKE $${index + 1} OR
-      SuDocsClass ILIKE $${index + 1} OR
-      Title ILIKE $${index + 1} OR
-      YearPages ILIKE $${index + 1}
+    const conditions = filteredKeywords.map((kw, index) => `
+      Title ILIKE $${index + 1}
     `);
 
     // Join the conditions with 'OR' to create the final query
     const query = `
-      SELECT * FROM books
-      WHERE
-        ${conditions.join(' OR ')}
+    SELECT * FROM books
+    WHERE ${conditions.join(' OR ')}
     `;
 
-    // Execute the query with the keyword array
-    const { rows } = await client.query(query, keywords.map(word => `%${word}%`));
+    // Execute the query with the filtered keyword array
+    const { rows } = await client.query(query, filteredKeywords.map(word => `%${word}%`));
 
     return rows;
   } catch (error) {
     console.error(error, "Error searching books in DB");
   }
 };
+
 
 
 

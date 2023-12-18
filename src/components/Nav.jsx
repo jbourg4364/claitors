@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./Nav.css";
 import { NavLink, useNavigate, useParams, useLocation } from "react-router-dom";
 import Admin from "./Admin";
@@ -10,25 +10,26 @@ const Nav = ({ category, setCategory }) => {
   const { searchTerm } = useParams();
   const location = useLocation();
   const defaultSearchTerm = searchTerm || "";
-  
 
-  
+
+  function setSelectCategory(term) {
+    setCategory(term);
+    localStorage.setItem('category', term);
+  };
 
   function handleSubmit() {
     const newSearchTerm = inputElement.current.value;
     navigate(`/books/search/${newSearchTerm}`);
   };
 
-  function setSelectCategory(term) {
-    setCategory(term);
-  };
+ 
 
   useEffect(() => {
     if (searchTerm && searchTerm !== defaultSearchTerm) {
       window.location.reload();
     }
   }, [searchTerm, defaultSearchTerm]);
-
+  
 
   return (
     <>

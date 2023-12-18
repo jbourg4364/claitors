@@ -17,8 +17,8 @@ const Search = ({ isAdmin, category }) => {
   const { searchTerm } = useParams();
   const { id } = useParams();
   const navigate = useNavigate();
+console.log(category)
 
-  
 
   useEffect(() => {
   const handleSearch = async (response) => {
@@ -57,6 +57,8 @@ const Search = ({ isAdmin, category }) => {
         response = [];
     }
 
+
+
     const uniqueIds = new Set();
     const filteredResponse = response.filter((item) => {
       if (!uniqueIds.has(item.id)) {
@@ -71,7 +73,8 @@ const Search = ({ isAdmin, category }) => {
 
   getBookBySearch();
   paginate(1);
-}, [searchTerm]);
+
+}, [searchTerm, category]);
 
   const handleDetail = async (id) => {
     navigate(`/books/details/${id}`);

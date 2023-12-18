@@ -29,12 +29,12 @@ booksRouter.get('/search/:keyword', async (req, res, next) => {
       // Run the search functions concurrently using Promise.all
       const [booksExactString, booksByTwo, booksDefault] = await Promise.all([
           searchBooksExactString(keyword),
-          searchBooksByTwo(keyword),
-          searchBooks(keyword)
+          searchBooksByTwo(keyword)
+          // searchBooks(keyword)
       ]);
 
       // Combine the results from all three search functions
-      const response = [...booksExactString, ...booksByTwo, ...booksDefault];
+      const response = [...booksExactString, ...booksByTwo];
 
       res.json(response);
   } catch (error) {
@@ -58,6 +58,7 @@ booksRouter.get('/search/title/:keyword', async (req, res, next) => {
 booksRouter.get('/search/author/:keyword', async (req, res, next) => {
   const { keyword } = req.params;
   try {
+
       const book = await searchAuthor(keyword);
       res.json(book);
   } catch (error) {

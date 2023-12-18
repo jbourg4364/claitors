@@ -1,20 +1,27 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Routes, Route, useLocation } from "react-router-dom";
 import { Home, Nav, LawBooks, IndBook, Footer, GPO, ClaitorsTitles, Contact, Search, Login, Admin, HomePageEdit, AdminNav, AddBook, EditBook } from './Index';
 import './Main.css';
 
 
 const Main = () => {
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState(localStorage.getItem('category'));
   const storedId = localStorage.getItem('id');
   const isAdmin = storedId === 'admin';
   const location = useLocation();
+
+  useEffect(() => {
+    if(location.pathname === '/') {
+    localStorage.setItem('category', '');
+  };
+  }, [location.pathname]);
+  
 
 
   return (
     <>
     {!isAdmin ? (
-      <Nav category={category} setCategory={setCategory}/>
+      <Nav category={category} setCategory={setCategory} />
     ) : (
       <AdminNav category={category} setCategory={setCategory}/>
     )}
