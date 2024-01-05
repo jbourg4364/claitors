@@ -49,7 +49,7 @@ html, body {
 }
 
 .ind-book-details {
-    width: 125px;
+    width: 110px;
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -225,6 +225,18 @@ h3.total-pages {
         border-radius: 10px 10px 10px 10px;
         font-size: 18px;
         margin: 15px;
+    }
+
+    .ind-book-details {
+        width: 100px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        height: 40px;
+        background-color: #79227b;
+        color: white;
+        border-radius: 10px 10px 10px 10px;
+        font-size: 15px;
     }
    
 }

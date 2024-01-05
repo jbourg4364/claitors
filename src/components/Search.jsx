@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { searchBooks, addIndBookToHome, searchAuthor, searchPublisher, searchTitle, searchISBN } from "../api-client";
+import { searchBooks, addIndBookToHome, searchAuthor, searchPublisher, searchTitle, searchISBN, deleteBook } from "../api-client";
 import { useNavigate, useParams } from "react-router-dom";
 import "./Books.css";
 import Images from "../media";
@@ -17,7 +17,7 @@ const Search = ({ isAdmin, category }) => {
   const { searchTerm } = useParams();
   const { id } = useParams();
   const navigate = useNavigate();
-console.log(category)
+
 
 
   useEffect(() => {
@@ -102,6 +102,21 @@ console.log(category)
       console.error(error, 'Error adding book to home page in React');
     }
   };
+
+  const handleDelete = async (id) => {
+    try {
+      const confirmDelete = window.confirm('Are you sure you want to delete this book?');
+  
+      if (confirmDelete) {
+        await deleteBook(id);
+        window.alert('This book has been deleted.');
+        navigate('/admin/dashboard');
+      }
+    } catch (error) {
+      console.error(error, 'Error deleting book in react');
+    }
+  };
+  
   
 
   const indexOfLastBook = currentPage * booksPerPage;
@@ -209,6 +224,12 @@ console.log(category)
                                 onClick={() => handleAddToHome(book)}
                               >
                                 <i className="fa-solid fa-plus fa-xl"></i>
+                              </button>
+                              <button
+                                className="ind-book-details"
+                                onClick={() => handleDelete(book.id)}
+                              >
+                                <i className="fa-solid fa-trash fa-xl"></i>
                               </button>
                             </>
                           ) : null}
