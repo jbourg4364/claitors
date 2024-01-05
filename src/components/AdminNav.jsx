@@ -21,6 +21,7 @@ const AdminNav = ({ category, setCategory }) => {
 
   function setSelectCategory(term) {
     setCategory(term);
+    localStorage.setItem('category', term);
   };
 
 
@@ -54,6 +55,7 @@ const AdminNav = ({ category, setCategory }) => {
             <option value={'title'}>Title</option>
             <option value={'author'}>Author</option>
             <option value={'publisher'}>Publisher</option>
+            <option value={'isbn'}>ISBN</option>
           </select>
           <input
             className="search-bar"
