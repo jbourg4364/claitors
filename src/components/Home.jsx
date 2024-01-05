@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import "./Home.css";
 import { getAllContent } from "../api-client";
 import { motion } from "framer-motion";
+import Images from "../media";
 
 const Home = () => {
   const [email, setEmail] = useState("");
@@ -185,7 +186,9 @@ const Home = () => {
                 key={adjustedBook.id}
                 >
                   <h3 className="featured-ind-heading">{adjustedBook.title}</h3>
-                  <img src={adjustedBook.imageurl} className="featured-image" />
+                  <img src={adjustedBook.imageurl} className="featured-image" onError={(e) => {
+                    e.target.src = Images.claitorsLogo;
+                  }}/>
                   <button
                     className="featured-button"
                     onClick={() => (window.location.href = adjustedBook.buttonurl)}
