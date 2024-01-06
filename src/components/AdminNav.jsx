@@ -5,6 +5,7 @@ import "./Nav.css";
 const AdminNav = ({ category, setCategory }) => {
   function handleLogout() {
     localStorage.removeItem("id");
+    localStorage.removeItem("token");
   }
 
   const inputElement = useRef();

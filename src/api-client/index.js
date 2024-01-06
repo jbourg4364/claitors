@@ -4,23 +4,37 @@ const BASE = 'http://localhost:8080/api';
 // const BASE = '/api';
 
 
-export const loginAdmin = async ({username, password}) => {
+export const loginAdmin = async (object) => {
     try {
         const response = await fetch(`${BASE}/login`, {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json',
             },
-            body: JSON.stringify({ username, password })
+            body: JSON.stringify(object),
         });
 
-        const result = await response.json();
-     
-        return result;
+        if (response.ok) {
+            const data = await response.json();
+            const { token, message, user } = data;
+
+            if (token) {
+                localStorage.setItem('token', token);
+                return { token, message, user };
+            }
+
+            return { message, error: data.error };
+        } else {
+            const { error, message } = await response.json();
+            return { error, message };
+        }
+
     } catch (error) {
         console.error(error, 'Error logging in Admin in middleware');
+        return { error: 'Unexpected error occurred' };
     }
 };
+
 
 export const getAllBooks = async () => {
     try {

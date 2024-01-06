@@ -10,20 +10,32 @@ const Login = () => {
     let navigate = useNavigate();
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
-        const data = await loginAdmin({ username: username, password: password });
-   
-      
-        if (data.token) {
-          localStorage.setItem("id", "admin");
-          navigate('/admin/dashboard');
-        }
-        else {
-          window.alert('Wrong username or password');
-          setUsername('');
-          setPassword('');
-        }
-    };
+      e.preventDefault();
+  
+      try {
+          const data = await loginAdmin({ username: username, password: password });
+
+  
+          if (data.token) {
+              localStorage.setItem("id", "admin");
+              localStorage.setItem('token', data.token);
+              navigate('/admin/dashboard');
+              console.log(data.token);
+          } else {
+              // Display error message in the UI or use a more user-friendly approach
+              console.error('Login failed:', data.error);
+              window.alert('Wrong username or password');
+              
+              // Clear only the password field, or adjust as per your UX design
+              setPassword('');
+          }
+      } catch (error) {
+          console.error('Unexpected error occurred:', error);
+          // Handle unexpected errors, e.g., display a generic error message to the user
+          window.alert('Unexpected error occurred. Please try again.');
+      }
+  };
+  
 
   return (
     <div>
