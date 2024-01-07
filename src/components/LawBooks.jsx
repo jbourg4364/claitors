@@ -4,6 +4,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import "./Books.css";
 import Images from "../media";
 
+
+
 const LawBooks = () => {
   const [allBooks, setAllBooks] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -120,7 +122,8 @@ const LawBooks = () => {
               <div key={book.id} id="ind-book-container">
                 <img
                   className="ind-book-image"
-                  src={`https://claitors.com/tphotos/${book.pk}`}
+                  // src={`https://claitors.com/tphotos/${book.pk}`}
+                  src={`/tphotos/${book.pk}`}
                   alt={book.title}
                   onError={(e) => {
                     e.target.src = Images.claitorsLogo;

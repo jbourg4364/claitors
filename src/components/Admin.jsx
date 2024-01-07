@@ -50,7 +50,8 @@ const Admin = ({ isAdmin }) => {
    
             <div className="featured-ind-container-edit-admin" key={book.id}>
               <img
-                src={`https://claitors.com/tphotos/${book.pk}`}
+                // src={`https://claitors.com/tphotos/${book.pk}`}
+                src={`/tphotos/${book.pk}`}
                 className="featured-image-edit"
                 alt={book.title}
                 onError={(e) => {

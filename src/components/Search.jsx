@@ -92,7 +92,7 @@ const Search = ({ isAdmin, category }) => {
         "home-ind",
         book.title,
         book.description,
-        `https://claitors.com/tphotos/${book.pk}`,
+        `/tphotos/${book.pk}`,
         `/books/details/${book.id}`,
         book.price
     );
@@ -195,7 +195,8 @@ const Search = ({ isAdmin, category }) => {
                     <LazyLoad height={200} offset={100}>
                       <img
                         className="ind-book-image"
-                        src={`https://claitors.com/tphotos/${book.pk}`}
+                        // src={`https://claitors.com/tphotos/${book.pk}`}
+                        src={`/tphotos/${book.pk}`}
                         alt={book.title}
                         onError={(e) => {
                           e.target.src = Images.claitorsLogo;
