@@ -209,7 +209,7 @@
 @media screen and (max-width: 800px) {
     .featured-ind-container-edit-admin {
         flex-direction: column;
-        height: auto;
+        height: 400px;
         justify-content: space-evenly;
     }
 

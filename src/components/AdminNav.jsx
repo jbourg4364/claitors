@@ -45,7 +45,7 @@ const AdminNav = ({ category, setCategory }) => {
             <h3 className="nav-link">ADD NEW TITLE</h3>
           </NavLink>
           <NavLink to="/" onClick={handleLogout}>
-            <h3 className="nav-link" id="contact-us">
+            <h3 className="nav-link">
               LOGOUT
             </h3>
           </NavLink>
