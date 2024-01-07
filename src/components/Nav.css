@@ -138,4 +138,21 @@ a:hover {
         align-items: center;
         transform: translate(20%);
     }
+
+    a {
+        padding-top: 5px;
+    }
+
+    #cart {
+        margin-bottom: 25px;
+    }
+
+    .logo {
+        font-size: 30px;
+        margin: 25px;
+    }
+
+    #header {
+        line-height: 10px;
+    }
 }
