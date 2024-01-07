@@ -53,7 +53,6 @@ const GPO = ({ isAdmin }) => {
   const indexOfFirstBook = indexOfLastBook - booksPerPage;
   const filteredBooks = allBooks.filter(
     (book) =>
-      book.availability.includes("GPO") ||
       book.doc.includes("govtprintingoffice")
   );
   const sortedBooks = filteredBooks.sort(compareAvailability);

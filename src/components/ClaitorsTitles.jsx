@@ -57,9 +57,9 @@ const ClaitorsTitles = () => {
   
     const indexOfLastBook = currentPage * booksPerPage;
     const indexOfFirstBook = indexOfLastBook - booksPerPage;
+
     const filteredBooks = allBooks.filter((book) =>
-      book.availability.includes("Available at Claitors") &&
-      !book.availability.includes("0. out of print")
+      book.doc.includes("CLB")
     );
     const sortedBooks = filteredBooks.sort(compareAvailability);
     const currentBooks = sortedBooks.slice(indexOfFirstBook, indexOfLastBook);
