@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Admin.css";
 import { getAllContent, editContent, deleteContent } from "../api-client";
+import Images from "../media";
 
 const HomePageEdit = ({ isAdmin }) => {
   const [content, setContent] = useState([]);
@@ -352,7 +353,9 @@ const HomePageEdit = ({ isAdmin }) => {
                 if (cont.label === "home-ind") {
                   return (
                     <div className="featured-ind-container-edit" key={cont.id}>
-                       <img src={cont.imageurl} className="featured-image-edit" />
+                       <img src={cont.imageurl} className="featured-image-edit" onError={(e) => {
+                    e.target.src = Images.claitorsLogo;
+                  }}/>
                       <h3 className="featured-ind-heading-edit">{cont.title}</h3>
                     
                       <div id="edit-ind-home-container-buttons">

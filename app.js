@@ -19,6 +19,8 @@ app.use((req, res, next) => {
 const apiRouter = require("./api");
 app.use("/api", apiRouter);
 
+app.use(express.static(path.join(__dirname, 'public', 'tphotos')));
+
 app.use(express.static(path.join(__dirname, 'build')));
 
 app.get('*', (req, res) => {
