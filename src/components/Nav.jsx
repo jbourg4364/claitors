@@ -54,6 +54,9 @@ const Nav = ({ category, setCategory }) => {
         <NavLink to="/lawbooks">
           <h3 className="nav-link">LAW BOOKS</h3>
         </NavLink>
+        <NavLink to="/genealogy">
+          <h3 className="nav-link">GENEALOGY</h3>
+        </NavLink>
         <NavLink to="/contact">
           <h3 className="nav-link" id="contact-us">
             CONTACT US

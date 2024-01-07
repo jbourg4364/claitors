@@ -14,4 +14,6 @@ export { default as HomePageEdit } from './HomePageEdit';
 export { default as AdminNav } from './AdminNav';
 export { default as AddBook } from './AddBook';
 export { default as EditBook } from './EditBook';
+export { default as Genealogy } from './Genealogy';
+
 
