@@ -12,7 +12,7 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage });
-
+router.use(express.static('public'));
 router.use((req, res, next) => {
     if (req.user) {
       console.log("User is set: ", req.user);

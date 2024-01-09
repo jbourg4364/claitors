@@ -31,8 +31,7 @@ const IndBook = ({ isAdmin }) => {
       <div id='ind-detail-img-table-container'>
         <img
         className="ind-book-image-detail"
-        // src={`https://claitors.com/tphotos/${book.pk}`}
-        src={`/tphotos/${book.pk}`}
+        src={`/${book.pk}`}
         alt={book.title}
         onError={(e) => {
           e.target.src = Images.claitorsLogo;

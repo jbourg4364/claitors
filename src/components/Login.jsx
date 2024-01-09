@@ -20,7 +20,6 @@ const Login = () => {
               localStorage.setItem("id", "admin");
               localStorage.setItem('token', data.token);
               navigate('/admin/dashboard');
-              console.log(data.token);
           } else {
               // Display error message in the UI or use a more user-friendly approach
               console.error('Login failed:', data.error);
