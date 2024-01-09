@@ -448,4 +448,27 @@ export const deleteBook = async (id) => {
         console.error(error, 'Error getting last 10 books in middleware');
     }
   };
+
+  export const uploadFile = async (file) => {
+    try {
+        const formData = new FormData();
+        formData.append('file', file);
+
+        const response = await fetch(`${BASE}/upload`, {
+            method: "POST",
+            body: formData,
+        });
+
+        const result = await response.json();
+      
+        return result;
+    } catch (error) {
+        console.error(error, 'Error uploading book image in middleware');
+    }
+};
+
+
+
+
+  
   

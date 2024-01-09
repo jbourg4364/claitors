@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Admin.css";
-import {createBook} from '../api-client/index';
+import {createBook, uploadFile} from '../api-client/index';
 
 const AddBook = ({ isAdmin }) => {
   const [title, setTitle] = useState("");
@@ -40,9 +40,12 @@ const AddBook = ({ isAdmin }) => {
   const [weight, setWeight] = useState("");
   const [yearPages, setYearPages] = useState("");
   const [hyperlink, setHyperlink] = useState("");
+  const [file, setFile] = useState("");
+
 
   const navigate = useNavigate();
   const inputElement = useRef();
+
 
   if (!isAdmin) {
     navigate("/login");
@@ -51,6 +54,8 @@ const AddBook = ({ isAdmin }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      const fileUploadResponse = await uploadFile(file);
+
       const response = await createBook(fieldOne,
         fieldTwo,
         fieldThree,
@@ -96,12 +101,21 @@ const AddBook = ({ isAdmin }) => {
     }
   };
 
+  const handleFileChange = (e) => {
+    const selectedFile = e.target.files[0];
+    setPk(selectedFile.name);
+    setFile(selectedFile);
+  };
+  
+
+
+
 
   return (
     <>
       <div id="add-book-container">
         <h2 className="edit-title-banner">Add New Title</h2>
-        <form className="add-book-form" ref={inputElement} onSubmit={handleSubmit}>
+        <form className="add-book-form" ref={inputElement} onSubmit={handleSubmit} encType="multipart/form-data" action="/upload" method="POST">
           <input
             required
             placeholder="Title"
@@ -148,9 +162,9 @@ const AddBook = ({ isAdmin }) => {
           <input
             placeholder="pk"
             className="add-book-input"
-            onChange={(e) => setPk(e.target.value)}
             type="text"
-            value={pk}
+
+           
           />
           <input
             placeholder="DOC"
@@ -355,6 +369,13 @@ const AddBook = ({ isAdmin }) => {
             onChange={(e) => setHyperlink(e.target.value)}
             type="text"
             value={hyperlink}
+          />
+          <input 
+          type="file"
+          className="add-book-input"
+          name="file"
+          id="file"
+          onChange={handleFileChange}
           />
           <button className="home-button-save" type="submit">Save</button>
         </form>

@@ -1,5 +1,17 @@
 const express = require("express");
 const router = express.Router();
+const multer = require('multer');
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, './public/tphotos/');
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.originalname);
+  },
+});
+
+const upload = multer({ storage });
 
 router.use((req, res, next) => {
     if (req.user) {
@@ -7,7 +19,13 @@ router.use((req, res, next) => {
     }
     next();
   });
-  
+
+ router.post('/upload', upload.single('file'), (req, res) => {
+    if (!req.file) {
+      return res.status(400).json({ error: 'No file uploaded' });
+    }
+    res.json({ message: 'File uploaded successfully', filename: req.file.filename });
+  });
   
   //Health
   router.get('/health', async (req, res, next) => {
