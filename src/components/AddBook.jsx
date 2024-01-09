@@ -163,6 +163,7 @@ const AddBook = ({ isAdmin }) => {
             placeholder="pk"
             className="add-book-input"
             type="text"
+            hidden
 
            
           />
