@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { getBookById, editBook, deleteBook } from "../api-client/index";
+import { getBookById, editBook, deleteBook, uploadFile } from "../api-client/index";
 import { useParams } from "react-router";
 import './IndBook.css';
 import { useNavigate } from "react-router-dom";
@@ -41,6 +41,7 @@ const EditBook = ({ isAdmin }) => {
   const [weight, setWeight] = useState("");
   const [yearPages, setYearPages] = useState("");
   const [hyperlink, setHyperlink] = useState("");
+  const [file, setFile] = useState("");
 
   let navigate = useNavigate();
   const [book, setBook] = useState({});
@@ -142,6 +143,7 @@ const EditBook = ({ isAdmin }) => {
   const tryEditBook = async (id) => {
     
     try {
+      const fileUploadResponse = await uploadFile(file);
       const response = await editBook(
         id,
         fieldOne,
@@ -191,6 +193,12 @@ const EditBook = ({ isAdmin }) => {
 
   function handleSubmit(e) {
     e.preventDefault();
+  };
+
+  const handleFileChange = (e) => {
+    const selectedFile = e.target.files[0];
+    setPk(selectedFile.name);
+    setFile(selectedFile);
   };
 
   const handleDelete = async (id) => {
@@ -258,7 +266,6 @@ const EditBook = ({ isAdmin }) => {
           <input
             placeholder="pk"
             className="add-book-input"
-            onChange={(e) => setPk(e.target.value)}
             type="text"
             value={pk}
           />
@@ -465,6 +472,13 @@ const EditBook = ({ isAdmin }) => {
             onChange={(e) => setHyperlink(e.target.value)}
             type="text"
             value={hyperlink}
+          />
+           <input 
+          type="file"
+          className="add-book-input"
+          name="file"
+          id="file"
+          onChange={handleFileChange}
           />
           <button className="home-button-save" type="submit" onClick={() => tryEditBook(book.id)}>Save</button>
           <button className="home-button-save" onClick={() => handleDelete(book.id)}>Delete Book</button>
