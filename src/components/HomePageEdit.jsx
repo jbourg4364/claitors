@@ -144,7 +144,7 @@ const HomePageEdit = ({ isAdmin }) => {
             >
               <input
                 placeholder="Image URL"
-                type="url"
+                type="text"
                 value={mainBannerImg}
                 className="home-edit-field"
                 onChange={(e) => setMainBannerImg(e.target.value)}
@@ -166,7 +166,7 @@ const HomePageEdit = ({ isAdmin }) => {
               />
               <input
                 placeholder="Button URL"
-                type="url"
+                type="text"
                 value={mainBannerButton}
                 className="home-edit-field"
                 onChange={(e) => setMainBannerButton(e.target.value)}
@@ -222,7 +222,7 @@ const HomePageEdit = ({ isAdmin }) => {
             >
               <input
                 placeholder="Image URL"
-                type="url"
+                type="text"
                 value={mainBannerImgTwo}
                 className="home-edit-field"
                 onChange={(e) => setMainBannerImgTwo(e.target.value)}
@@ -244,7 +244,7 @@ const HomePageEdit = ({ isAdmin }) => {
               />
               <input
                 placeholder="Button URL"
-                type="url"
+                type="text"
                 value={mainBannerButtonTwo}
                 className="home-edit-field"
                 onChange={(e) => setMainBannerButtonTwo(e.target.value)}
@@ -300,7 +300,7 @@ const HomePageEdit = ({ isAdmin }) => {
             >
               <input
                 placeholder="Image URL"
-                type="url"
+                type="text"
                 value={mainBannerImgThree}
                 className="home-edit-field"
                 onChange={(e) => setMainBannerImgThree(e.target.value)}
@@ -322,7 +322,7 @@ const HomePageEdit = ({ isAdmin }) => {
               />
               <input
                 placeholder="Button URL"
-                type="url"
+                type="text"
                 value={mainBannerButtonThree}
                 className="home-edit-field"
                 onChange={(e) => setMainBannerButtonThree(e.target.value)}
