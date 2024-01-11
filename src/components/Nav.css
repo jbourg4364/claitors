@@ -59,9 +59,11 @@ a:hover {
     padding-left: 17px;
     padding-right: 17px;
     text-align: center;
+    transition: font-weight 0.3s;
 }
 
-.nav-link:hover {
+.nav-link:hover,
+.nav-link:active {
     font-weight: 500;
 }
 
