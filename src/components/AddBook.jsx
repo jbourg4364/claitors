@@ -115,7 +115,7 @@ const AddBook = ({ isAdmin }) => {
     <>
       <div id="add-book-container">
         <h2 className="edit-title-banner">Add New Title</h2>
-        <form className="add-book-form" ref={inputElement} onSubmit={handleSubmit} encType="multipart/form-data" action="/upload" method="POST">
+        <form className="add-book-form" ref={inputElement} onSubmit={handleSubmit} encType="multipart/form-data" action="/api/upload" method="POST">
           <input
             required
             placeholder="Title"
@@ -164,8 +164,6 @@ const AddBook = ({ isAdmin }) => {
             className="add-book-input"
             type="text"
             hidden
-
-           
           />
           <input
             placeholder="DOC"

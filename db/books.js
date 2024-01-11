@@ -270,16 +270,24 @@ async function deleteBook(id) {
 
 async function searchTitle(keyword) {
   try {
+    // Split the search term into individual words
+    const searchWords = keyword.split(' ');
+
+    // Construct the tsquery by joining words with the & operator
+    const tsqueryString = searchWords.join(' & ');
+
     const { rows } = await client.query(`
-    SELECT * FROM books
-    WHERE Title ILIKE '%' || $1 || '%'
-    `, [keyword]);
+      SELECT * FROM books
+      WHERE to_tsvector('english', Title) @@ to_tsquery('english', $1)
+    `, [tsqueryString]);
 
     return rows;
   } catch (error) {
     console.error(error, 'Error searching books for title in DB');
   }
 };
+
+
 
 async function searchAuthor(keyword) {
   try {
