@@ -183,22 +183,29 @@ async function searchBooks(keyword) {
 
 async function searchBooksExactString(keyword) {
   try {
+    // Split the search term into individual words
+    const searchWords = keyword.split(' ');
+
+    // Construct the tsquery by joining words with the & operator
+    const tsqueryString = searchWords.join(' & ');
+
     const conditions = [
-      'Title'
-    ].map((field, index) => `${field} ILIKE $1`).join(' OR ');
+      `to_tsvector('english', Title) @@ to_tsquery('english', $1)`
+    ].join(' OR ');
 
     const query = `
-    SELECT * FROM books
-    WHERE ${conditions}
+      SELECT * FROM books
+      WHERE ${conditions}
     `;
 
-    const { rows } = await client.query(query, [`%${keyword}%`]);
+    const { rows } = await client.query(query, [tsqueryString]);
 
     return rows;
   } catch (error) {
     console.error(error, "Error searching books in DB");
   }
 };
+
 
 
 async function searchBooksByTwo(keyword) {
@@ -212,10 +219,13 @@ async function searchBooksByTwo(keyword) {
     // Filter out stop words from the keywords
     const filteredKeywords = keywords.filter(kw => !stopWords.includes(kw.toLowerCase()));
 
+    // Construct the tsquery by joining filtered keywords with the & operator
+    const tsqueryString = filteredKeywords.join(' & ');
+
     // Generate an array to hold the conditions for each keyword
-    const conditions = filteredKeywords.map((kw, index) => `
-      Title ILIKE $${index + 1}
-    `);
+    const conditions = [
+      `to_tsvector('english', Title) @@ to_tsquery('english', $1)`
+    ];
 
     // Join the conditions with 'OR' to create the final query
     const query = `
@@ -223,8 +233,8 @@ async function searchBooksByTwo(keyword) {
     WHERE ${conditions.join(' OR ')}
     `;
 
-    // Execute the query with the filtered keyword array
-    const { rows } = await client.query(query, filteredKeywords.map(word => `%${word}%`));
+    // Execute the query with the tsquery
+    const { rows } = await client.query(query, [tsqueryString]);
 
     return rows;
   } catch (error) {
