@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
     overflow-x: hidden;
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
@@ -126,7 +127,7 @@ html, body {
     align-items: center;
     margin-top: 20px;
 }
-  
+
 .pagination {
     display: flex;
     list-style: none;
@@ -182,8 +183,10 @@ h3.total-pages {
 .loading-dots::after {
     content: '';
     display: inline-block;
-    width: 1em; /* Adjust the width as needed */
-    text-align: left; /* Align dots to the left of the container */
+    width: 1em;
+    /* Adjust the width as needed */
+    text-align: left;
+    /* Align dots to the left of the container */
     animation: loading-animation 1s infinite;
 }
 
@@ -199,10 +202,23 @@ h3.total-pages {
 }
 
 @keyframes loading-animation {
-    0%, 100% { content: ''; }
-    25% { content: '.'; }
-    50% { content: '..'; }
-    75% { content: '...'; }
+
+    0%,
+    100% {
+        content: '';
+    }
+
+    25% {
+        content: '.';
+    }
+
+    50% {
+        content: '..';
+    }
+
+    75% {
+        content: '...';
+    }
 }
 
 @media screen and (max-width: 1150px) {
@@ -238,7 +254,7 @@ h3.total-pages {
         border-radius: 10px 10px 10px 10px;
         font-size: 15px;
     }
-   
+
 }
 
 @media screen and (max-width: 800px) {
@@ -259,8 +275,12 @@ h3.total-pages {
         margin: 0;
     }
 
+
+
     .ind-book-title {
         width: auto;
+        padding-left: 5px;
+        padding-right: 5px;
     }
 
     .ind-book-cart {
@@ -285,5 +305,10 @@ h3.total-pages {
 
     #books-heading {
         height: auto;
+    }
+
+    .ind-book-price {
+        padding: 0;
+        margin: 0;
     }
 }

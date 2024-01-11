@@ -238,18 +238,18 @@ html, body {
 
 @media screen and (max-width: 975px) {
     #featured-container {
-        height: 2500px;
+        height: auto;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         padding: 10px;
-        margin-top: 175px;
+        margin-top: 300px;
     }
 
     .featured-ind-container {
         background-color: lightgray;
-        width: 90%;
+        width: 80%;
         text-align: center;
         padding: 5px;
         color: black;
@@ -322,7 +322,8 @@ html, body {
     .featured-ind-heading {
         height: 50px;
         font-size: 18px;
-        padding: 15px;
+        padding-left: 25px;
+        padding-right: 25px;
     }
 
     .featured-image {
@@ -333,6 +334,10 @@ html, body {
 
     .mailingList-input {
         width: 80vw;
+    }
+
+    .featured-button {
+        margin: 0px;
     }
 }
 
