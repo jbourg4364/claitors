@@ -13,6 +13,8 @@ const Search = ({ isAdmin, category }) => {
   const [noResult, setNoResult] = useState(false);
   const [price, setPrice] = useState(0);
   const [qty, setQty] = useState(1);
+  const [options, optionsOpen] = useState(false);
+  const [homeCategory, setHomeCategory] = useState("");
   const booksPerPage = 10;
   const { searchTerm } = useParams();
   const { id } = useParams();
@@ -89,7 +91,7 @@ const Search = ({ isAdmin, category }) => {
 
     try {
       const response = await addIndBookToHome(
-        "home-ind",
+        homeCategory,
         book.title,
         book.description,
         `/${book.pk}`,
@@ -98,6 +100,8 @@ const Search = ({ isAdmin, category }) => {
     );
 
       window.alert(`${book.title} added to home page!`);
+      optionsOpen(false);
+      setHomeCategory("");
     } catch (error) {
       console.error(error, 'Error adding book to home page in React');
     }
@@ -205,13 +209,16 @@ const Search = ({ isAdmin, category }) => {
                       <div className="ind-book-left-container">
                         <h2 className="ind-book-title">{book.title}</h2>
                         <div className="ind-book-button-container">
-                          <button
+                          {options ? (
+                            null
+                          ) : (<button
                             className="ind-book-details"
                             onClick={() => handleDetail(book.id)}
                           >
                             Details
-                          </button>
-                          {isAdmin ? (
+                          </button>)}
+                          
+                          {isAdmin && !options ? (
                             <>
                               <button
                                 className="ind-book-details"
@@ -221,7 +228,7 @@ const Search = ({ isAdmin, category }) => {
                               </button>
                               <button
                                 className="ind-book-details"
-                                onClick={() => handleAddToHome(book)}
+                                onClick={() => optionsOpen(true)}
                               >
                                 <i className="fa-solid fa-plus fa-xl"></i>
                               </button>
@@ -230,6 +237,28 @@ const Search = ({ isAdmin, category }) => {
                                 onClick={() => handleDelete(book.id)}
                               >
                                 <i className="fa-solid fa-trash fa-xl"></i>
+                              </button>
+                            </>
+                          ) : null}
+                           {isAdmin && options ? (
+                            <>
+                            <select onChange={(e) => setHomeCategory(e.target.value)} defaultValue={homeCategory}>
+                              <option value={'home-ind'}>Featured Titles</option>
+                              <option value={'home-ind-law'}>Top Law Titles</option>
+                              <option value={'home-ind-gpo'}>Top GPO Titles</option>
+                              <option value={'home-ind-genealogy'}>Top Genealogy Titles</option>
+                            </select>
+                              <button
+                                className="ind-book-details"
+                                onClick={() => handleAddToHome(book)}
+                              >
+                                Save
+                              </button>
+                              <button
+                                className="ind-book-details"
+                                onClick={() => optionsOpen(false)}
+                              >
+                                Cancel
                               </button>
                             </>
                           ) : null}

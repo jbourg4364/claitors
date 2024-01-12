@@ -143,7 +143,7 @@ const HomePageEdit = ({ isAdmin }) => {
               onSubmit={handleMainSubmit}
             >
               <input
-                placeholder="Image URL"
+                placeholder="Image Path (/image.jpg)"
                 type="text"
                 value={mainBannerImg}
                 className="home-edit-field"
@@ -165,7 +165,7 @@ const HomePageEdit = ({ isAdmin }) => {
                 onChange={(e) => setMainBannerDescription(e.target.value)}
               />
               <input
-                placeholder="Button URL"
+                placeholder="Button Path (/books/details/id)"
                 type="text"
                 value={mainBannerButton}
                 className="home-edit-field"
@@ -221,7 +221,7 @@ const HomePageEdit = ({ isAdmin }) => {
               onSubmit={handleMainSubmit}
             >
               <input
-                placeholder="Image URL"
+                placeholder="Image Path (/image.jpg)"
                 type="text"
                 value={mainBannerImgTwo}
                 className="home-edit-field"
@@ -243,7 +243,7 @@ const HomePageEdit = ({ isAdmin }) => {
                 onChange={(e) => setMainBannerDescriptionTwo(e.target.value)}
               />
               <input
-                placeholder="Button URL"
+                placeholder="Button Path (/books/details/id)"
                 type="text"
                 value={mainBannerButtonTwo}
                 className="home-edit-field"
@@ -299,7 +299,7 @@ const HomePageEdit = ({ isAdmin }) => {
               onSubmit={handleMainSubmit}
             >
               <input
-                placeholder="Image URL"
+                placeholder="Image Path (/image.jpg)"
                 type="text"
                 value={mainBannerImgThree}
                 className="home-edit-field"
@@ -321,7 +321,7 @@ const HomePageEdit = ({ isAdmin }) => {
                 onChange={(e) => setMainBannerDescriptionThree(e.target.value)}
               />
               <input
-                placeholder="Button URL"
+                placeholder="Button Path (/books/details/id)"
                 type="text"
                 value={mainBannerButtonThree}
                 className="home-edit-field"
@@ -351,6 +351,122 @@ const HomePageEdit = ({ isAdmin }) => {
             <div id="featured-container-edit">
               {content.map((cont) => {
                 if (cont.label === "home-ind") {
+                  return (
+                    <div className="featured-ind-container-edit" key={cont.id}>
+                       <img src={cont.imageurl} className="featured-image-edit" onError={(e) => {
+                    e.target.src = Images.claitorsLogo;
+                  }}/>
+                      <h3 className="featured-ind-heading-edit">{cont.title}</h3>
+                    
+                      <div id="edit-ind-home-container-buttons">
+                        <button
+                          className="featured-button-edit"
+                          onClick={() =>
+                            (window.location.href = cont.buttonurl)
+                          }
+                        >
+                          Order Now!
+                        </button>
+                        <button
+                          className="featured-button-edit"
+                          id='trash-edit-admin'
+                          onClick={() => handleDelete(cont)}
+                        >
+                          <i className="fa-solid fa-trash fa-xl"></i>
+                        </button>
+                      </div>
+                    </div>
+                  );
+                }
+              })}
+            </div>
+          </div>
+        </div>
+
+        <h2>Top Law Titles</h2>
+        <div className="home-edit-content-container-ind">
+          <div className="home-banner-preview">
+            <div id="featured-container-edit">
+              {content.map((cont) => {
+                if (cont.label === "home-ind-law") {
+                  return (
+                    <div className="featured-ind-container-edit" key={cont.id}>
+                       <img src={cont.imageurl} className="featured-image-edit" onError={(e) => {
+                    e.target.src = Images.claitorsLogo;
+                  }}/>
+                      <h3 className="featured-ind-heading-edit">{cont.title}</h3>
+                    
+                      <div id="edit-ind-home-container-buttons">
+                        <button
+                          className="featured-button-edit"
+                          onClick={() =>
+                            (window.location.href = cont.buttonurl)
+                          }
+                        >
+                          Order Now!
+                        </button>
+                        <button
+                          className="featured-button-edit"
+                          id='trash-edit-admin'
+                          onClick={() => handleDelete(cont)}
+                        >
+                          <i className="fa-solid fa-trash fa-xl"></i>
+                        </button>
+                      </div>
+                    </div>
+                  );
+                }
+              })}
+            </div>
+          </div>
+        </div>
+
+
+        <h2>Top GPO Titles</h2>
+        <div className="home-edit-content-container-ind">
+          <div className="home-banner-preview">
+            <div id="featured-container-edit">
+              {content.map((cont) => {
+                if (cont.label === "home-ind-gpo") {
+                  return (
+                    <div className="featured-ind-container-edit" key={cont.id}>
+                       <img src={cont.imageurl} className="featured-image-edit" onError={(e) => {
+                    e.target.src = Images.claitorsLogo;
+                  }}/>
+                      <h3 className="featured-ind-heading-edit">{cont.title}</h3>
+                    
+                      <div id="edit-ind-home-container-buttons">
+                        <button
+                          className="featured-button-edit"
+                          onClick={() =>
+                            (window.location.href = cont.buttonurl)
+                          }
+                        >
+                          Order Now!
+                        </button>
+                        <button
+                          className="featured-button-edit"
+                          id='trash-edit-admin'
+                          onClick={() => handleDelete(cont)}
+                        >
+                          <i className="fa-solid fa-trash fa-xl"></i>
+                        </button>
+                      </div>
+                    </div>
+                  );
+                }
+              })}
+            </div>
+          </div>
+        </div>
+
+
+        <h2>Top Genealogy Titles</h2>
+        <div className="home-edit-content-container-ind">
+          <div className="home-banner-preview">
+            <div id="featured-container-edit">
+              {content.map((cont) => {
+                if (cont.label === "home-ind-genealogy") {
                   return (
                     <div className="featured-ind-container-edit" key={cont.id}>
                        <img src={cont.imageurl} className="featured-image-edit" onError={(e) => {

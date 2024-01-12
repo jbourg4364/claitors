@@ -68,7 +68,10 @@ const Main = () => {
       path='/books/edit/:id'
       element={<EditBook isAdmin={isAdmin} />} /> 
     </Routes>
-    <Footer isAdmin={isAdmin} />
+    {location.pathname === '/' ? (null) : (
+      <Footer isAdmin={isAdmin} />
+    )}
+    
     </>
   )
 };

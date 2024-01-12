@@ -3,6 +3,7 @@ import "./Home.css";
 import { getAllContent } from "../api-client";
 import { motion } from "framer-motion";
 import Images from "../media";
+import { Footer } from "./Index";
 
 const Home = () => {
   const [email, setEmail] = useState("");
@@ -10,13 +11,19 @@ const Home = () => {
   const [mainBannerTwo, setMainBannerTwo] = useState([]);
   const [mainBannerThree, setMainBannerThree] = useState([]);
   const [indContent, setIndContent] = useState([]);
+  const [lawContent, setLawContent] = useState([]);
+  const [GPOContent, setGPOContent] = useState([]);
+  const [genealogyContent, setGenealogyContent] = useState([]);
   const [bannerRotation, setRotation] = useState(1);
   const [indContentRotation, setIndContentRotation] = useState(0);
+  const [indContentRotationLaw, setIndContentRotationLaw] = useState(0);
+  const [indContentRotationGPO, setIndContentRotationGPO] = useState(0);
+  const [indContentRotationGenealogy, setIndContentRotationGenealogy] =
+    useState(0);
   const [autoRotation, setAutoRotation] = useState(true);
   const [rotationIntervalId, setRotationIntervalId] = useState(null);
   const inputElement = useRef();
   const maxBooksToShow = 5;
- 
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -42,11 +49,22 @@ const Home = () => {
     const getContent = async () => {
       const response = await getAllContent();
 
-
       const indContentArray = response.filter(
         (cont) => cont.label === "home-ind"
       );
+      const indContentArrayLaw = response.filter(
+        (cont) => cont.label === "home-ind-law"
+      );
+      const indContentArrayGPO = response.filter(
+        (cont) => cont.label === "home-ind-gpo"
+      );
+      const indContentArrayGenealogy = response.filter(
+        (cont) => cont.label === "home-ind-genealogy"
+      );
       setIndContent(indContentArray);
+      setLawContent(indContentArrayLaw);
+      setGPOContent(indContentArrayGPO);
+      setGenealogyContent(indContentArrayGenealogy);
 
       response.forEach((cont) => {
         if (cont.label === "home-main-banner") {
@@ -104,17 +122,46 @@ const Home = () => {
     }
   };
 
-
   const rotateIndCarouselRight = () => {
-    setIndContentRotation((prevRotation) => (prevRotation + 1) % maxBooksToShow);
+    setIndContentRotation(
+      (prevRotation) => (prevRotation + 1) % maxBooksToShow
+    );
   };
-  
   const rotateIndCarouselLeft = () => {
-    setIndContentRotation((prevRotation) => (prevRotation - 1 + maxBooksToShow) % maxBooksToShow);
+    setIndContentRotation(
+      (prevRotation) => (prevRotation - 1 + maxBooksToShow) % maxBooksToShow
+    );
   };
-  
-
-  
+  const rotateIndCarouselRightLaw = () => {
+    setIndContentRotationLaw(
+      (prevRotation) => (prevRotation + 1) % maxBooksToShow
+    );
+  };
+  const rotateIndCarouselLeftLaw = () => {
+    setIndContentRotationLaw(
+      (prevRotation) => (prevRotation - 1 + maxBooksToShow) % maxBooksToShow
+    );
+  };
+  const rotateIndCarouselRightGPO = () => {
+    setIndContentRotationGPO(
+      (prevRotation) => (prevRotation + 1) % maxBooksToShow
+    );
+  };
+  const rotateIndCarouselLeftGPO = () => {
+    setIndContentRotationGPO(
+      (prevRotation) => (prevRotation - 1 + maxBooksToShow) % maxBooksToShow
+    );
+  };
+  const rotateIndCarouselRightGenealogy = () => {
+    setIndContentRotationGenealogy(
+      (prevRotation) => (prevRotation + 1) % maxBooksToShow
+    );
+  };
+  const rotateIndCarouselLeftGenealogy = () => {
+    setIndContentRotationGenealogy(
+      (prevRotation) => (prevRotation - 1 + maxBooksToShow) % maxBooksToShow
+    );
+  };
 
   return (
     <>
@@ -166,8 +213,8 @@ const Home = () => {
             ></i>
           </div>
         </motion.div>
-
-        <div id="featured-container" >
+        <h1 id="featured-heading-start">FEATURED TITLES</h1>
+        <div className="featured-container">
           <div id="ind-banner-left-arrow">
             <i
               className="fa-solid fa-chevron-left fa-2xl"
@@ -175,23 +222,27 @@ const Home = () => {
               onClick={rotateIndCarouselLeft}
             ></i>
           </div>
-            {indContent.slice(0, maxBooksToShow).map((cont, index) => {
-            const adjustedIndex = (index + indContentRotation) % indContent.length;
+          {indContent.slice(0, maxBooksToShow).map((cont, index) => {
+            const adjustedIndex =
+              (index + indContentRotation) % indContent.length;
             const adjustedBook = indContent[adjustedIndex];
-          
+
             if (adjustedBook.label === "home-ind") {
               return (
-                <div 
-                className="featured-ind-container" 
-                key={adjustedBook.id}
-                >
+                <div className="featured-ind-container" key={adjustedBook.id}>
                   <h3 className="featured-ind-heading">{adjustedBook.title}</h3>
-                  <img src={adjustedBook.imageurl} className="featured-image" onError={(e) => {
-                    e.target.src = Images.claitorsLogo;
-                  }}/>
+                  <img
+                    src={adjustedBook.imageurl}
+                    className="featured-image"
+                    onError={(e) => {
+                      e.target.src = Images.claitorsLogo;
+                    }}
+                  />
                   <button
                     className="featured-button"
-                    onClick={() => (window.location.href = adjustedBook.buttonurl)}
+                    onClick={() =>
+                      (window.location.href = adjustedBook.buttonurl)
+                    }
                   >
                     Order Now!
                   </button>
@@ -207,24 +258,165 @@ const Home = () => {
             ></i>
           </div>
         </div>
-      </div>
-      <div id="newsletter">
-        <h2>Join our mailing list for new titles, specials and more!</h2>
-        <form
-          method="post"
-          action="https://claitors.com/cgi-bin/clt/subscribe.cgi"
-          ref={inputElement}
-          onSubmit={handleSubmit}
-        >
-          <input
-            className="mailingList-input"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            type="email"
-          />
-          <button className="subscribe-button">Subscribe</button>
-        </form>
+
+        <h1 id="featured-heading">TOP LAW TITLES</h1>
+        <div className="featured-container">
+          <div id="ind-banner-left-arrow">
+            <i
+              className="fa-solid fa-chevron-left fa-2xl"
+              id="left-arrow-ind"
+              onClick={rotateIndCarouselLeftLaw}
+            ></i>
+          </div>
+          {lawContent.slice(0, maxBooksToShow).map((cont, index) => {
+            const adjustedIndex =
+              (index + indContentRotationLaw) % lawContent.length;
+            const adjustedBook = lawContent[adjustedIndex];
+
+            if (adjustedBook.label === "home-ind-law") {
+              return (
+                <div className="featured-ind-container" key={adjustedBook.id}>
+                  <h3 className="featured-ind-heading">{adjustedBook.title}</h3>
+                  <img
+                    src={adjustedBook.imageurl}
+                    className="featured-image"
+                    onError={(e) => {
+                      e.target.src = Images.claitorsLogo;
+                    }}
+                  />
+                  <button
+                    className="featured-button"
+                    onClick={() =>
+                      (window.location.href = adjustedBook.buttonurl)
+                    }
+                  >
+                    Order Now!
+                  </button>
+                </div>
+              );
+            }
+          })}
+          <div id="ind-banner-right-arrow">
+            <i
+              className="fa-solid fa-chevron-right fa-2xl"
+              id="right-arrow-ind"
+              onClick={rotateIndCarouselRightLaw}
+            ></i>
+          </div>
+        </div>
+
+        <h1 id="featured-heading">TOP GPO TITLES</h1>
+        <div className="featured-container">
+          <div id="ind-banner-left-arrow">
+            <i
+              className="fa-solid fa-chevron-left fa-2xl"
+              id="left-arrow-ind"
+              onClick={rotateIndCarouselLeftGPO}
+            ></i>
+          </div>
+          {GPOContent.slice(0, maxBooksToShow).map((cont, index) => {
+            const adjustedIndex =
+              (index + indContentRotationGPO) % GPOContent.length;
+            const adjustedBook = GPOContent[adjustedIndex];
+
+            if (adjustedBook.label === "home-ind-gpo") {
+              return (
+                <div className="featured-ind-container" key={adjustedBook.id}>
+                  <h3 className="featured-ind-heading">{adjustedBook.title}</h3>
+                  <img
+                    src={adjustedBook.imageurl}
+                    className="featured-image"
+                    onError={(e) => {
+                      e.target.src = Images.claitorsLogo;
+                    }}
+                  />
+                  <button
+                    className="featured-button"
+                    onClick={() =>
+                      (window.location.href = adjustedBook.buttonurl)
+                    }
+                  >
+                    Order Now!
+                  </button>
+                </div>
+              );
+            }
+          })}
+          <div id="ind-banner-right-arrow">
+            <i
+              className="fa-solid fa-chevron-right fa-2xl"
+              id="right-arrow-ind"
+              onClick={rotateIndCarouselRightGPO}
+            ></i>
+          </div>
+        </div>
+
+        <h1 id="featured-heading">TOP GENEALOGY TITLES</h1>
+        <div className="featured-container">
+          <div id="ind-banner-left-arrow">
+            <i
+              className="fa-solid fa-chevron-left fa-2xl"
+              id="left-arrow-ind"
+              onClick={rotateIndCarouselLeftGenealogy}
+            ></i>
+          </div>
+          {genealogyContent.slice(0, maxBooksToShow).map((cont, index) => {
+            const adjustedIndex =
+              (index + indContentRotationGenealogy) % genealogyContent.length;
+            const adjustedBook = genealogyContent[adjustedIndex];
+
+            if (adjustedBook.label === "home-ind-genealogy") {
+              return (
+                <div className="featured-ind-container" key={adjustedBook.id}>
+                  <h3 className="featured-ind-heading">{adjustedBook.title}</h3>
+                  <img
+                    src={adjustedBook.imageurl}
+                    className="featured-image"
+                    onError={(e) => {
+                      e.target.src = Images.claitorsLogo;
+                    }}
+                  />
+                  <button
+                    className="featured-button"
+                    onClick={() =>
+                      (window.location.href = adjustedBook.buttonurl)
+                    }
+                  >
+                    Order Now!
+                  </button>
+                </div>
+              );
+            }
+          })}
+          <div id="ind-banner-right-arrow">
+            <i
+              className="fa-solid fa-chevron-right fa-2xl"
+              id="right-arrow-ind"
+              onClick={rotateIndCarouselRightGenealogy}
+            ></i>
+          </div>
+        </div>
+        <div id="newsletter">
+          <h2 id="newsletter-heading">
+            Join our mailing list for new titles, specials and more!
+          </h2>
+          <form
+            method="post"
+            action="https://claitors.com/cgi-bin/clt/subscribe.cgi"
+            ref={inputElement}
+            onSubmit={handleSubmit}
+          >
+            <input
+              className="mailingList-input"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              type="email"
+            />
+            <button className="subscribe-button">Subscribe</button>
+          </form>
+        </div>
+        <Footer />
       </div>
     </>
   );
