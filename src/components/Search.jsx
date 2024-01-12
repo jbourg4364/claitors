@@ -242,7 +242,7 @@ const Search = ({ isAdmin, category }) => {
                           ) : null}
                            {isAdmin && options ? (
                             <>
-                            <select onChange={(e) => setHomeCategory(e.target.value)} defaultValue={homeCategory}>
+                            <select id="select-add-featured" onChange={(e) => setHomeCategory(e.target.value)} defaultValue={homeCategory}>
                               <option value={'home-ind'}>Featured Titles</option>
                               <option value={'home-ind-law'}>Top Law Titles</option>
                               <option value={'home-ind-gpo'}>Top GPO Titles</option>
