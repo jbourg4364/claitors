@@ -1,14 +1,5 @@
-html, body {
-    overflow-x: hidden;
-    scroll-behavior: smooth;
-    -webkit-text-size-adjust: 100%;
-    margin: 0 auto;
-    padding: 0 auto;
-    width: 100%;
-}
-
 #home-banner {
-    background-color: #79227b;
+
     height: 500px;
     width: 100%;
     display: block;
@@ -25,6 +16,7 @@ html, body {
     justify-content: space-evenly;
     padding: 0px;
     text-align: center;
+    background-color: #79227b;
 }
 
 .home-image-main {
@@ -90,7 +82,7 @@ html, body {
 
 .featured-ind-heading {
     height: 100px;
-    font-size: 16px;
+    font-size: 15px;
     display: flex;
     align-items: center;
 }
@@ -302,18 +294,19 @@ html, body {
     #home-banner-content {
         display: flex;
         flex-direction: column;
-        height: 500px;
+        height: auto;
         align-items: center;
         justify-content: space-evenly;
         padding: 20px;
         text-align: center;
+        background-color: #79227b;
     }
     
     .home-image-main {
         height: 225px;
         margin: 0px;
         padding: 0px;
-        padding-top: 225px;
+
     }
     
     #home-banner-description {
@@ -336,7 +329,7 @@ html, body {
     }
 
     #home-banner {
-        height: 775px;
+        height: auto;
     }
 
     #newsletter {
@@ -361,11 +354,12 @@ html, body {
     }
 
     .featured-ind-heading {
-        height: 100px;
-        font-size: 17px;
+        height: auto;
+        font-size: 15px;
         padding: 15px;
         padding-bottom: 0px;
         text-wrap: wrap;
+        overflow-wrap: break-word;
     }
 
     .featured-image {
@@ -384,7 +378,7 @@ html, body {
     }
 
     #featured-heading-start {
-        margin-top: 300px;
+        margin-top: 50px;
         letter-spacing: 0px;
 
     }

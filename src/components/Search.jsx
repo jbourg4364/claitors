@@ -14,7 +14,7 @@ const Search = ({ isAdmin, category }) => {
   const [price, setPrice] = useState(0);
   const [qty, setQty] = useState(1);
   const [options, optionsOpen] = useState(false);
-  const [homeCategory, setHomeCategory] = useState("");
+  const [homeCategory, setHomeCategory] = useState("home-ind");
   const booksPerPage = 10;
   const { searchTerm } = useParams();
   const { id } = useParams();

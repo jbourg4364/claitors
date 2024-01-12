@@ -4,6 +4,7 @@ import { getAllContent } from "../api-client";
 import { motion } from "framer-motion";
 import Images from "../media";
 import { Footer } from "./Index";
+import './Footer.css';
 
 const Home = () => {
   const [email, setEmail] = useState("");
