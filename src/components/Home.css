@@ -253,9 +253,9 @@ html, body {
         text-align: center;
         padding: 5px;
         color: black;
-        padding: 0;
+        padding: 10px;
         margin: 0;
-        height: 450px;
+        height: auto;
     }
 
     #home-banner-content {
@@ -299,8 +299,9 @@ html, body {
     }
 
     #newsletter {
-        margin-top: 2400px;
+        margin-top: 2150px;
         text-align: center;
+        padding-top: 50px;
     }
 
     #right-arrow {
@@ -320,10 +321,10 @@ html, body {
     }
 
     .featured-ind-heading {
-        height: 50px;
-        font-size: 18px;
-        padding-left: 25px;
-        padding-right: 25px;
+        height: auto;
+        font-size: 17px;
+        padding: 15px;
+        padding-bottom: 0px;
     }
 
     .featured-image {
