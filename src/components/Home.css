@@ -1,3 +1,11 @@
+html, body {
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    margin: 0 auto;
+    padding: 0 auto;
+}
+
 #home-banner {
 
     height: 500px;
@@ -243,9 +251,12 @@
     }
 
     .featured-ind-heading {
+        height: auto;
         font-size: 15px;
         display: flex;
         align-items: center;
+        text-align: center;
+        justify-content: center;
     }
 
     .featured-image {
@@ -272,7 +283,6 @@
     .featured-container {
         display: flex;
         flex-direction: column; /* Change to row for horizontal layout */
-        white-space: nowrap; /* Prevent wrapping to the next line */
         padding: 5px;
         height: auto;
         justify-content: center;
@@ -357,9 +367,9 @@
         height: auto;
         font-size: 15px;
         padding: 15px;
-        padding-bottom: 0px;
+        width: 80%;
         text-wrap: wrap;
-        overflow-wrap: break-word;
+        
     }
 
     .featured-image {

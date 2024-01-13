@@ -40,7 +40,7 @@ const AddBook = ({ isAdmin }) => {
   const [weight, setWeight] = useState("");
   const [yearPages, setYearPages] = useState("");
   const [hyperlink, setHyperlink] = useState("");
-  const [file, setFile] = useState("");
+  const [file, setFile] = useState([]);
 
 
   const navigate = useNavigate();
@@ -375,6 +375,7 @@ const AddBook = ({ isAdmin }) => {
           name="file"
           id="file"
           onChange={handleFileChange}
+          multiple
           />
           <button className="home-button-save" type="submit">Save</button>
         </form>

@@ -1,4 +1,4 @@
-# fly.toml app configuration file generated for claitors on 2023-11-03T15:49:45-05:00
+# fly.toml app configuration file generated for claitors-old-cloud-943 on 2024-01-12T20:19:55-06:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
@@ -6,7 +6,11 @@
 app = "claitors"
 primary_region = "atl"
 
+[build]
 
+[mounts]
+source="myapp_images"
+destination="/app/public/tphotos"
 
 
 [http_service]
@@ -16,3 +20,4 @@ primary_region = "atl"
   auto_start_machines = true
   min_machines_running = 0
   processes = ["app"]
+

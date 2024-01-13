@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import './Admin.css';
 import { getLast10Books, deleteBook } from '../api-client';
 import Images from '../media';
+import LazyLoad from 'react-lazyload';
 
 
 const Admin = ({ isAdmin }) => {
@@ -49,7 +50,8 @@ const Admin = ({ isAdmin }) => {
         {books.map((book) => (
    
             <div className="featured-ind-container-edit-admin" key={book.id}>
-              <img
+              <LazyLoad height={200} offset={100}>
+                <img
                 src={`/${book.pk}`}
                 className="featured-image-edit"
                 alt={book.title}
@@ -57,6 +59,7 @@ const Admin = ({ isAdmin }) => {
                   e.target.src = Images.claitorsLogo;
                 }}
               />
+              </LazyLoad>
               <h3 className="featured-ind-heading-edit">{book.title}</h3>
               <button
                 className="ind-book-details-admin"
