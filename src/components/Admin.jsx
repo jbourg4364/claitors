@@ -1,14 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useNavigate } from "react-router-dom";
 import './Admin.css';
-import { getLast10Books, deleteBook } from '../api-client';
+import { getLast10Books, deleteBook, uploadMultipleFiles } from '../api-client';
 import Images from '../media';
 import LazyLoad from 'react-lazyload';
 
 
 const Admin = ({ isAdmin }) => {
   const [books, setBooks] = useState([]);
+  const [files, setFiles] = useState([]);
+  const inputElement = useRef();
   let navigate = useNavigate();
+
 
   if (!isAdmin) {
     navigate("/login");
@@ -41,6 +44,30 @@ const Admin = ({ isAdmin }) => {
       console.error(error, 'Error deleting book in react');
     }
   }
+
+  const handleFileChange = (e) => {
+    const selectedFiles = e.target.files;
+    setFiles(Array.from(selectedFiles));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const fileUploadResponse = await uploadMultipleFiles(files);
+      console.log("File upload response:", fileUploadResponse);
+
+      if (fileUploadResponse && fileUploadResponse.message === 'Files uploaded successfully') {
+        window.alert("Files uploaded successfully!");
+        window.location.reload();
+      }
+    } catch (error) {
+      console.error(error, 'Error uploading files in React');
+    }
+  };
+  
+
+ 
+
 
   return (
     <div id="admin-dash-container">
@@ -78,6 +105,21 @@ const Admin = ({ isAdmin }) => {
     
         ))}
       </div>
+      <div>
+        <h2>Upload Multiple Image Files</h2>
+        <form className="tphotos-upload-form" ref={inputElement} onSubmit={handleSubmit} encType="multipart/form-data" action="/api/upload/multiple" method="POST">
+        <input 
+          type="file"
+          className="add-book-input"
+          name="files"
+          id="files"
+          onChange={handleFileChange}
+          multiple
+        />
+        <button className="home-button-save" type="submit">Upload</button>
+        </form>
+      </div>
+      
     </div>
   );
 };

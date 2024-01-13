@@ -375,7 +375,6 @@ const AddBook = ({ isAdmin }) => {
           name="file"
           id="file"
           onChange={handleFileChange}
-          multiple
           />
           <button className="home-button-save" type="submit">Save</button>
         </form>

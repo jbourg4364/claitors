@@ -26,6 +26,15 @@ router.use((req, res, next) => {
     }
     res.json({ message: 'File uploaded successfully', filename: req.file.filename });
   });
+
+  router.post('/upload/multiple', upload.array('files', 300), (req, res) => {
+    if (!req.files || req.files.length === 0) {
+      return res.status(400).json({ error: 'No files uploaded' });
+    }
+  
+    const filenames = req.files.map(file => file.filename);
+    res.json({ message: 'Files uploaded successfully', filenames });
+  });
   
   //Health
   router.get('/health', async (req, res, next) => {

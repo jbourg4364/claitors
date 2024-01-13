@@ -467,6 +467,26 @@ export const deleteBook = async (id) => {
     }
 };
 
+export const uploadMultipleFiles = async (files) => {
+    try {
+      const formData = new FormData();
+      files.forEach((file) => {
+        formData.append('files', file);
+      });
+  
+      const response = await fetch(`${BASE}/upload/multiple`, {
+        method: "POST",
+        body: formData,
+      });
+  
+      const result = await response.json();
+  
+      return result;
+    } catch (error) {
+      console.error(error, 'Error uploading multiple files in middleware');
+    }
+  };
+  
 
 
 
