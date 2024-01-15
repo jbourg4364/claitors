@@ -210,7 +210,7 @@
 @media screen and (max-width: 800px) {
     .featured-ind-container-edit-admin {
         flex-direction: column;
-        height: 400px;
+        height: auto;
         justify-content: space-evenly;
     }
 
@@ -222,13 +222,16 @@
     .featured-ind-heading-edit {
         width: auto;
         text-align: center;
+        height: auto;
     }
 
     .featured-ind-container-edit {
         flex-direction: column;
     }
 
-    
+    #featured-container-edit {
+        height: auto;
+    }
     
 }
 
