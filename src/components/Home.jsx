@@ -4,7 +4,7 @@ import { getAllContent } from "../api-client";
 import { motion } from "framer-motion";
 import Images from "../media";
 import { Footer } from "./Index";
-import './Footer.css';
+import "./Footer.css";
 
 const Home = () => {
   const [email, setEmail] = useState("");
@@ -216,13 +216,16 @@ const Home = () => {
         </motion.div>
         <h1 id="featured-heading-start">FEATURED TITLES</h1>
         <div className="featured-container">
-          <div id="ind-banner-left-arrow">
-            <i
-              className="fa-solid fa-chevron-left fa-2xl"
-              id="left-arrow-ind"
-              onClick={rotateIndCarouselLeft}
-            ></i>
-          </div>
+          {indContent.length < maxBooksToShow ? null : (
+            <div id="ind-banner-left-arrow">
+              <i
+                className="fa-solid fa-chevron-left fa-2xl"
+                id="left-arrow-ind"
+                onClick={rotateIndCarouselLeft}
+              ></i>
+            </div>
+          )}
+
           {indContent.slice(0, maxBooksToShow).map((cont, index) => {
             const adjustedIndex =
               (index + indContentRotation) % indContent.length;
@@ -251,24 +254,29 @@ const Home = () => {
               );
             }
           })}
-          <div id="ind-banner-right-arrow">
-            <i
-              className="fa-solid fa-chevron-right fa-2xl"
-              id="right-arrow-ind"
-              onClick={rotateIndCarouselRight}
-            ></i>
-          </div>
+          {indContent.length < maxBooksToShow ? null : (
+            <div id="ind-banner-right-arrow">
+              <i
+                className="fa-solid fa-chevron-right fa-2xl"
+                id="right-arrow-ind"
+                onClick={rotateIndCarouselRight}
+              ></i>
+            </div>
+          )}
         </div>
 
         <h1 id="featured-heading">TOP LAW TITLES</h1>
         <div className="featured-container">
-          <div id="ind-banner-left-arrow">
-            <i
-              className="fa-solid fa-chevron-left fa-2xl"
-              id="left-arrow-ind"
-              onClick={rotateIndCarouselLeftLaw}
-            ></i>
-          </div>
+          {lawContent.length < maxBooksToShow ? null : (
+            <div id="ind-banner-left-arrow">
+              <i
+                className="fa-solid fa-chevron-left fa-2xl"
+                id="left-arrow-ind"
+                onClick={rotateIndCarouselLeftLaw}
+              ></i>
+            </div>
+          )}
+
           {lawContent.slice(0, maxBooksToShow).map((cont, index) => {
             const adjustedIndex =
               (index + indContentRotationLaw) % lawContent.length;
@@ -297,24 +305,29 @@ const Home = () => {
               );
             }
           })}
-          <div id="ind-banner-right-arrow">
-            <i
-              className="fa-solid fa-chevron-right fa-2xl"
-              id="right-arrow-ind"
-              onClick={rotateIndCarouselRightLaw}
-            ></i>
-          </div>
+          {lawContent.length < maxBooksToShow ? null : (
+            <div id="ind-banner-right-arrow">
+              <i
+                className="fa-solid fa-chevron-right fa-2xl"
+                id="right-arrow-ind"
+                onClick={rotateIndCarouselRightLaw}
+              ></i>
+            </div>
+          )}
         </div>
 
         <h1 id="featured-heading">TOP GPO TITLES</h1>
         <div className="featured-container">
-          <div id="ind-banner-left-arrow">
-            <i
-              className="fa-solid fa-chevron-left fa-2xl"
-              id="left-arrow-ind"
-              onClick={rotateIndCarouselLeftGPO}
-            ></i>
-          </div>
+          {GPOContent.length < maxBooksToShow ? null : (
+            <div id="ind-banner-left-arrow">
+              <i
+                className="fa-solid fa-chevron-left fa-2xl"
+                id="left-arrow-ind"
+                onClick={rotateIndCarouselLeftGPO}
+              ></i>
+            </div>
+          )}
+
           {GPOContent.slice(0, maxBooksToShow).map((cont, index) => {
             const adjustedIndex =
               (index + indContentRotationGPO) % GPOContent.length;
@@ -343,24 +356,29 @@ const Home = () => {
               );
             }
           })}
-          <div id="ind-banner-right-arrow">
-            <i
-              className="fa-solid fa-chevron-right fa-2xl"
-              id="right-arrow-ind"
-              onClick={rotateIndCarouselRightGPO}
-            ></i>
-          </div>
+          {GPOContent.length < maxBooksToShow ? null : (
+            <div id="ind-banner-right-arrow">
+              <i
+                className="fa-solid fa-chevron-right fa-2xl"
+                id="right-arrow-ind"
+                onClick={rotateIndCarouselRightGPO}
+              ></i>
+            </div>
+          )}
         </div>
 
         <h1 id="featured-heading">TOP GENEALOGY TITLES</h1>
         <div className="featured-container">
-          <div id="ind-banner-left-arrow">
-            <i
-              className="fa-solid fa-chevron-left fa-2xl"
-              id="left-arrow-ind"
-              onClick={rotateIndCarouselLeftGenealogy}
-            ></i>
-          </div>
+          {genealogyContent.length < maxBooksToShow ? null : (
+            <div id="ind-banner-left-arrow">
+              <i
+                className="fa-solid fa-chevron-left fa-2xl"
+                id="left-arrow-ind"
+                onClick={rotateIndCarouselLeftGenealogy}
+              ></i>
+            </div>
+          )}
+
           {genealogyContent.slice(0, maxBooksToShow).map((cont, index) => {
             const adjustedIndex =
               (index + indContentRotationGenealogy) % genealogyContent.length;
@@ -389,13 +407,15 @@ const Home = () => {
               );
             }
           })}
-          <div id="ind-banner-right-arrow">
-            <i
-              className="fa-solid fa-chevron-right fa-2xl"
-              id="right-arrow-ind"
-              onClick={rotateIndCarouselRightGenealogy}
-            ></i>
-          </div>
+          {genealogyContent.length < maxBooksToShow ? null : (
+            <div id="ind-banner-right-arrow">
+              <i
+                className="fa-solid fa-chevron-right fa-2xl"
+                id="right-arrow-ind"
+                onClick={rotateIndCarouselRightGenealogy}
+              ></i>
+            </div>
+          )}
         </div>
         <div id="newsletter">
           <h2 id="newsletter-heading">
