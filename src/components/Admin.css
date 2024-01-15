@@ -37,6 +37,7 @@
     margin-left: auto;
     margin-right: auto;
     border-radius: 10px 10px 10px 10px;
+    color: white;
 }
 
 .home-edit-field {
@@ -222,6 +223,12 @@
         width: auto;
         text-align: center;
     }
+
+    .featured-ind-container-edit {
+        flex-direction: column;
+    }
+
+    
     
 }
 
