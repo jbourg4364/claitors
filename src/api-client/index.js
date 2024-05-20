@@ -4,12 +4,13 @@
 const BASE = '/api';
 
 
-export const loginAdmin = async (object) => {
+export const loginAdmin = async (object, token) => {
     try {
         const response = await fetch(`${BASE}/login`, {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json',
+                'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify(object),
         });

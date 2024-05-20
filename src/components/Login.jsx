@@ -6,6 +6,7 @@ import { loginAdmin } from '../api-client';
 const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [token, setToken] = useState('');
     const inputElement = useRef();
     let navigate = useNavigate();
 
@@ -13,12 +14,11 @@ const Login = () => {
       e.preventDefault();
   
       try {
-          const data = await loginAdmin({ username: username, password: password });
+          const data = await loginAdmin({ username: username, password: password, token: token });
 
   
           if (data.token) {
               localStorage.setItem("id", "admin");
-              localStorage.setItem('token', data.token);
               navigate('/admin/dashboard');
           } else {
               // Display error message in the UI or use a more user-friendly approach

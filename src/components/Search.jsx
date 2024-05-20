@@ -196,28 +196,28 @@ const Search = ({ isAdmin, category }) => {
                 {displayedBooks.map((book) => {
                   return (
                     <div key={book.id} id="ind-book-container">
-                    <LazyLoad height={200} offset={100}>
-                      <img
-                        className="ind-book-image"
-                        src={`/${book.pk}`}
-                        alt={book.title}
-                        onError={(e) => {
-                          e.target.src = Images.claitorsLogo;
-                        }}
-                      />
-                    </LazyLoad>
+                      <LazyLoad height={200} offset={100}>
+                        <img
+                          className="ind-book-image"
+                          src={`/${book.pk}`}
+                          alt={book.title}
+                          onError={(e) => {
+                            e.target.src = Images.claitorsLogo;
+                          }}
+                        />
+                      </LazyLoad>
                       <div className="ind-book-left-container">
                         <h2 className="ind-book-title">{book.title}</h2>
                         <div className="ind-book-button-container">
-                          {options ? (
-                            null
-                          ) : (<button
-                            className="ind-book-details"
-                            onClick={() => handleDetail(book.id)}
-                          >
-                            Details
-                          </button>)}
-                          
+                          {options ? null : (
+                            <button
+                              className="ind-book-details"
+                              onClick={() => handleDetail(book.id)}
+                            >
+                              Details
+                            </button>
+                          )}
+
                           {isAdmin && !options ? (
                             <>
                               <button
@@ -240,14 +240,28 @@ const Search = ({ isAdmin, category }) => {
                               </button>
                             </>
                           ) : null}
-                           {isAdmin && options ? (
+                          {isAdmin && options ? (
                             <>
-                            <select id="select-add-featured" onChange={(e) => setHomeCategory(e.target.value)} defaultValue={homeCategory}>
-                              <option value={'home-ind'}>Featured Titles</option>
-                              <option value={'home-ind-law'}>Top Law Titles</option>
-                              <option value={'home-ind-gpo'}>Top GPO Titles</option>
-                              <option value={'home-ind-genealogy'}>Top Genealogy Titles</option>
-                            </select>
+                              <select
+                                id="select-add-featured"
+                                onChange={(e) =>
+                                  setHomeCategory(e.target.value)
+                                }
+                                defaultValue={homeCategory}
+                              >
+                                <option value={"home-ind"}>
+                                  Featured Titles
+                                </option>
+                                <option value={"home-ind-law"}>
+                                  Top Law Titles
+                                </option>
+                                <option value={"home-ind-gpo"}>
+                                  Top GPO Titles
+                                </option>
+                                <option value={"home-ind-genealogy"}>
+                                  Top Genealogy Titles
+                                </option>
+                              </select>
                               <button
                                 className="ind-book-details"
                                 onClick={() => handleAddToHome(book)}
@@ -296,7 +310,9 @@ const Search = ({ isAdmin, category }) => {
                             onChange={(e) => setQty(e.target.value)}
                             name="VARQuantity1"
                           />
-                          {book.availability.includes("out of print") ? (
+                          {book.availability.includes("out of print") ||
+                          book.availability.includes("superseded") ||
+                          book.availability.includes("replaced by") ? (
                             <button
                               className="ind-book-cart"
                               name="I3"

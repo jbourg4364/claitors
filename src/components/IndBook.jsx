@@ -18,7 +18,10 @@ const IndBook = ({ isAdmin }) => {
       const response = await getBookById(id);
       setBook(response);
       setPrice(response.price);
-      if (response.availability.includes("out of print")) {
+      if (response.availability.includes("out of print") ||
+      response.availability.includes("superseded") ||
+      response.availability.includes("replaced by")
+      ) {
         setUnavailable(true);
       }
     };

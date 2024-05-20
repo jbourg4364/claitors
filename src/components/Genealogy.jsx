@@ -165,7 +165,9 @@ const Genealogy = () => {
                       onChange={(e) => setQty(e.target.value)}
                       name="VARQuantity1"
                     />
-                    {book.availability.includes("out of print") ? (
+                    {book.availability.includes("out of print") ||
+                      book.availability.includes("superseded") ||
+                      book.availability.includes("replaced by") ? (
                       <button
                         className="ind-book-cart"
                         name="I3"
