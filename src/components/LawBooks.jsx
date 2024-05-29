@@ -168,8 +168,10 @@ const LawBooks = () => {
                       name="VARQuantity1"
                     />
                     {book.availability.includes("out of print") ||
-                      book.availability.includes("superseded") ||
-                      book.availability.includes("replaced by") ? (
+                    book.availability.includes("superseded") ||
+                    book.availability.includes("no stock") ||
+                    book.availability.includes("pending") ||
+                    book.availability.includes("replaced by") ? (
                       <button
                         className="ind-book-cart"
                         name="I3"

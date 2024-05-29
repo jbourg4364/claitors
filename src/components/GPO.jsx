@@ -4,7 +4,6 @@ import { getAllBooks } from "../api-client/index";
 import "./Books.css";
 import Images from "../media";
 
-
 const GPO = ({ isAdmin }) => {
   const [allBooks, setAllBooks] = useState([]);
   const [price, setPrice] = useState(0);
@@ -51,9 +50,8 @@ const GPO = ({ isAdmin }) => {
 
   const indexOfLastBook = currentPage * booksPerPage;
   const indexOfFirstBook = indexOfLastBook - booksPerPage;
-  const filteredBooks = allBooks.filter(
-    (book) =>
-      book.doc.includes("govtprintingoffice")
+  const filteredBooks = allBooks.filter((book) =>
+    book.doc.includes("govtprintingoffice")
   );
   const sortedBooks = filteredBooks.sort(compareAvailability);
   const currentBooks = sortedBooks.slice(indexOfFirstBook, indexOfLastBook);
@@ -105,10 +103,12 @@ const GPO = ({ isAdmin }) => {
         <h1 className="books-heading-h1">GPO Titles</h1>
       </div>
       {loading ? (
-        <div id='loading-container'>
-        <i className="fa-solid fa-gear fa-spin fa-2xl" id='gear'></i>
-        <h1 id="loading-books">Loading Books<span className="loading-dots"></span></h1>
-      </div>
+        <div id="loading-container">
+          <i className="fa-solid fa-gear fa-spin fa-2xl" id="gear"></i>
+          <h1 id="loading-books">
+            Loading Books<span className="loading-dots"></span>
+          </h1>
+        </div>
       ) : (
         <>
           <div id="all-books-container">
@@ -165,8 +165,10 @@ const GPO = ({ isAdmin }) => {
                       name="VARQuantity1"
                     />
                     {book.availability.includes("out of print") ||
-                      book.availability.includes("superseded") ||
-                      book.availability.includes("replaced by") ? (
+                    book.availability.includes("superseded") ||
+                    book.availability.includes("no stock") ||
+                    book.availability.includes("pending") ||
+                    book.availability.includes("replaced by") ? (
                       <button
                         className="ind-book-cart"
                         name="I3"

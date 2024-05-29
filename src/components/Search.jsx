@@ -1,10 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { searchBooks, addIndBookToHome, searchAuthor, searchPublisher, searchTitle, searchISBN, deleteBook } from "../api-client";
+import {
+  searchBooks,
+  addIndBookToHome,
+  searchAuthor,
+  searchPublisher,
+  searchTitle,
+  searchISBN,
+  deleteBook,
+} from "../api-client";
 import { useNavigate, useParams } from "react-router-dom";
 import "./Books.css";
 import Images from "../media";
-import LazyLoad from 'react-lazyload';
-
+import LazyLoad from "react-lazyload";
 
 const Search = ({ isAdmin, category }) => {
   const [sortedBooks, setSortedBooks] = useState([]);
@@ -20,63 +27,63 @@ const Search = ({ isAdmin, category }) => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-
-
   useEffect(() => {
-  const handleSearch = async (response) => {
-    const sortedResponse = response.sort((a, b) => {
-      const availabilityA = a.availability.toLowerCase();
-      const availabilityB = b.availability.toLowerCase();
-      return (availabilityA === 'available at claitors' && availabilityB !== 'available at claitors') ? -1 :
-             (availabilityA !== 'available at claitors' && availabilityB === 'available at claitors') ? 1 : 0;
-    });
+    const handleSearch = async (response) => {
+      const sortedResponse = response.sort((a, b) => {
+        const availabilityA = a.availability.toLowerCase();
+        const availabilityB = b.availability.toLowerCase();
+        return availabilityA === "available at claitors" &&
+          availabilityB !== "available at claitors"
+          ? -1
+          : availabilityA !== "available at claitors" &&
+            availabilityB === "available at claitors"
+          ? 1
+          : 0;
+      });
 
-    setSortedBooks(sortedResponse);
-    setLoading(false);
-    setNoResult(response.length === 0);
-  };
+      setSortedBooks(sortedResponse);
+      setLoading(false);
+      setNoResult(response.length === 0);
+    };
 
-  const getBookBySearch = async () => {
-    let response;
+    const getBookBySearch = async () => {
+      let response;
 
-    switch (category) {
-      case "":
-        response = await searchBooks(searchTerm);
-        break;
-      case 'title':
-        response = await searchTitle(searchTerm);
-        break;
-      case 'author':
-        response = await searchAuthor(searchTerm);
-        break;
-      case 'publisher':
-        response = await searchPublisher(searchTerm);
-        break;
-      case 'isbn':
-        response = await searchISBN(searchTerm);
-        break;
-      default:
-        response = [];
-    }
-
-
-
-    const uniqueIds = new Set();
-    const filteredResponse = response.filter((item) => {
-      if (!uniqueIds.has(item.id)) {
-        uniqueIds.add(item.id);
-        return true;
+      switch (category) {
+        case "":
+          response = await searchBooks(searchTerm);
+          break;
+        case "title":
+          response = await searchTitle(searchTerm);
+          break;
+        case "author":
+          response = await searchAuthor(searchTerm);
+          break;
+        case "publisher":
+          response = await searchPublisher(searchTerm);
+          break;
+        case "isbn":
+          response = await searchISBN(searchTerm);
+          break;
+        default:
+          response = [];
       }
-      return false;
-    });
 
-    handleSearch(filteredResponse);
-  };
+      const uniqueIds = new Set();
+      const filteredResponse = response.filter((item) => {
+        if (!uniqueIds.has(item.id)) {
+          uniqueIds.add(item.id);
+          return true;
+        }
+        return false;
+      });
 
-  getBookBySearch();
-  paginate(1);
+      handleSearch(filteredResponse);
+    };
 
-}, [searchTerm, category]);
+    getBookBySearch();
+    paginate(1);
+  }, [searchTerm, category]);
 
   const handleDetail = async (id) => {
     navigate(`/books/details/${id}`);
@@ -88,7 +95,6 @@ const Search = ({ isAdmin, category }) => {
   };
 
   const handleAddToHome = async (book) => {
-
     try {
       const response = await addIndBookToHome(
         homeCategory,
@@ -97,31 +103,31 @@ const Search = ({ isAdmin, category }) => {
         `/${book.pk}`,
         `/books/details/${book.id}`,
         book.price
-    );
+      );
 
       window.alert(`${book.title} added to home page!`);
       optionsOpen(false);
       setHomeCategory("");
     } catch (error) {
-      console.error(error, 'Error adding book to home page in React');
+      console.error(error, "Error adding book to home page in React");
     }
   };
 
   const handleDelete = async (id) => {
     try {
-      const confirmDelete = window.confirm('Are you sure you want to delete this book?');
-  
+      const confirmDelete = window.confirm(
+        "Are you sure you want to delete this book?"
+      );
+
       if (confirmDelete) {
         await deleteBook(id);
-        window.alert('This book has been deleted.');
-        navigate('/admin/dashboard');
+        window.alert("This book has been deleted.");
+        navigate("/admin/dashboard");
       }
     } catch (error) {
-      console.error(error, 'Error deleting book in react');
+      console.error(error, "Error deleting book in react");
     }
   };
-  
-  
 
   const indexOfLastBook = currentPage * booksPerPage;
   const indexOfFirstBook = indexOfLastBook - booksPerPage;
@@ -177,9 +183,11 @@ const Search = ({ isAdmin, category }) => {
         <h1 className="books-heading-h1">Search results for "{searchTerm}"</h1>
       </div>
       {loading ? (
-        <div id='loading-container'>
-          <i className="fa-solid fa-gear fa-spin fa-2xl" id='gear'></i>
-          <h1 id="loading-books">Loading Books<span className="loading-dots"></span></h1>
+        <div id="loading-container">
+          <i className="fa-solid fa-gear fa-spin fa-2xl" id="gear"></i>
+          <h1 id="loading-books">
+            Loading Books<span className="loading-dots"></span>
+          </h1>
         </div>
       ) : (
         <>
@@ -312,6 +320,8 @@ const Search = ({ isAdmin, category }) => {
                           />
                           {book.availability.includes("out of print") ||
                           book.availability.includes("superseded") ||
+                          book.availability.includes("no stock") ||
+                          book.availability.includes("pending") ||
                           book.availability.includes("replaced by") ? (
                             <button
                               className="ind-book-cart"
