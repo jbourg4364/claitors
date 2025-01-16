@@ -8,6 +8,7 @@ import "./Footer.css";
 
 const Home = () => {
   const [email, setEmail] = useState("");
+  const [mainBannerArray, setMainBannerArray] = useState([]);
   const [mainBanner, setMainBanner] = useState([]);
   const [mainBannerTwo, setMainBannerTwo] = useState([]);
   const [mainBannerThree, setMainBannerThree] = useState([]);
@@ -33,16 +34,11 @@ const Home = () => {
   }
 
   const startAutoRotation = () => {
-    if (autoRotation) {
+    if (autoRotation && mainBannerArray.length > 0) {
       const intervalId = setInterval(newRotation, 6000);
       setRotationIntervalId(intervalId);
-    }
-
-    if (!autoRotation) {
-      setRotationIntervalId(null);
-      return () => {
-        clearInterval(rotationIntervalId);
-      };
+    } else if (!autoRotation && rotationIntervalId) {
+      clearInterval(rotationIntervalId);
     }
   };
 
@@ -62,37 +58,36 @@ const Home = () => {
       const indContentArrayGenealogy = response.filter(
         (cont) => cont.label === "home-ind-genealogy"
       );
+      const mainContentArray = response.filter(
+        (cont) => cont.label === "home-main-banner"
+      );
       setIndContent(indContentArray);
       setLawContent(indContentArrayLaw);
       setGPOContent(indContentArrayGPO);
       setGenealogyContent(indContentArrayGenealogy);
-
-      response.forEach((cont) => {
-        if (cont.label === "home-main-banner") {
-          setMainBanner(cont);
-        } else if (cont.label === "home-main-banner-two") {
-          setMainBannerTwo(cont);
-        } else if (cont.label === "home-main-banner-three") {
-          setMainBannerThree(cont);
-        }
-      });
+      setMainBannerArray(mainContentArray);
     };
 
     getContent();
 
     // Start auto rotation when the component mounts
-    if (autoRotation) {
+    if (autoRotation && mainBannerArray.length > 0) {
       startAutoRotation();
     }
 
     // Clear the interval when the component unmounts
     return () => {
-      clearInterval(rotationIntervalId);
+      if (rotationIntervalId) {
+        clearInterval(rotationIntervalId);
+      }
     };
-  }, []);
+  }, [autoRotation, mainBannerArray.length]);
 
   const newRotation = () => {
-    setRotation((prevRotation) => (prevRotation % 3) + 1);
+    setRotation((prevRotation) => {
+      const newRotation = (prevRotation % mainBannerArray.length) + 1;
+      return newRotation;
+    });
   };
 
   const toggleAutoRotation = () => {
@@ -101,6 +96,7 @@ const Home = () => {
     clearInterval(rotationIntervalId);
   };
 
+
   const toggleAutoRotationLeft = () => {
     setAutoRotation(false);
     newRotationLeft();
@@ -108,19 +104,15 @@ const Home = () => {
   };
 
   const newRotationLeft = () => {
-    setRotation((prevRotation) => prevRotation - 1);
+    setRotation((prevRotation) => {
+      const newRotation = (prevRotation - 1 + mainBannerArray.length) % mainBannerArray.length;
+      return newRotation === 0 ? mainBannerArray.length : newRotation; // Ensure rotation stays within bounds
+    });
   };
 
   const carousel = (bannerRotation) => {
-    if (bannerRotation === 1) {
-      return mainBanner;
-    } else if (bannerRotation === 2) {
-      return mainBannerTwo;
-    } else if (bannerRotation === 3) {
-      return mainBannerThree;
-    } else {
-      return mainBanner;
-    }
+    if (mainBannerArray.length === 0) return {}; // Return empty if no banners available
+    return mainBannerArray[bannerRotation % mainBannerArray.length];
   };
 
   const rotateIndCarouselRight = () => {

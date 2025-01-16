@@ -18,7 +18,7 @@ const Search = ({ isAdmin, category }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(true);
   const [noResult, setNoResult] = useState(false);
-  const [price, setPrice] = useState(0);
+  // const [price, setPrice] = useState(0);
   const [qty, setQty] = useState(1);
   const [options, optionsOpen] = useState(false);
   const [homeCategory, setHomeCategory] = useState("home-ind");
@@ -26,6 +26,7 @@ const Search = ({ isAdmin, category }) => {
   const { searchTerm } = useParams();
   const { id } = useParams();
   const navigate = useNavigate();
+  const [bookPrices, setBookPrices] = useState({});
 
   useEffect(() => {
     const handleSearch = async (response) => {
@@ -177,6 +178,16 @@ const Search = ({ isAdmin, category }) => {
     );
   };
 
+  const handlePriceChange = (bookId, newPrice) => {
+    setBookPrices((prevPrices) => {
+      return {
+        ...prevPrices,
+        [bookId]: newPrice, // Update price for specific book
+      };
+    });
+  };
+
+
   return (
     <>
       <div id="books-heading">
@@ -257,6 +268,9 @@ const Search = ({ isAdmin, category }) => {
                                 }
                                 defaultValue={homeCategory}
                               >
+                                <option value={"home-main-banner"}>
+                                  Main Banner
+                                </option>
                                 <option value={"home-ind"}>
                                   Featured Titles
                                 </option>
@@ -295,16 +309,18 @@ const Search = ({ isAdmin, category }) => {
                           <input
                             type="hidden"
                             name="AddItem"
-                            value={`9917477|${book.title}|${price}|${qty}|${book.stocknumber}||prompt|${book.weight}||@10:10%`}
+                            value={`9917477|${book.title}|${bookPrices[book.id] || book.price}|${qty}|${book.stocknumber}||prompt|${book.weight}||@10:10%`}
                           />
                           <h3 className="ind-book-price">Price</h3>
                           <select
                             className="ind-book-price-actual"
-                            onChange={(e) => setPrice(e.target.value)}
+                            onChange={(e) =>
+                              handlePriceChange(book.id, e.target.value)
+                            }
                             name="VARcost1"
-                            value={price}
+                            value={bookPrices[book.id] || book.price}
                           >
-                            <option defaultValue={book.price}>
+                            <option value={book.price}>
                               {book.price} US
                             </option>
                             <option value={book.pricenonus}>
@@ -334,7 +350,7 @@ const Search = ({ isAdmin, category }) => {
                             <button
                               className="ind-book-cart"
                               name="I3"
-                              onClick={() => setPrice(book.price)}
+                              
                             >
                               Add to Cart
                             </button>

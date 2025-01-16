@@ -13,6 +13,7 @@ const Genealogy = () => {
   const booksPerPage = 10;
   const { id } = useParams();
   const navigate = useNavigate();
+  const [bookPrices, setBookPrices] = useState({});
 
   useEffect(() => {
     const getAllLawBooks = async () => {
@@ -97,6 +98,15 @@ const Genealogy = () => {
     );
   };
 
+  const handlePriceChange = (bookId, newPrice) => {
+    setBookPrices((prevPrices) => {
+      return {
+        ...prevPrices,
+        [bookId]: newPrice, // Update price for specific book
+      };
+    });
+  };
+
   return (
     <>
       <div id="books-heading">
@@ -143,16 +153,18 @@ const Genealogy = () => {
                     <input
                       type="hidden"
                       name="AddItem"
-                      value={`9917477|${book.title}|${price}|${qty}|${book.stocknumber}||prompt|${book.weight}||@10:10%`}
+                      value={`9917477|${book.title}|${bookPrices[book.id] || book.price}|${qty}|${book.stocknumber}||prompt|${book.weight}||@10:10%`}
                     />
                     <h3 className="ind-book-price">Price</h3>
                     <select
                       className="ind-book-price-actual"
-                      onChange={(e) => setPrice(e.target.value)}
+                      onChange={(e) =>
+                        handlePriceChange(book.id, e.target.value)
+                      }
                       name="VARcost1"
-                      value={price}
+                      value={bookPrices[book.id] || book.price}
                     >
-                      <option defaultValue={book.price}>{book.price} US</option>
+                      <option value={book.price}>{book.price} US</option>
                       <option value={book.pricenonus}>
                         {book.pricenonus} INT
                       </option>

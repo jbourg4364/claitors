@@ -1,5 +1,5 @@
 const client = require('./client');
-const fs = require('fs');
+const fs = require('fs').promises;
 const { createBooks } = require('./books');
 const { createContent } = require('./content');
 
@@ -35,7 +35,7 @@ async function createTables() {
                 Binding VARCHAR(400),
                 Cover VARCHAR(400),
                 CrossReference VARCHAR(400),
-                Description VARCHAR(1000),
+                Description VARCHAR(5000),
                 ExtraDescription VARCHAR(400),
                 Format VARCHAR(400),
                 ISBN VARCHAR(400),
@@ -76,42 +76,78 @@ async function createTables() {
     }
 };
 
-function textFileToJSON(filePath) {
-    const fileContent = fs.readFileSync(filePath, 'utf8');
-    const lines = fileContent.split('\n');
-    const header = lines[0].split('|');
-    const jsonData = [];
-  
-    for (let i = 1; i < lines.length; i++) {
-      const fields = lines[i].split('|');
-      const record = {};
-  
-      for (let j = 0; j < header.length; j++) {
-        // Remove the \r from field names
-        const fieldName = header[j].replace(/\r/, '');
-        record[fieldName] = fields[j].trim();
-      }
-  
-      jsonData.push(record);
-    }
-  
-    return jsonData;
-  }
-  
-  async function createInitialBooks() {
-    console.log('Creating initial books...');
+async function jsonFileToObject(filePath) {
     try {
-    //   const filePath = 'db/CATALOG_1.txt';
-      const filePath = 'db/CATALOG.txt';
-      const jsonResult = textFileToJSON(filePath); // Calls the textFileToJSON for JSON data
-  
-      const books = await Promise.all(jsonResult.map(createBooks));
-  
-      console.log('Finished creating books...');
+      const fileContent = await fs.readFile(filePath, "utf8");
+      return JSON.parse(fileContent);
     } catch (error) {
-      console.error('Error creating initial books');
+      console.error("Error reading JSON file:", error);
+      throw error;
     }
   };
+
+  function transformJsonToBooksFields(jsonData) {
+    return jsonData.map(item => {
+      return {
+        Field_1: item.field_1 || "",
+        Field_2: item.field_2 || "",
+        Field3: item.field3 || "",
+        Topic: item.topic || "",
+        Family: item.family || "",
+        pk: item.pk || "",
+        DOC: item.doc || "",
+        Author: item.author || "",
+        Availability: item.availability || "",
+        AvailableDate: item.availabledate || "",
+        Binding: item.binding || "",
+        Cover: item.cover || "",
+        CrossReference: item.crossreference || "",
+        Description: item.description || "",
+        ExtraDescription: item.extradescription || "",
+        Format: item.format || "",
+        ISBN: item.isbn || "",
+        ISSN: item.issn || "",
+        KeyPhrases: item.keyphrases || "",
+        ListID: item.listid || "",
+        Note: item.note || "",
+        Price: item.price || "",
+        PriceNonUS: item.pricenonus || "",
+        Publisher: item.publisher || "",
+        QuantityPrice: item.quantityprice || "",
+        StandingOrderCode: item.standingordercode || "",
+        StatusDate: item.statusdate || "",
+        StockNumber: item.stocknumber || "",
+        SubjectBibliography: item.subjectbibliography || "",
+        SuDocsClass: item.sudocsclass || "",
+        Title: item.title || "",
+        Unit: item.unit || "",
+        UnitNonUS: item.unitnonus || "",
+        Weight: item.weight || "",
+        YearPages: item.yearpages || "",
+        Hyperlink: item.hyperlink || ""
+      };
+    });
+  };
+  
+  async function createInitialBooks() {
+    console.log("Creating initial books...");
+    try {
+      const filePath = "db/books_11DEC2024.json"; // Your file path
+      const jsonResult = await jsonFileToObject(filePath); // Parse the JSON file
+  
+      // Transform the JSON data into the format expected by the createBooks function
+      const transformedBooks = transformJsonToBooksFields(jsonResult);
+  
+      // Create books asynchronously using createBooks
+      const createdBooks = await Promise.all(transformedBooks.map(createBooks));
+  
+      console.log("Finished creating books...");
+      return createdBooks; // Optionally return the created books
+    } catch (error) {
+      console.error("Error creating initial books:", error);
+    }
+  };
+  
 
   async function createInitialContent() {
     console.log('Creating initial content...')
@@ -128,7 +164,7 @@ function textFileToJSON(filePath) {
             },
             {
                 id: 2,
-                label: 'home-main-banner-two',
+                label: 'home-main-banner',
                 title: 'Louisiana Liability & Property Insurance Coverage Law',
                 description: 'This is a handbook for those who practice law, handle claims, and write or sell insurance. Years ago, for my own use and for the benefit of clients and friends, I began writing and updating a booklet on insurance law in Louisiana. I finally decided that others could benefit from a coverage handbook. This is not an insurance law treatise — Louisiana already has an excellent one in the McKenzie and Johnson treatise. But for those liability and property insurance issues most commonly seen by lawyers and claims adjusters, this handbook hopefully provides some understanding and points those seeking answers in the right direction.',
                 imageurl: 'https://claitors.com/9781598048940.jpg',
@@ -137,7 +173,7 @@ function textFileToJSON(filePath) {
             },
             {
                 id: 3,
-                label: 'home-main-banner-three',
+                label: 'home-main-banner',
                 title: 'LOUISIANA MINERAL LEASES: A TREATISE',
                 description: 'In rich detail, the Treatise examines the evolution of the mineral lease under the civil law that prevails in Louisiana; the contours and various attributes of the lease relationship; the statutory laws that regulate it, as well as the clauses (both customary and special) contained in the mineral lease forms used in Louisiana. Additionally, the Treatise analyzes the types and kinds of mineral lease; transfers of the lease contract, as well as security interests in the mineral lease, and remedies for the breach of the lease.',
                 imageurl: 'https://claitors.com/9871598047875.main.gif',
